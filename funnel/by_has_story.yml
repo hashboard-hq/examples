@@ -1,0 +1,44 @@
+glean: "1.0"
+type: saved_view
+model: m::funnel
+alias: funnel_by_has_story
+name: Funnels by "Has Story"
+data:
+  x:
+    columnId: stage_name
+  y:
+    columnId: user_count
+  breakout:
+    columnId: has_story
+    groups:
+      - key: No Story
+        color: "#003F5C"
+      - key: Posted Story
+        color: "#FFA600"
+    showOther: true
+  filters: []
+  limit: 10000
+visualization:
+  chartType: pivot
+  showAxisLabels: true
+  legend: top
+  showLegendTitle: false
+  tableCellFormatting:
+    - color: none
+      showPercentage: true
+      calculation: columnPercentMax
+  tableVisualization:
+    - calculation: columnPercentTotal
+      heightPixels: 15
+      type: bar
+      maxWidthPixels: 100
+      labelPlacement: right
+  tableColumnWidths:
+    - columnId: Short Username
+      width: 171
+    - columnId: Posted Story
+      width: 228
+    - columnId: No Story
+      width: 243
+    - columnId: Long Username
+      width: 175

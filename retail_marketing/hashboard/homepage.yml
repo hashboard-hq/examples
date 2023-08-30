@@ -1,0 +1,29 @@
+hbVersion: '1.0'
+type: homepage_launchpad
+description: |
+  ## 🍕 Pizza Bytes
+
+  Welcome to the hashboard demo!
+
+  [Examples on github](https://github.com/hashboard-hq/examples/)
+  [App Quickstart](https://docs.hashboard.com/docs/getting-started/quick-start)
+  [CLI Quickstart](https://docs.hashboard.com/docs/data-ops/quickstart)
+
+  ## Data overview
+  - 📚 Sales data model ([hashboard](https://demo.hashboard.com/app/m/edbc5759-6e93-3cc6-a310-3ddeed60b0ff), [code spec](https://github.com/hashboard-hq/examples/blob/main/retail_marketing/models/_sales.yml)) - shows all pizza sales across locations over the past five years.
+  - 📈 Marketing data models - ([hashboard](https://demo.hashboard.com/app/m/a807cb1c-633e-3363-a10e-7065fd045709), [code spec](https://github.com/hashboard-hq/examples/blob/main/retail_marketing/models/_marketing.yml))
+
+  ## Build this project with code
+  This example is checked in as code and you can check it out and build it yourself
+
+  ```bash
+  git clone https://github.com/hashboard-hq/examples.git
+  cd retail_examples
+  pip install -r requirements.txt
+
+  make
+  ```
+
+pinnedResourceIds:
+  - m::sales
+  - m::marketing_attribution

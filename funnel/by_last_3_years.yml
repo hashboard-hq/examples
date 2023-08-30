@@ -1,0 +1,48 @@
+glean: "1.0"
+type: saved_view
+model: m::funnel
+name: Funnels by Last 3 Years
+data:
+  x:
+    columnId: stage_name
+  y:
+    columnId: user_count
+  breakout:
+    columnId: cohort_year
+    metricId: user_count
+    sort: desc
+    limit: 3
+    showOther: false
+  filters: []
+  sort:
+    - columnId: cohort_year
+      order: desc
+  limit: 10000
+visualization:
+  chartType: pivot
+  showAxisLabels: true
+  legend: top
+  showLegendTitle: false
+  tableCellFormatting:
+    - color: none
+      showPercentage: true
+      calculation: columnPercentMax
+  tableVisualization:
+    - calculation: columnPercentTotal
+      heightPixels: 15
+      type: bar
+      maxWidthPixels: 100
+      labelPlacement: right
+  tableColumnWidths:
+    - columnId: "2019"
+      width: 220
+    - columnId: "2020"
+      width: 219
+    - columnId: "2021"
+      width: 221
+    - columnId: "2022"
+      width: 236
+    - columnId: Short Username
+      width: 171
+    - columnId: Long Username
+      width: 175

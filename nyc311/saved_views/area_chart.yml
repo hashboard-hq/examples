@@ -1,0 +1,22 @@
+glean: "1.0"
+type: saved_view
+model: m::311
+alias: area_chart
+name: Area Chart
+data:
+  x:
+    columnId: created_date
+    granularity: quarter
+  y:
+    - columnId: row_count
+    - name: Rolling Sum over call volume
+      formula: rollingSum(row_count, 4, trailing, 0)
+    - name: Rolling Average over call volume
+      formula: rollingAverage(row_count, 4, trailing, 0)
+  breakout:
+    by: metric
+  filters: []
+visualization:
+  chartType: area
+  stack: stack
+  showAxisLabels: true

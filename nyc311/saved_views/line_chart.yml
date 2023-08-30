@@ -1,0 +1,25 @@
+glean: "1.0"
+type: saved_view
+model: m::311
+name: Line Chart
+alias: line_chart
+data:
+  x:
+    columnId: created_date
+    granularity: quarter
+  y:
+    columnId: row_count
+  breakout:
+    columnId: agency_name
+    groups:
+      - key: New York City Police Department
+      - key: Department of Housing Preservation and Development
+      - key: Department of Transportation
+      - key: Department of Environmental Protection
+      - key: Department of Buildings
+      - key: Department of Parks and Recreation
+    showOther: true
+  filters: []
+visualization:
+  chartType: line
+  showAxisLabels: true

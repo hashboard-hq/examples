@@ -1,0 +1,37 @@
+glean: "1.0"
+type: saved_view
+model: m::retention
+name: Active Users by Yearly Cohort
+data:
+  x:
+    columnId: cohort
+    granularity: year
+  y:
+    columnId: active_users
+  breakout:
+    columnId: months_since_signup
+    groups:
+      - key: 0
+      - key: 1
+      - key: 2
+      - key: 3
+      - key: 4
+      - key: 5
+      - key: 6
+      - key: 7
+      - key: 8
+      - key: 9
+    showOther: true
+  filters: []
+  sort:
+    - columnId: months_since_signup
+      order: asc
+visualization:
+  chartType: pivot
+  showAxisLabels: true
+  legend: top
+  showLegendTitle: false
+  tableCellFormatting:
+    - color: green
+      showPercentage: true
+      calculation: rowPercentMax

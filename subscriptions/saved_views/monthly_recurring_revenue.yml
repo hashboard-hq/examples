@@ -1,0 +1,20 @@
+glean: '1.0'
+type: saved_view
+model: ../models/mrr.yml
+name: Monthly Recurring Revenue
+data:
+  x:
+    columnId: date_month
+    granularity: month
+  y:
+    columnId: revenue
+  filters:
+  - columnId: date_month
+    range:
+    - '2018-01-01'
+    - '2019-12-01'
+visualization:
+  chartType: line
+  showOther: true
+  stack: unstack
+

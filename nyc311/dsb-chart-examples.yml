@@ -1,0 +1,74 @@
+glean: "1.0"
+name: Chart Type Examples
+description: Chart type examples for documentation
+type: dashboard
+globalFilters: []
+sections:
+  - filters: []
+    rows:
+      - blocks:
+          - type: markdown
+            text: "## Cartesians\n---"
+            width: 12
+      - blocks:
+          - type: savedView
+            savedView: sv::bar_chart
+            legendPosition: top
+            ignoreDashboardFilters: false
+            width: 12
+        height: 6
+      - blocks:
+          - type: savedView
+            savedView: sv::line_chart
+            legendPosition: top
+            ignoreDashboardFilters: false
+            width: 12
+        height: 6
+      - blocks:
+          - type: savedView
+            savedView: sv::area_chart
+            legendPosition: top
+            ignoreDashboardFilters: false
+            width: 12
+        height: 6
+      - blocks:
+          - type: savedView
+            savedView: sv::horizontal_bar_chart
+            legendPosition: top
+            ignoreDashboardFilters: false
+            width: 12
+        height: 6
+      - blocks:
+          - type: savedView
+            savedView: sv::bar_and_line
+            legendPosition: top
+            ignoreDashboardFilters: false
+            width: 12
+        height: 6
+  - filters: []
+    rows:
+      - blocks:
+          - type: markdown
+            text: "## Tables \n ---"
+            width: 12
+      - blocks:
+          - type: savedView
+            savedView: sv::table
+            legendPosition: top
+            ignoreDashboardFilters: false
+            width: 12
+        height: 6
+      - blocks:
+          - type: savedView
+            savedView: sv::pivot_table
+            legendPosition: top
+            ignoreDashboardFilters: false
+            width: 12
+        height: 6
+      - blocks:
+          - type: savedView
+            savedView: sv::source_data_table
+            legendPosition: top
+            ignoreDashboardFilters: false
+            width: 12
+        height: 6

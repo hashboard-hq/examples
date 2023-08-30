@@ -1,0 +1,37 @@
+glean: '1.0'
+type: saved_view
+model: ../models/mrr.yml
+name: New and Churned Customer Revenue
+data:
+  x:
+    columnId: date_month
+    granularity: month
+  y:
+    columnId: mrr_change
+  breakout:
+    columnId: change_category
+    groups:
+    - index: 0
+      key: new
+    - index: 1
+      key: upgrade
+    - index: 2
+      key: reactivation
+    - index: 3
+      key:
+    - index: 4
+      key: downgrade
+    - index: 5
+      key: churn
+  filters:
+  - columnId: date_month
+    range:
+    - '2018-01-01'
+    - '2019-12-01'
+visualization:
+  chartType: bar
+  showOther: false
+  stack: stack
+  showAxisLabels: true
+  legend: top
+  colorPalette: ../red_green_diverging_palette.yml

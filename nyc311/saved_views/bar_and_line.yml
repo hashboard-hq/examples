@@ -1,0 +1,24 @@
+glean: "1.0"
+type: saved_view
+alias: bar_and_line
+model: m:90e32eb7-9709-3d59-ba2a-63fcbf2c5d7b
+name: Bar and Line
+data:
+  x:
+    columnId: created_date
+    granularity: quarter
+  y:
+    - columnId: row_count
+    - name: Rolling Sum
+      formula: rollingSum(row_count, 24, trailing, 0)
+      axis:
+        orient: secondary
+      markType: line
+  breakout:
+    by: metric
+  filters: []
+visualization:
+  chartType: bar
+  stack: unstack
+  showAxisLabels: true
+  missingValuesBehavior: show

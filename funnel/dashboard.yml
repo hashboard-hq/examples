@@ -1,0 +1,59 @@
+glean: "1.0"
+name: User Activation Funnel
+description: User activation funnel based on comment count
+type: dashboard
+globalFilters: []
+sections:
+  - filters: []
+    rows:
+      - blocks:
+          - type: markdown
+            text: "## Overview \n ---"
+            width: 12
+      - blocks:
+          - type: savedView
+            savedView: ./overview.yml
+            legendPosition: top
+            ignoreDashboardFilters: false
+            width: 12
+        height: 5
+      - blocks:
+          - type: markdown
+            text: "##  Drill Downs \n ---"
+            width: 12
+      - blocks:
+          - type: markdown
+            text:
+              2022 is performing significantly worse compared to previous two years.
+              Dropoff seems particularly big between the second and third comment.
+            width: 2
+          - type: savedView
+            savedView: ./by_last_3_years.yml
+            legendPosition: top
+            ignoreDashboardFilters: false
+            width: 10
+        height: 5
+      - blocks:
+          - type: markdown
+            text:
+              Users who have posted a story perform significantly better than users
+              who have not.
+            width: 2
+          - type: savedView
+            savedView: sv::funnel_by_has_story
+            legendPosition: top
+            ignoreDashboardFilters: false
+            width: 10
+        height: 5
+      - blocks:
+          - type: markdown
+            text:
+              There are many more short username users than long username users, but
+              funnel performance is similar across the two.
+            width: 2
+          - type: savedView
+            savedView: ./by_username.yml
+            legendPosition: top
+            ignoreDashboardFilters: false
+            width: 10
+        height: 5

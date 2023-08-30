@@ -1,0 +1,19 @@
+glean: "1.0"
+type: saved_view
+model: m::311
+name: Source Data Table
+alias: source_data_table
+hidden:
+  - unique_key
+  - agency_name
+  - incident_zip
+data:
+  y:
+    columnId: row_count
+  filters:
+    - columnId: is_suspicious_timestamp
+      values:
+        - false
+  limit: 10000
+visualization:
+  chartType: source_data_table

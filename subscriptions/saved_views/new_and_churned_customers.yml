@@ -1,0 +1,30 @@
+glean: '1.0'
+type: saved_view
+model: ../models/mrr.yml
+name: New and Churned Customers
+data:
+  x:
+    columnId: date_month
+    granularity: month
+  y:
+    columnId: customers
+  trellis:
+    columnId: change_category
+    groups:
+    - key: new
+    - key: upgrade
+    - key: downgrade
+    - key: churn
+    - key: reactivation
+    showOther: false
+  filters:
+  - columnId: date_month
+    range:
+    - '2018-01-01'
+    - '2019-12-01'
+visualization:
+  chartType: bar
+  showOther: true
+  stack: stack
+  showAxisLabels: true
+

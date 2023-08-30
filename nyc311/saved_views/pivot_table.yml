@@ -1,0 +1,39 @@
+glean: "1.0"
+type: saved_view
+model: m::311
+name: Pivot Table
+alias: pivot_table
+data:
+  x:
+    columnId: day_of_week
+  y:
+    columnId: row_count
+  breakout:
+    columnId: agency_name
+    groups:
+      - key: New York City Police Department
+      - key: Department of Housing Preservation and Development
+      - key: Department of Transportation
+      - key: Department of Parks and Recreation
+      - key: Department of Sanitation
+    showOther: true
+  filters:
+    - columnId: location_type
+      excludeValues:
+        - null
+    - columnId: agency_name
+      values:
+        - New York City Police Department
+        - Department of Housing Preservation and Development
+        - Department of Transportation
+        - Department of Parks and Recreation
+        - Department of Sanitation
+        - Department of Health and Mental Hygiene
+  limit: 10000
+visualization:
+  chartType: pivot
+  showAxisLabels: true
+  padding: compact
+  tableCellFormatting:
+    - color: green
+      calculation: columnPercentTotal
