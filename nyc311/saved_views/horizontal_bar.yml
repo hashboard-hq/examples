@@ -1,0 +1,18 @@
+glean: "1.0"
+type: saved_view
+model: m::311
+name: Total Call Volume By Agency
+data:
+  metric:
+    columnId: row_count
+  rows:
+    columnId: agency_name
+  filters: []
+  sort:
+    - columnId: row_count
+      order: desc
+  limit: 10000
+visualization:
+  chartType: horizontal_bar
+  showBarLabels: true
+  showAxisLabels: true

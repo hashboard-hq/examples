@@ -1,6 +1,7 @@
 glean: "1.0"
 type: model
 name: NYC 311
+alias: "311"
 source:
   connectionName: hashboard-bq-public-examples
   sql: >-
