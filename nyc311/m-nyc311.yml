@@ -1,0 +1,104 @@
+glean: "1.0"
+type: model
+name: NYC 311
+source:
+  connectionName: hashboard-bq-public-examples
+  sql: >-
+    select *, 
+    case when extract(dayofweek from created_date) = 1 then 'sunday'
+    when extract(dayofweek from created_date) = 2 then 'monday'
+    when extract(dayofweek from created_date) = 3 then 'tuesday'
+    when extract(dayofweek from created_date) = 4 then 'wednesday'
+    when extract(dayofweek from created_date) = 5 then 'thursday'
+    when extract(dayofweek from created_date) = 6 then 'friday'
+    when extract(dayofweek from created_date) = 7 then 'saturday'
+    else null END as day_of_week,
+    extract(dayofweek from created_date) as created_day_of_week_numeric,
+    extract(day from created_date) as created_day_of_month_numeric,
+    extract(month from created_date) as created_month_numeric,
+    extract(hour from created_date) as created_hour,
+    extract(year from created_date) as created_year,
+    if(extract(hour from created_date) in (0,12) and extract(minute from created_date)=0 and extract(second from created_date)=0,true,false) as is_suspicious_timestamp,
+    from quickstart.nyc_311
+cols:
+  - id: created_date
+    type: datetime
+    physicalName: created_date
+    name: Create Date
+    primaryDate: true
+    aggregationOptions:
+      minGranularity: day
+      maxGranularity: year
+  - id: closed_date
+    type: datetime
+    physicalName: closed_date
+    name: Close Date
+    primaryDate: false
+    aggregationOptions:
+      minGranularity: day
+      maxGranularity: year
+  - id: agency_name
+    type: attribute
+    physicalName: agency_name
+    name: Agency
+    description: city agency
+  - id: complaint_type
+    type: attribute
+    physicalName: complaint_type
+    name: complaint_type
+  - id: location_type
+    type: attribute
+    physicalName: location_type
+    name: location_type
+  - id: status
+    type: attribute
+    physicalName: status
+    name: status
+  - id: is_suspicious_timestamp
+    type: attribute
+    physicalName: is_suspicious_timestamp
+    name: Is Suspicious Timestamp
+    description: timestamps with too many zeros
+  - id: incident_zip
+    type: attribute
+    physicalName: incident_zip
+    name: Zipcode
+  - id: close_time_days
+    type: attribute
+    physicalName: close_time_days
+    name: Days to Close
+  - id: day_of_week
+    type: attribute
+    physicalName: day_of_week
+    name: Day of Week
+  - id: created_hour
+    type: attribute
+    physicalName: created_hour
+    name: Created Hour
+  - id: created_year
+    type: attribute
+    physicalName: created_year
+    name: Created Year
+  - id: created_month_numeric
+    type: attribute
+    physicalName: created_month_numeric
+    name: Created Month
+  - id: created_day_of_month_numeric
+    type: attribute
+    physicalName: created_day_of_month_numeric
+    name: Created Day of Month
+  - id: created_day_of_week_numeric
+    type: attribute
+    physicalName: created_day_of_week_numeric
+    name: Created Day of Week
+  - id: row_count
+    type: metric
+    name: call volume
+    description: count of calls to 311
+    aggregate: row_count
+  - id: avg_close_time_days
+    type: metric
+    name: avg days to close
+    description: average number of days to close the complaint
+    aggregate: avg
+    physicalName: close_time_days

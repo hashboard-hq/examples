@@ -1,0 +1,9 @@
+duckdb_profile:
+  outputs:
+    dev:
+      type: duckdb
+      external_root: ./data/dbt/
+      extensions:
+        - parquet
+      threads: 4
+  target: dev

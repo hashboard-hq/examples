@@ -1,0 +1,100 @@
+glean: "1.0"
+type: model
+name: Retention
+alias: retention
+description: Retention data from a sample of stories and comments on Hacker News
+source:
+  connectionName: hashboard-bq-public-examples
+  sql: |+
+    -- retention query, see glean examples docs on github gleannyc/examples/02_retention_curves
+    with active_months as (
+      select
+        distinct user_id
+        , timestamp_trunc(timestamp, month) as month
+      from`quickstart.webapp_events_subset`
+    ),
+    users as (
+      select
+        user_id
+        , min(timestamp_trunc(timestamp, month)) as first_month
+        , max(timestamp_trunc(timestamp, month)) as last_month
+      from `quickstart.webapp_events_subset`
+      group BY user_id
+    )
+    select
+      u.user_id
+      , m.month
+      , first_month as cohort_month
+      , substr(cast(first_month as string),1,7) as cohort_month_str
+      , substr(cast(first_month as string),1,4) as cohort_year_str
+      , date_diff(DATE(m.month), DATE(u.first_month), MONTH) as month_number
+    -- could add cohort
+    --  , experiment_cohort as experiment
+      , if(m.month <= u.last_month, 1.0, 0.0) as unbounded_active
+      , if(a.month IS NOT NULL, 1.0, 0.0) as active
+    from users as u
+      cross join `quickstart.webapp_all_months` as m
+      left join active_months as a
+        on a.user_id = u.user_id and a.month = m.month
+      where m.month >= u.first_month
+
+cols:
+  - id: month
+    type: datetime
+    physicalName: month
+    name: Activity month
+    primaryDate: true
+    description: The analyzed month.
+    aggregationOptions:
+      minGranularity: month
+      maxGranularity: month
+  - id: cohort
+    type: datetime
+    physicalName: cohort_month
+    name: Signup cohort
+    primaryDate: false
+    description: The date that the analyzed users signed up.
+    aggregationOptions:
+      minGranularity: month
+      maxGranularity: year
+  - id: user_id
+    type: attribute
+    physicalName: user_id
+    name: user_id
+    description: Unique string representing a specific user.
+  - id: months_since_signup
+    type: attribute
+    physicalName: month_number
+    name: Months since signup
+    description: Number of months since the analyzed users signed up.
+    aggregationOptions:
+      defaultBinWidth: 6
+      binsEnabled: false
+  - id: row_count
+    type: metric
+    name: Row count
+    description: Number of rows, where each row is a (month, user) pair.
+    aggregate: row_count
+  - id: active_retention
+    type: metric
+    name: Active Retention
+    description: Percentage of users that were active in the time period.
+    formattingOptions:
+      fixedDecimals: 1
+      formatAsPercent: true
+    aggregate: avg
+    physicalName: active
+  - id: unbounded_retention
+    type: metric
+    name: Unbounded Retention
+    description: Percentage of users that were active in the time period or at any time in the future.
+    formattingOptions:
+      fixedDecimals: 1
+      formatAsPercent: true
+    aggregate: avg
+    physicalName: unbounded_active
+  - id: active_users
+    type: metric
+    name: Active Users
+    description: Number of unique active users in the analyzed time period.
+    sql: count(distinct if(active=1, user_id, null))
