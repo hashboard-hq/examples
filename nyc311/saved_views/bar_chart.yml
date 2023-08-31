@@ -1,7 +1,8 @@
 glean: "1.0"
 type: saved_view
 model: m::311
-name: Call Volume Over Time
+name: Bar Chart
+alias: bar_chart
 data:
   x:
     columnId: created_date

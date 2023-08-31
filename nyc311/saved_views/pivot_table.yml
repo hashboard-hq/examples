@@ -1,7 +1,8 @@
 glean: "1.0"
 type: saved_view
 model: m::311
-name: Call Volume by Day of Week and Agency
+name: Pivot Table
+alias: pivot_table
 data:
   x:
     columnId: day_of_week

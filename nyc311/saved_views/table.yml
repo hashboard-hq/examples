@@ -1,7 +1,8 @@
 glean: "1.0"
 type: saved_view
 model: m::311
-name: Comparing Call Volume Metrics By Agency
+name: Table
+alias: table
 data:
   x:
     columnId: agency_name
