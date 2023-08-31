@@ -1,8 +1,8 @@
 glean: "1.0"
 type: saved_view
 model: m::311
-grn: sv:1a403d2b-69a0-3348-a97f-9d6022b2a7ac
 name: Table
+alias: table
 data:
   x:
     columnId: agency_name

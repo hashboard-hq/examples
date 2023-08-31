@@ -1,8 +1,8 @@
 glean: "1.0"
 type: saved_view
 model: m::311
-grn: sv:e3c7fd01-3190-34ec-9783-4208ad04f06a
 name: Pivot Table
+alias: pivot_table
 data:
   x:
     columnId: day_of_week

@@ -3,7 +3,6 @@ type: saved_view
 model: m::311
 name: Bar Chart
 alias: bar_chart
-grn: sv:df805e6e-8df0-3053-bb3c-a071689b9ca6
 data:
   x:
     columnId: created_date

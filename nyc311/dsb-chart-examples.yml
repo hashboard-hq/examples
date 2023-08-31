@@ -13,35 +13,35 @@ sections:
             width: 12
       - blocks:
           - type: savedView
-            savedView: sv:df805e6e-8df0-3053-bb3c-a071689b9ca6
+            savedView: sv::bar_chart
             legendPosition: top
             ignoreDashboardFilters: false
             width: 12
         height: 6
       - blocks:
           - type: savedView
-            savedView: sv:51036904-ccd0-30d7-90ee-89319c54eca2
+            savedView: sv::line_chart
             legendPosition: top
             ignoreDashboardFilters: false
             width: 12
         height: 6
       - blocks:
           - type: savedView
-            savedView: sv:4a82043a-5f22-3824-8107-bcba6263920a
+            savedView: sv::area_chart
             legendPosition: top
             ignoreDashboardFilters: false
             width: 12
         height: 6
       - blocks:
           - type: savedView
-            savedView: sv:6bcc245b-19bd-3468-b8fb-c092a0e3476b
+            savedView: sv::horizontal_bar_chart
             legendPosition: top
             ignoreDashboardFilters: false
             width: 12
         height: 6
       - blocks:
           - type: savedView
-            savedView: sv:7iW8G1UJOi69ZT6q
+            savedView: sv::bar_and_line
             legendPosition: top
             ignoreDashboardFilters: false
             width: 12
@@ -54,14 +54,21 @@ sections:
             width: 12
       - blocks:
           - type: savedView
-            savedView: sv:1a403d2b-69a0-3348-a97f-9d6022b2a7ac
+            savedView: sv::table
             legendPosition: top
             ignoreDashboardFilters: false
             width: 12
         height: 6
       - blocks:
           - type: savedView
-            savedView: sv:e3c7fd01-3190-34ec-9783-4208ad04f06a
+            savedView: sv::pivot_table
+            legendPosition: top
+            ignoreDashboardFilters: false
+            width: 12
+        height: 6
+      - blocks:
+          - type: savedView
+            savedView: sv::source_data_table
             legendPosition: top
             ignoreDashboardFilters: false
             width: 12
