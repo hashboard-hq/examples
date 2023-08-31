@@ -1,7 +1,8 @@
 glean: "1.0"
 type: saved_view
 model: m::311
-name: NYC 311 Source Data
+grn: sv:f814e94b-66c9-3cf7-8cee-b8039a7d7ca1
+name: Source Data Table
 hidden:
   - unique_key
   - agency_name

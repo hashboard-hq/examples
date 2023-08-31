@@ -1,7 +1,8 @@
 glean: "1.0"
 type: saved_view
 model: m::311
-name: Call Volume By Agency
+grn: sv:51036904-ccd0-30d7-90ee-89319c54eca2
+name: Line Chart
 data:
   x:
     columnId: created_date

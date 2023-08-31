@@ -1,7 +1,8 @@
 glean: "1.0"
 type: saved_view
 model: m::311
-name: Total Call Volume By Agency
+name: Horizontal Bar Chart
+grn: sv:6bcc245b-19bd-3468-b8fb-c092a0e3476b
 data:
   metric:
     columnId: row_count
