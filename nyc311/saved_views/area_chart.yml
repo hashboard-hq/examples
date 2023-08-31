@@ -2,7 +2,7 @@ glean: "1.0"
 type: saved_view
 model: m::311
 alias: area_chart
-name: Cumulative Call Volume Metrics Over Time
+name: Area Chart
 data:
   x:
     columnId: created_date
