@@ -19,3 +19,6 @@ upload_data: run_dbt
 
 deploy_hb: upload_data
 	hb deploy --dbt --no-preview
+
+clean :
+	rm data/*.parquet && rm data/dbt/*.parquet
