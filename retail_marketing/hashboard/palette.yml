@@ -1,0 +1,20 @@
+hbVersion: '1.0'
+alias: hb_default
+type: color_palette
+name: Hashboard
+defaultColor:
+  color: '#194146'
+  name: dark green
+colors:
+  - color: '#235564'
+    name: dark green blue
+  - color: '#50B4CD'
+    name: aquamarine
+  - color: '#D2DCFF'
+    name: light blue
+  - color: '#FFC8D6'
+    name: pink
+  - color: '#FF6746'
+    name: light primary red orange
+options:
+  additionalColorGeneration: interpolate
