@@ -1,0 +1,89 @@
+hbVersion: '1.0'
+type: model
+grn: m:622eb9e2-2c0d-3b3c-8b49-713ea71697ab
+alias: claims
+name: Claims
+source:
+  connectionName: Uploads
+  physicalName: claims.parquet
+cols:
+- id: date_of_service
+  type: datetime
+  physicalName: DateOfService
+  name: DateOfService
+  primaryDate: true
+  aggregationOptions:
+    minGranularity: second
+    maxGranularity: year
+- id: submission_date
+  type: datetime
+  physicalName: SubmissionDate
+  name: SubmissionDate
+  primaryDate: false
+  aggregationOptions:
+    minGranularity: second
+    maxGranularity: year
+- id: payment_date
+  type: datetime
+  physicalName: PaymentDate
+  name: PaymentDate
+  primaryDate: false
+  aggregationOptions:
+    minGranularity: second
+    maxGranularity: year
+- id: provider_id
+  type: attribute
+  physicalName: ProviderID
+  name: ProviderID
+- id: status
+  type: attribute
+  physicalName: Status
+  name: Status
+- id: payor_name
+  type: attribute
+  physicalName: PayorName
+  name: PayorName
+- id: plan_information
+  type: attribute
+  physicalName: PlanInformation
+  name: PlanInformation
+- id: claim_id
+  type: attribute
+  physicalName: ClaimID
+  name: ClaimID
+  aggregationOptions:
+    defaultBinWidth: 900
+    binsEnabled: false
+  primaryKey: true
+- id: total_amount
+  type: attribute
+  physicalName: TotalAmount
+  name: TotalAmount
+  aggregationOptions:
+    defaultBinWidth: 5
+    binsEnabled: false
+- id: allowed_amount
+  type: attribute
+  physicalName: AllowedAmount
+  name: AllowedAmount
+  aggregationOptions:
+    defaultBinWidth: 5
+    binsEnabled: false
+- id: actual_paid_amount
+  type: attribute
+  physicalName: ActualPaidAmount
+  name: ActualPaidAmount
+  aggregationOptions:
+    defaultBinWidth: 4
+    binsEnabled: true
+- id: patient_id
+  type: attribute
+  physicalName: PatientID
+  name: PatientID
+  aggregationOptions:
+    defaultBinWidth: 3000000
+    binsEnabled: false
+- id: claims
+  type: metric
+  name: Claims
+  aggregate: row_count

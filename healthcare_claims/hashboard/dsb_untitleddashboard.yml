@@ -1,0 +1,102 @@
+hbVersion: '1.0'
+grn: dsb:q4bQwrk_jhlRbvYP
+name: Monthly Payor report
+description: Payor performance for the last complete month
+type: dashboard
+globalFilters:
+- dataModel: m:622eb9e2-2c0d-3b3c-8b49-713ea71697ab
+  columnId: m:622eb9e2-2c0d-3b3c-8b49-713ea71697ab.payor_name
+  filterOnlyUnderlyingModel: true
+sections:
+- filters: []
+  rows:
+  - blocks:
+    - type: markdown
+      text: ''
+      width: 12
+  - blocks:
+    - type: customDashboardMetric
+      label: ''
+      ignoreDashboardFilters: true
+      width: 4
+      config:
+        dataModel: m:56dca31e-9f9f-3182-ac30-954178407204
+        measureId: claims
+        filters: []
+        metricType: timeseries
+        dimensionId: m:622eb9e2-2c0d-3b3c-8b49-713ea71697ab.date_of_service
+        granularity: month
+        displayOptions:
+          sparkline: false
+          displayNumber: lastPeriod
+          differenceConfig:
+            showDifference: true
+    - type: customDashboardMetric
+      label: ''
+      ignoreDashboardFilters: true
+      width: 4
+      config:
+        dataModel: m:56dca31e-9f9f-3182-ac30-954178407204
+        measureId: rejection_rate
+        filters: []
+        metricType: timeseries
+        dimensionId: m:622eb9e2-2c0d-3b3c-8b49-713ea71697ab.date_of_service
+        granularity: month
+        displayOptions:
+          sparkline: false
+          displayNumber: lastPeriod
+          differenceConfig:
+            showDifference: true
+    - type: customDashboardMetric
+      label: ''
+      ignoreDashboardFilters: true
+      width: 4
+      config:
+        dataModel: m:56dca31e-9f9f-3182-ac30-954178407204
+        measureId: count_distinct_patient_id
+        filters: []
+        metricType: timeseries
+        dimensionId: m:622eb9e2-2c0d-3b3c-8b49-713ea71697ab.date_of_service
+        granularity: week
+        displayOptions:
+          sparkline: false
+          displayNumber: lastPeriod
+          differenceConfig:
+            showDifference: true
+    height: 2
+- filters:
+  - dataModel: m:622eb9e2-2c0d-3b3c-8b49-713ea71697ab
+    columnId: m:622eb9e2-2c0d-3b3c-8b49-713ea71697ab.date_of_service
+    range:
+    - - -1
+      - month
+      - startOfPeriod: true
+    - - 0
+      - month
+      - startOfPeriod: true
+    filterOnlyUnderlyingModel: true
+  rows:
+  - blocks:
+    - type: savedView
+      savedView: sv:BYbGAHTFVrYb11da
+      legendPosition: top
+      ignoreDashboardFilters: false
+      width: 12
+    height: 6
+  - blocks:
+    - type: savedView
+      savedView: sv:uLzfPnmRQo_kbiSP
+      legendPosition: none
+      ignoreDashboardFilters: false
+      width: 4
+    - type: savedView
+      savedView: sv:NppIHwqEG2CXzCzR
+      legendPosition: none
+      ignoreDashboardFilters: false
+      width: 4
+    - type: savedView
+      savedView: sv:EZvej27ahUddqu2H
+      legendPosition: none
+      ignoreDashboardFilters: false
+      width: 4
+    height: 6

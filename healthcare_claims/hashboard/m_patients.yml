@@ -1,0 +1,44 @@
+hbVersion: '1.0'
+type: model
+grn: m:1f24e457-e299-326f-9ca2-405768c48297
+alias: patients
+name: Patients
+source:
+  connectionName: Uploads
+  physicalName: patients.parquet
+cols:
+- id: first_name
+  type: attribute
+  physicalName: first_name
+  name: first_name
+- id: last_name
+  type: attribute
+  physicalName: last_name
+  name: last_name
+- id: address
+  type: attribute
+  physicalName: address
+  name: address
+- id: payor
+  type: attribute
+  physicalName: payor
+  name: payor
+- id: patient_id
+  type: attribute
+  physicalName: patient_id
+  name: patient_id
+  aggregationOptions:
+    defaultBinWidth: 1000000
+    binsEnabled: false
+  primaryKey: true
+- id: age
+  type: attribute
+  physicalName: age
+  name: age
+  aggregationOptions:
+    defaultBinWidth: 5
+    binsEnabled: true
+- id: patients
+  type: metric
+  name: Patients
+  aggregate: row_count

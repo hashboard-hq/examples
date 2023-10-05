@@ -5,7 +5,7 @@ from faker import Faker
 fake = Faker()
 
 # Step 1: Load the Parquet file
-parquet_file_path = "./data_catalog/sales_data.parquet"
+parquet_file_path = "./data/sales_data.parquet"
 df = pd.read_parquet(parquet_file_path)
 
 # Step 2: Extract the unique customer IDs
@@ -41,5 +41,5 @@ for customer_id in customer_ids:
 
 
 # Step 6: Write the customers table to a Parquet file
-output_parquet_file_path = "./data_catalog/customers.parquet"
+output_parquet_file_path = "./data/customers.parquet"
 customers_table.to_parquet(output_parquet_file_path, index=False)
