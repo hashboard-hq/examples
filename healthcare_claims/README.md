@@ -7,28 +7,13 @@
 ``` bash
 git clone https://github.com/hashboard-hq/examples.git
 
-cd 04_retail_marketing
+cd healthcare_claims
 
 # with python 2.9+
 pip install -r requirements.txt
 
 # you need to get your authorization key setup locally
-# see docs here: https://docs.hashboard.com/docs/data-ops/cli#1-create-an-access-key
+hb signup # to signup
 
 # you can run all of the below step just with make:
 make -B
-
-# generate synthetic data:
-python generate_data.py
-python generate_customers.py
-python generate_marketing.py
-
-# run dbt
-dbt build
-
-# you can upload the files in data manually, or progromatically
-for file in ./data_catalog/dbt/*; do hb upload Uploads "$$file"; done
-
-# run hashboard:
-hb preview --dbt
-```
