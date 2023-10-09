@@ -4,8 +4,8 @@ type: model
 alias: claim_details
 name: Claim Explorer
 source:
-  connectionName: Uploads
-  physicalName: claim_details.parquet
+  connectionName: motherduck-demo
+  physicalName: claim_details
 cols:
 - id: service_date
   type: datetime

@@ -4,8 +4,8 @@ type: model
 alias: claims
 name: Claims
 source:
-  connectionName: Uploads
-  physicalName: claims.parquet
+  connectionName: motherduck-demo
+  physicalName: claims
 cols:
 - id: date_of_service
   type: datetime

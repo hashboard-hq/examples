@@ -3,8 +3,8 @@ type: model
 alias: patients
 name: Patients
 source:
-  connectionName: Uploads
-  physicalName: patients.parquet
+  connectionName: motherduck-demo
+  physicalName: patients
 cols:
 - id: first_name
   type: attribute
