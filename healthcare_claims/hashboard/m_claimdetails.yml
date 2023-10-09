@@ -1,6 +1,6 @@
 hbVersion: '1.0'
 type: model
-grn: m:56dca31e-9f9f-3182-ac30-954178407204
+#grn: m:56dca31e-9f9f-3182-ac30-954178407204
 alias: claim_details
 name: Claim Explorer
 source:
@@ -42,7 +42,7 @@ cols:
     defaultBinWidth: 900
     binsEnabled: false
   foreignModels:
-  - m:622eb9e2-2c0d-3b3c-8b49-713ea71697ab
+    - m::claims
 - id: quantity
   type: attribute
   physicalName: Quantity
@@ -86,7 +86,7 @@ cols:
     defaultBinWidth: 4000000
     binsEnabled: false
   foreignModels:
-  - m:1f24e457-e299-326f-9ca2-405768c48297
+    - m::patients
 - id: claim_lines
   type: metric
   name: Claim Lines

@@ -1,5 +1,5 @@
 hbVersion: '1.0'
-grn: palette:8cd42b14-4656-3e41-868f-5ee4944d7553
+#grn: palette:8cd42b14-4656-3e41-868f-5ee4944d7553
 type: color_palette
 name: Hashboard inverted
 alias: hb_inverted

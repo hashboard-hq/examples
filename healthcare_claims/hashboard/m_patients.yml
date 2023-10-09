@@ -1,6 +1,5 @@
 hbVersion: '1.0'
 type: model
-grn: m:1f24e457-e299-326f-9ca2-405768c48297
 alias: patients
 name: Patients
 source:
