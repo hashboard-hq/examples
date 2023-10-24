@@ -1,28 +1,33 @@
 hbVersion: '1.0'
 type: saved_view
+alias: claimallowedamountbystatus
 #grn: sv:b4XBq1NXCitaQboJ
+#model: m:56dca31e-9f9f-3182-ac30-954178407204
 model: m::claim_details
 name: Claim Allowed Amount by Status
 data:
   x:
     columnId: service_date
-    granularity: week
+    granularity: month
   y:
-    columnId: allowed_amount_2
+    columnId: claim_lines
   breakout:
-    columnId: m::claims.status
+    columnId: m:622eb9e2-2c0d-3b3c-8b49-713ea71697ab.status
     groups:
     - key: Rejected
     - key: Unpaid
     - key: Paid
-    showOther: true
+    showOther: false
   filters: []
 visualization:
   chartType: bar
   stack: stack
   showAxisLabels: true
-  colorPalette: palette::hb_inverted
+  legend: top
+  showLegendTitle: false
+  colorPalette: palette:8cd42b14-4656-3e41-868f-5ee4944d7553
 attributeTray:
+  orderAttributesAccordingToSpec: true
   attributeTiles:
   - columnId: claim_detail_id
     hidden: true
@@ -32,3 +37,9 @@ attributeTray:
     hidden: true
   - columnId: total_cost
     hidden: true
+  - columnId: allowed_amount
+    hidden: true
+  - columnId: cpt_code
+  - columnId: icd_code
+  - columnId: service_description
+  - columnId: actual_paid_amount
