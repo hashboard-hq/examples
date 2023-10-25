@@ -32,6 +32,7 @@ cols:
     minGranularity: second
     maxGranularity: year
 - id: provider_id
+  isHiddenByDefault: true
   type: attribute
   physicalName: ProviderID
   name: ProviderID
@@ -48,6 +49,7 @@ cols:
   physicalName: PlanInformation
   name: PlanInformation
 - id: claim_id
+  isHiddenByDefault: true
   type: attribute
   physicalName: ClaimID
   name: ClaimID
@@ -56,6 +58,7 @@ cols:
     binsEnabled: false
   primaryKey: true
 - id: total_amount
+  isHiddenByDefault: true
   type: attribute
   physicalName: TotalAmount
   name: TotalAmount
@@ -63,6 +66,7 @@ cols:
     defaultBinWidth: 5
     binsEnabled: false
 - id: allowed_amount
+  isHiddenByDefault: true
   type: attribute
   physicalName: AllowedAmount
   name: AllowedAmount
@@ -70,6 +74,7 @@ cols:
     defaultBinWidth: 5
     binsEnabled: false
 - id: actual_paid_amount
+  isHiddenByDefault: true
   type: attribute
   physicalName: ActualPaidAmount
   name: ActualPaidAmount
@@ -77,6 +82,7 @@ cols:
     defaultBinWidth: 4
     binsEnabled: true
 - id: patient_id
+  isHiddenByDefault: true
   type: attribute
   physicalName: PatientID
   name: PatientID
