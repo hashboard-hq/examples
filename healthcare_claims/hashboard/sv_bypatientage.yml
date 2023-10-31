@@ -6,7 +6,7 @@ model: m::claim_details
 name: By Patient Age
 data:
   x:
-    columnId: m:1f24e457-e299-326f-9ca2-405768c48297.age
+    columnId: m::claim_details.age
     bins:
       binWidth: 5
       binsEnabled: true
