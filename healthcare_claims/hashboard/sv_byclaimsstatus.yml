@@ -2,7 +2,7 @@ hbVersion: '1.0'
 type: saved_view
 alias: byclaimsstatus
 #grn: sv:EZvej27ahUddqu2H
-#m:56dca31e-9f9f-3182-ac30-954178407204
+#m::claim_details
 model: m::claim_details
 name: By Claims Status
 data:
@@ -10,7 +10,7 @@ data:
     name: Percent of Total Claims
     formula: percentOfTotal(claims)
   rows:
-    columnId: m:622eb9e2-2c0d-3b3c-8b49-713ea71697ab.status
+    columnId: m::claims.status
   filters: []
   sort:
   - columnId: claims

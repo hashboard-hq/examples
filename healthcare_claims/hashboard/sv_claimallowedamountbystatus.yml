@@ -2,7 +2,7 @@ hbVersion: '1.0'
 type: saved_view
 alias: claimallowedamountbystatus
 #grn: sv:b4XBq1NXCitaQboJ
-#model: m:56dca31e-9f9f-3182-ac30-954178407204
+#model: m::claim_details
 model: m::claim_details
 name: Claim Allowed Amount by Status
 data:
@@ -12,7 +12,7 @@ data:
   y:
     columnId: claim_lines
   breakout:
-    columnId: m:622eb9e2-2c0d-3b3c-8b49-713ea71697ab.status
+    columnId: m::claims.status
     groups:
     - key: Rejected
     - key: Unpaid
@@ -25,7 +25,7 @@ visualization:
   showAxisLabels: true
   legend: top
   showLegendTitle: false
-  colorPalette: palette:8cd42b14-4656-3e41-868f-5ee4944d7553
+  colorPalette: palette::hb_inverted
 attributeTray:
   orderAttributesAccordingToSpec: true
   attributeTiles:

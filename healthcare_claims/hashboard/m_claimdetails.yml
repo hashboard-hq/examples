@@ -1,6 +1,6 @@
 hbVersion: '1.0'
 type: model
-#grn: m:56dca31e-9f9f-3182-ac30-954178407204
+#grn: m::claim_details
 alias: claim_details
 name: Claim Explorer
 source:

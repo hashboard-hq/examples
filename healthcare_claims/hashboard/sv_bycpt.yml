@@ -3,7 +3,7 @@ type: saved_view
 #grn: sv:uLzfPnmRQo_kbiSP
 alias: bycpt
 model: m::claim_details
-#model: m:56dca31e-9f9f-3182-ac30-954178407204
+#model: m::claim_details
 name: By CPT
 data:
   metric:
@@ -12,7 +12,7 @@ data:
   rows:
     columnId: cpt_code
   filters:
-  - columnId: m:622eb9e2-2c0d-3b3c-8b49-713ea71697ab.date_of_service
+  - columnId: m::claims.date_of_service
     range:
     - - -1
       - month
@@ -20,7 +20,7 @@ data:
     - - 0
       - month
       - startOfPeriod: true
-  - columnId: m:622eb9e2-2c0d-3b3c-8b49-713ea71697ab.date_of_service
+  - columnId: m::claims.date_of_service
     range:
     - - -1
       - month
