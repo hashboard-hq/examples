@@ -118,6 +118,11 @@ def create_daily_dataset(partition: date) -> None:
     tiffs = download_daily_tiffs(partition=partition)
     assert tiffs is not None
     if any(isinstance(result, HTTPError) for result in tiffs):
+        # we tolerate errors here so jobs that include the current
+        # day can fail gracefully if the data isn't yet available;
+        # that way we don't exit the flow with a failure, which could
+        # prevent downstream flows (like concatenating and loading data)
+        # from running.
         logger.error("GeoTiffs unavailable for %s", partition)
         return
 
