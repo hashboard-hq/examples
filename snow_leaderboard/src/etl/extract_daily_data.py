@@ -16,6 +16,7 @@ from etl.paths import (
     get_local_dir_for_tiffs,
     get_local_path_for_daily_pq,
     get_tiff_filenames_for_partition,
+    s3_uri,
 )
 from etl.upload import upload_file_to_s3
 
@@ -69,7 +70,7 @@ def transform_tiffs_to_df(partition: date, tiffs: tuple[Path, Path]) -> pd.DataF
 
     # load locations
     loc_bucket, loc_key = get_bucket_and_key_for_location_data()
-    loc_uri = f"s3://{loc_bucket}/{loc_key}"
+    loc_uri = s3_uri(loc_bucket, loc_key)
     conn = duckdb.connect()
     conn.execute("install httpfs; load httpfs; install aws; load aws;")
     conn.execute("call load_aws_credentials();")
@@ -104,9 +105,8 @@ def write_df_to_parquet(partition: date, df: pd.DataFrame) -> Path:
 @flow
 def upload_parquet_to_s3(partition: date, local_path: Path) -> str:
     bucket, key = get_bucket_and_key_for_daily_pq(partition=partition)
-    uri = f"s3://{bucket}/{key}"
     upload_file.submit(local_path, bucket, key)
-    return uri
+    return s3_uri(bucket, key)
 
 
 @flow

@@ -14,6 +14,10 @@ DAILY_PQ = "daily_pq"
 SEASON_PQ = "season_pq"
 
 
+def s3_uri(bucket: str, key: str) -> str:
+    return f"s3://{bucket}/{key}"
+
+
 def get_bucket() -> str:
     if not (bucket := os.getenv("S3_BUCKET")):
         raise ValueError("Must set the S3_BUCKET env var.")

@@ -11,6 +11,7 @@ from etl.download import download_file_from_url
 from etl.paths import (
     get_bucket_and_key_for_location_data,
     get_local_dir_for_location_data,
+    s3_uri,
 )
 from etl.upload import upload_file_to_s3
 
@@ -87,8 +88,7 @@ def upload_parquet_to_s3(pq_file: Path) -> str:
     """
     bucket, key = get_bucket_and_key_for_location_data()
     upload_file_to_s3(pq_file, bucket, key)
-    uri = f"s3://{bucket}/{key}"
-    return uri
+    return s3_uri(bucket, key)
 
 
 @flow

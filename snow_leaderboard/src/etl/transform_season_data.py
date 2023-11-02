@@ -4,6 +4,7 @@ from prefect import flow, get_run_logger
 from etl.paths import (
     get_bucket_and_key_for_daily_pq_season_dir,
     get_bucket_and_key_for_season_pq,
+    s3_uri,
 )
 
 
@@ -14,7 +15,7 @@ def concatenate_season_data(season: int) -> None:
     source_bucket, source_key = get_bucket_and_key_for_daily_pq_season_dir(
         season=season
     )
-    source_uri = f"s3://{source_bucket}/{source_key}"
+    source_uri = s3_uri(source_bucket, source_key)
 
     conn = duckdb.connect()
     conn.execute("install httpfs; load httpfs; install aws; load aws;")
@@ -28,7 +29,7 @@ def concatenate_season_data(season: int) -> None:
     )
 
     dest_bucket, dest_key = get_bucket_and_key_for_season_pq(season=season)
-    dest_uri = f"s3://{dest_bucket}/{dest_key}"
+    dest_uri = s3_uri(dest_bucket, dest_key)
     cur.write_parquet(file_name=dest_uri, compression="snappy")
     logger.info("Wrote season dataset to %s", dest_uri)
 
