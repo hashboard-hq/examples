@@ -1,0 +1,32 @@
+hbVersion: '1.0'
+type: saved_view
+grn: sv:clN-OZcpZqmhudEb
+model: m:W5n7kyuuKaETEy49
+name: Top Ski Areas T7 Days
+data:
+  metric:
+    columnId: total_snowfall
+  rows:
+    columnId: m:_YdPKNeTPUBs6AYs.name
+  breakout:
+    columnId: m:_YdPKNeTPUBs6AYs.state
+    metricId: total_snowfall
+    sort: desc
+    limit: 6
+    showOther: false
+  filters:
+  - columnId: observed_at
+    range:
+    - - -6
+      - day
+    - - 1
+      - day
+      - startOfPeriod: true
+  sort:
+  - columnId: total_snowfall
+    order: desc
+  limit: 50
+visualization:
+  chartType: horizontal_bar
+  showBarLabels: true
+  showAxisLabels: true

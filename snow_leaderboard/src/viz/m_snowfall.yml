@@ -1,0 +1,73 @@
+hbVersion: '1.0'
+type: model
+grn: m:W5n7kyuuKaETEy49
+name: Snowfall
+description: All Snowfall Data
+source:
+  connectionName: Uploads
+  sql: "with unioned as (\r\n  select * from \"2022.parquet\"\r\n\r\n  union all\r\
+    \n\r\n  select * from \"2023.parquet\"\r\n)\r\nselect *, \r\ncase when date_part('month',
+    observed_at) < 10 then -1 else 0 end + date_part('year', observed_at) as season,\r\
+    \ndate_diff('day', make_date(season, 10, 1), observed_at) + 1 as day_in_season,\r
+    \nfrom unioned\n"
+cols:
+- id: observed_at
+  type: datetime
+  physicalName: observed_at
+  name: Observed At
+  primaryDate: true
+  description: The end of a 24-hour window; snow measures are for the window.
+  aggregationOptions:
+    minGranularity: day
+    maxGranularity: year
+- id: location_id
+  type: attribute
+  physicalName: location_id
+  name: location_id
+  foreignModels:
+  - m:_YdPKNeTPUBs6AYs
+- id: season
+  type: attribute
+  physicalName: season
+  name: Season
+  description: The start year for a snow season.
+  aggregationOptions:
+    defaultBinWidth: 1
+    binsEnabled: false
+- id: day_in_season
+  type: attribute
+  physicalName: day_in_season
+  name: Day in Season
+  description: 1 for Oct 1; 365 or 366 for Sep 30
+  aggregationOptions:
+    defaultBinWidth: 20
+    binsEnabled: false
+- id: total_snowfall
+  type: metric
+  name: Total Snowfall
+  formattingOptions:
+    fixedDecimals: 1
+  sql: sum(snowfall_24h)
+- id: distinct_locations
+  type: metric
+  name: Number of Distinct Locations
+  formattingOptions:
+    fixedDecimals: 0
+  sql: count(distinct location_id)
+- id: row_count
+  type: metric
+  name: Number of Observations
+  aggregate: row_count
+- id: avg_snowfall
+  type: metric
+  name: Average Daily Snowfall
+  formattingOptions:
+    fixedDecimals: 2
+  sql: avg(snowfall_24h)
+- id: sum_snowfall_ytd
+  type: metric
+  name: Max Snowfall YTD
+  formattingOptions:
+    fixedDecimals: 1
+  aggregate: max
+  physicalName: snowfall_ytd

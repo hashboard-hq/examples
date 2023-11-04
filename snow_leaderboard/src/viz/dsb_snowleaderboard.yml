@@ -1,0 +1,56 @@
+hbVersion: '1.0'
+grn: dsb:0uGUI4BUHtixsyvZ
+name: Snow Leaderboard
+description: "There are 661 ski areas in the Lower 48 -- which ones get the most snow?\n
+  \nData provided by the National Weather Service's National Gridded Snowfall Analysis.\n\
+  \"Observed At\" dates represent the 24-hour period preceding 12:00:00 UTC on that
+  date."
+type: dashboard
+globalFilters: []
+sections:
+- filters: []
+  rows:
+  - blocks:
+    - type: savedView
+      savedView: sv:KQjL2NrFJgvlRve9
+      legendPosition: top
+      width: 4
+    - type: savedView
+      savedView: sv:clN-OZcpZqmhudEb
+      legendPosition: top
+      width: 4
+    - type: savedView
+      savedView: sv:eBctSMHy9byOmm3X
+      legendPosition: top
+      width: 4
+    height: 9
+- filters:
+  - dataModel: m:_YdPKNeTPUBs6AYs
+    columnId: name
+    filterOnlyUnderlyingModel: true
+  - dataModel: m:_YdPKNeTPUBs6AYs
+    columnId: state
+    filterOnlyUnderlyingModel: true
+  rows:
+  - blocks:
+    - type: savedView
+      savedView: sv:Gkc9_Yipyqqrv92t
+      legendPosition: top
+      width: 6
+    - type: savedView
+      savedView: sv:YGLXCRHjzE0yALSF
+      legendPosition: top
+      width: 6
+    height: 9
+- filters:
+  - dataModel: m:W5n7kyuuKaETEy49
+    columnId: day_in_season
+    lt: 231
+    filterOnlyUnderlyingModel: false
+  rows:
+  - blocks:
+    - type: savedView
+      savedView: sv:AirOnZ4rv_YvT4gx
+      legendPosition: top
+      width: 12
+    height: 12
