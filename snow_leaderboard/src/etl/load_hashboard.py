@@ -1,3 +1,4 @@
+import os
 import subprocess
 import tempfile
 from pathlib import Path
@@ -19,6 +20,9 @@ def load_season_to_hashboard(season: int) -> None:
     with tempfile.TemporaryDirectory() as tmpdir:
         local_path = download_file_from_s3(bucket, key, Path(tmpdir)).resolve()
         subprocess.run(["hb", "upload", str(local_path)])
+        model_id = os.getenv("SNOWFALL_MODEL_ID")
+        if model_id:
+            subprocess.run(["hb", "cache", "clear", f"m:{model_id}"])
 
 
 @flow
@@ -29,6 +33,9 @@ def load_locations_to_hashboard() -> None:
     with tempfile.TemporaryDirectory() as tmpdir:
         local_path = download_file_from_s3(bucket, key, Path(tmpdir)).resolve()
         subprocess.run(["hb", "upload", str(local_path)])
+        model_id = os.getenv("LOCATIONS_MODEL_ID")
+        if model_id:
+            subprocess.run(["hb", "cache", "clear", f"m:{model_id}"])
 
 
 if __name__ == "__main__":
