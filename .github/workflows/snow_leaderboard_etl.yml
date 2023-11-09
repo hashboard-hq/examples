@@ -13,7 +13,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  static:
+  daily-update:
     name: Run ETL
     runs-on: ubuntu-latest
     steps:

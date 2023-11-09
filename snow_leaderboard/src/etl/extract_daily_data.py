@@ -68,7 +68,8 @@ def download_daily_tiffs(partition: date) -> tuple[Path | HTTPError, Path | HTTP
 def transform_tiffs_to_df(partition: date, tiffs: tuple[Path, Path]) -> pd.DataFrame:
     assert len(tiffs) == 2
 
-    # load locations
+    # First, query our locations dataset to build a list of
+    # coordinates that we would like snowfall data for.
     loc_bucket, loc_key = get_bucket_and_key_for_location_data()
     loc_uri = s3_uri(loc_bucket, loc_key)
     conn = duckdb.connect()
@@ -79,6 +80,7 @@ def transform_tiffs_to_df(partition: date, tiffs: tuple[Path, Path]) -> pd.DataF
     ).fetchall()
     coords = [(location[2], location[1]) for location in locations]
 
+    # Next, use rasterio to extract data for each coordinate
     with (
         rasterio.open(tiffs[0]) as daily_dataset,
         rasterio.open(tiffs[1]) as ytd_dataset,

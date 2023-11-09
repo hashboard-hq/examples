@@ -13,20 +13,25 @@ sections:
   - blocks:
     - type: savedView
       savedView: sv:KQjL2NrFJgvlRve9
+      axisLabels: hide
       legendPosition: top
       width: 4
     - type: savedView
       savedView: sv:clN-OZcpZqmhudEb
+      axisLabels: hide
       legendPosition: top
       width: 4
     - type: savedView
       savedView: sv:eBctSMHy9byOmm3X
+      axisLabels: hide
       legendPosition: top
       width: 4
     height: 9
 - filters:
   - dataModel: m:_YdPKNeTPUBs6AYs
     columnId: name
+    values:
+    - Bighorn Ski Area (WY)
     filterOnlyUnderlyingModel: true
   - dataModel: m:_YdPKNeTPUBs6AYs
     columnId: state
@@ -35,10 +40,12 @@ sections:
   - blocks:
     - type: savedView
       savedView: sv:Gkc9_Yipyqqrv92t
+      axisLabels: hide
       legendPosition: top
       width: 6
     - type: savedView
       savedView: sv:YGLXCRHjzE0yALSF
+      axisLabels: hide
       legendPosition: top
       width: 6
     height: 9
@@ -46,11 +53,11 @@ sections:
   - dataModel: m:W5n7kyuuKaETEy49
     columnId: day_in_season
     lt: 231
-    filterOnlyUnderlyingModel: false
   rows:
   - blocks:
     - type: savedView
       savedView: sv:AirOnZ4rv_YvT4gx
+      axisLabels: hide
       legendPosition: top
       width: 12
     height: 12
