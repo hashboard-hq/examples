@@ -6,6 +6,7 @@ from etl.extract_daily_data import create_daily_dataset
 from etl.load_hashboard import load_season_to_hashboard
 from etl.paths import get_season_of_partition
 from etl.transform_season_data import concatenate_season_data
+from etl.update_dashboard_filter import update_dashboard_filter
 
 
 def today() -> date:
@@ -59,3 +60,4 @@ def update_current_season(delta: timedelta = timedelta(days=5)) -> None:
     season = get_season_of_partition(partition=end_date)
     concatenate_season_data(season=season)
     load_season_to_hashboard(season=season)
+    update_dashboard_filter(season=season)
