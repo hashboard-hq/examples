@@ -57,7 +57,7 @@ def update_dashboard_filter(season: int) -> None:
     dashboard_path = VIZ_DIRECTORY / "dsb_snowleaderboard.yml"
     dashboard_config = yaml.load(dashboard_path)
 
-    # update the description with "last upated" date:
+    # update the description with "last updated" date:
     description = (
         "There are 661 ski areas in the Lower 48 -- which ones get the most snow?\n\n"
         "Data provided by the National Weather Service's National Gridded Snowfall "

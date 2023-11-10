@@ -3,7 +3,7 @@ grn: dsb:0uGUI4BUHtixsyvZ
 name: Snow Leaderboard
 description: "There are 661 ski areas in the Lower 48 -- which ones get the most snow?\n
   \nData provided by the National Weather Service's National Gridded Snowfall Analysis.
-  Last updated 2023-11-09T12:00:00+00:00.\n\"Observed At\" dates represent the 24-hour
+  Last updated 2023-11-10T12:00:00+00:00.\n\"Observed At\" dates represent the 24-hour
   period preceding 12:00:00 UTC on that date."
 type: dashboard
 globalFilters: []
