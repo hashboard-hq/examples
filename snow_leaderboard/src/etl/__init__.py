@@ -2,6 +2,7 @@ from datetime import date, datetime, timedelta, timezone
 
 from prefect import flow, get_run_logger
 
+from etl.check_for_powder import check_for_powder_day
 from etl.extract_daily_data import create_daily_dataset
 from etl.load_hashboard import load_season_to_hashboard
 from etl.paths import get_season_of_partition
@@ -61,3 +62,4 @@ def update_current_season(delta: timedelta = timedelta(days=5)) -> None:
     concatenate_season_data(season=season)
     load_season_to_hashboard(season=season)
     update_dashboard_filter(season=season)
+    check_for_powder_day(season=season)
