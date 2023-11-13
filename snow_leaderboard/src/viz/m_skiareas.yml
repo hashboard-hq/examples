@@ -1,0 +1,40 @@
+hbVersion: '1.0'
+type: model
+grn: m:_YdPKNeTPUBs6AYs
+name: Ski Areas
+source:
+  connectionName: Uploads
+  physicalName: ski_areas_all.parquet
+cols:
+- id: id
+  type: attribute
+  physicalName: id
+  isHiddenByDefault: true
+  name: id
+  primaryKey: true
+- id: name
+  type: attribute
+  physicalName: NAME
+  name: Location Name
+- id: state
+  type: attribute
+  physicalName: STATE
+  name: State
+- id: lat
+  type: attribute
+  physicalName: lat
+  name: Latitude
+  aggregationOptions:
+    defaultBinWidth: 0.4
+    binsEnabled: false
+- id: long
+  type: attribute
+  physicalName: long
+  name: Longitude
+  aggregationOptions:
+    defaultBinWidth: 4
+    binsEnabled: false
+- id: row_count
+  type: metric
+  name: Number of Locations
+  aggregate: row_count

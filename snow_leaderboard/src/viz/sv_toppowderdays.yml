@@ -1,0 +1,46 @@
+hbVersion: '1.0'
+type: saved_view
+grn: sv:Gkc9_Yipyqqrv92t
+model: m:W5n7kyuuKaETEy49
+name: Top Powder Days
+data:
+  x:
+  - columnId: season
+  - columnId: observed_at
+    granularity: day
+  - columnId: m:_YdPKNeTPUBs6AYs.name
+  - columnId: m:_YdPKNeTPUBs6AYs.state
+  y:
+    columnId: total_snowfall
+  filters: []
+  sort:
+  - columnId: total_snowfall
+    order: desc
+  limit: 1000
+visualization:
+  chartType: table
+  showAxisLabels: true
+  padding: compact
+  tableCellFormatting: []
+  tableVisualization:
+  - columnId: total_snowfall
+    calculation: columnPercentTotal
+    heightPixels: 15
+    type: bar
+    maxWidthPixels: 100
+    labelPlacement: right
+  tableColumnWidths:
+  - columnId: '#virtual._YdPKNeTPUBs6AYs.09cd2981-3688-4e63-b422-a5bbcca8e793'
+    width: 259
+  - columnId: observed_at
+    width: 120
+  - columnId: total_snowfall
+    width: 158
+  - columnId: '#virtual._YdPKNeTPUBs6AYs.3a30a83a-5df1-4cd1-ba05-427f46f85051'
+    width: 120
+  - columnId: season
+    width: 94
+attributeTray:
+  attributeTiles:
+  - columnId: location_id
+    hidden: true

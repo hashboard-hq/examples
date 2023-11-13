@@ -1,0 +1,32 @@
+hbVersion: '1.0'
+type: saved_view
+grn: sv:KQjL2NrFJgvlRve9
+model: m:W5n7kyuuKaETEy49
+name: Top Ski Areas YTD
+data:
+  metric:
+    columnId: total_snowfall
+  rows:
+    columnId: m:_YdPKNeTPUBs6AYs.name
+  breakout:
+    columnId: m:_YdPKNeTPUBs6AYs.state
+    groups:
+    - key: COLORADO
+    - key: MONTANA
+    - key: OREGON
+    - key: WYOMING
+    - key: UTAH
+    - key: IDAHO
+    showOther: true
+  filters:
+  - columnId: season
+    values:
+    - 2023
+  sort:
+  - columnId: total_snowfall
+    order: desc
+  limit: 50
+visualization:
+  chartType: horizontal_bar
+  showBarLabels: true
+  showAxisLabels: true
