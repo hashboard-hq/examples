@@ -17,6 +17,7 @@ This project is in Python and is built using Poetry.
     look like this:
     ```sh
     S3_BUCKET = <my bucket>
+    S3_PREFIX = <dir inside bucket>
     ```
 7.  Run `poetry install --sync` to install the dependencies for this project,
     including development and testing dependencies, into a virtual environment
