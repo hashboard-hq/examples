@@ -1,4 +1,5 @@
 import subprocess
+import tempfile
 from datetime import datetime, time, timezone
 from pathlib import Path
 
@@ -11,8 +12,6 @@ from etl.paths import (
     get_bucket_and_key_for_season_pq,
     s3_uri,
 )
-
-VIZ_DIRECTORY = Path(__file__).parent.parent / "viz"
 
 
 @flow
@@ -52,36 +51,38 @@ def update_dashboard_filter(season: int) -> None:
 
     # pull the remote state of all Hashboard assets into
     # config files in the viz directory
-    subprocess.run(["hb", "pull", "--all"], cwd=str(VIZ_DIRECTORY))
-    yaml = YAML(typ="rt")
-    dashboard_path = VIZ_DIRECTORY / "dsb_snowleaderboard.yml"
-    dashboard_config = yaml.load(dashboard_path)
+    with tempfile.TemporaryDirectory() as tmpdir:
+        subprocess.run(["hb", "pull", "--all"], cwd=tmpdir)
+        yaml = YAML(typ="rt")
+        dashboard_path = Path(tmpdir) / "dsb_snowleaderboard.yml"
+        dashboard_config = yaml.load(dashboard_path)
 
-    # update the description with "last updated" date:
-    description = (
-        "There are 661 ski areas in the Lower 48 -- which ones get the most snow?\n\n"
-        "Data provided by the National Weather Service's National Gridded Snowfall "
-        f"Analysis. Last updated {last_updated_str}.\n"
-        '"Observed At" dates represent the 24-hour period preceding 12:00:00 UTC on '
-        "that date."
-    )
-    dashboard_config["description"] = description
+        # update the description with "last updated" date:
+        description = (
+            "There are 661 ski areas in the Lower 48 -- which ones get the most snow?"
+            "\n\n"
+            "Data provided by the National Weather Service's National Gridded Snowfall "
+            f"Analysis. Last updated {last_updated_str}.\n"
+            '"Observed At" dates represent the 24-hour period preceding 12:00:00 UTC '
+            "on that date."
+        )
+        dashboard_config["description"] = description
 
-    # update the filter value with the top resort name
-    for i, section in enumerate(dashboard_config["sections"]):
-        for j, filter_ in enumerate(section["filters"]):
-            if "columnId" in filter_ and filter_["columnId"] == "name":
-                dashboard_config["sections"][i]["filters"][j]["values"] = [
-                    top_resort_name
-                ]
-                logger.info(
-                    "Section %s, filter %s updated with %s", i, j, top_resort_name
-                )
-                break
-    yaml.dump(dashboard_config, dashboard_path)
+        # update the filter value with the top resort name
+        for i, section in enumerate(dashboard_config["sections"]):
+            for j, filter_ in enumerate(section["filters"]):
+                if "columnId" in filter_ and filter_["columnId"] == "name":
+                    dashboard_config["sections"][i]["filters"][j]["values"] = [
+                        top_resort_name
+                    ]
+                    logger.info(
+                        "Section %s, filter %s updated with %s", i, j, top_resort_name
+                    )
+                    break
+        yaml.dump(dashboard_config, dashboard_path)
 
-    # deploy the updated dashboard
-    subprocess.run(["hb", "deploy", "--no-preview"], cwd=str(VIZ_DIRECTORY))
+        # deploy the updated dashboard
+        subprocess.run(["hb", "deploy", "--no-preview"], cwd=tmpdir)
     logger.info("Dashboard deployed.")
 
 
