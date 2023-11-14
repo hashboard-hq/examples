@@ -19,7 +19,7 @@ def load_season_to_hashboard(season: int) -> None:
     logger = get_run_logger()
     logger.info("Loading season %s to Hashboard", season)
     bucket, key = get_bucket_and_key_for_season_pq(season)
-    subprocess.run(["hb", "pull", "--all"], cwd=str(VIZ_DIRECTORY))
+    subprocess.run(["hb", "pull", "--all"])
     yaml = YAML(typ="rt")
     model = yaml.load(VIZ_DIRECTORY / "m_snowfall.yml")
     model_id = model["grn"]
