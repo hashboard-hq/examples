@@ -1,6 +1,6 @@
-hbVersion: '1.0'
-grn: launchpad:ZCs4oMc5iodr8v-j
+hbVersion: "1.0"
+alias: launchpad_untitled
 type: homepage_launchpad
-description: ''
+description: ""
 pinnedResourceIds:
-- dsb:0uGUI4BUHtixsyvZ
+  - dsb:0uGUI4BUHtixsyvZ

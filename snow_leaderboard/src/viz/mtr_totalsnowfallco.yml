@@ -1,15 +1,15 @@
-hbVersion: '1.0'
+hbVersion: "1.0"
 type: metric
-grn: mtr:kIWHJbr8gpnbzJHU
+alias: mtr_totalsnowfallco
 name: Total Snowfall (CO)
 config:
   metricType: timeseries
-  dataModel: m:W5n7kyuuKaETEy49
+  dataModel: m::snowfall
   measureId: total_snowfall
   filters:
-  - columnId: m:_YdPKNeTPUBs6AYs.state
-    values:
-    - COLORADO
+    - columnId: m::skiareas.state
+      values:
+        - COLORADO
   dimensionId: observed_at
   granularity: week
   displayOptions:
