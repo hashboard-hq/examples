@@ -5,6 +5,8 @@ from typing import Literal
 
 DATA_DIR = Path(__file__).parent.parent.parent / "data"
 
+S3_KEY_PREFIX = os.getenv("S3_PREFIX", None)
+
 LOCATIONS = "ski_locations"
 SNOWFALL = "snowfall"
 
@@ -30,7 +32,10 @@ def get_local_dir_for_location_data() -> Path:
 
 
 def get_bucket_and_key_for_location_data() -> tuple[str, str]:
-    key = f"{LOCATIONS}/ski_areas_all.parquet"
+    if S3_KEY_PREFIX is None:
+        key = f"{LOCATIONS}/ski_areas_all.parquet"
+    else:
+        key = f"{S3_KEY_PREFIX}/{LOCATIONS}/ski_areas_all.parquet"
     return get_bucket(), key
 
 
@@ -57,7 +62,10 @@ def get_local_dir_for_tiffs() -> Path:
 
 
 def get_bucket_and_key_for_tiffs() -> tuple[str, str]:
-    key = f"{SNOWFALL}/{TIFFS}"
+    if S3_KEY_PREFIX is None:
+        key = f"{SNOWFALL}/{TIFFS}"
+    else:
+        key = f"{S3_KEY_PREFIX}/{SNOWFALL}/{TIFFS}"
     return get_bucket(), key
 
 
@@ -79,8 +87,12 @@ def get_bucket_and_key_for_daily_pq_season_dir(
         raise TypeError("Must set either partition or season")
     elif partition is not None and season is not None:
         raise TypeError("Must set only one of partition or season")
-    key = season or get_season_of_partition(partition=partition)  # type: ignore
-    return get_bucket(), f"{SNOWFALL}/{DAILY_PQ}/{key}"
+    season_dir = season or get_season_of_partition(partition=partition)  # type: ignore
+    if S3_KEY_PREFIX is None:
+        key = f"{SNOWFALL}/{DAILY_PQ}/{season_dir}"
+    else:
+        key = f"{S3_KEY_PREFIX}/{SNOWFALL}/{DAILY_PQ}/{season_dir}"
+    return get_bucket(), key
 
 
 def get_bucket_and_key_for_daily_pq(partition: date) -> tuple[str, str]:
@@ -93,4 +105,8 @@ def get_bucket_and_key_for_daily_pq(partition: date) -> tuple[str, str]:
 
 
 def get_bucket_and_key_for_season_pq(season: int) -> tuple[str, str]:
-    return get_bucket(), f"{SNOWFALL}/{SEASON_PQ}/{season}.parquet"
+    if S3_KEY_PREFIX is None:
+        key = f"{SNOWFALL}/{SEASON_PQ}/{season}.parquet"
+    else:
+        key = f"{S3_KEY_PREFIX}/{SNOWFALL}/{SEASON_PQ}/{season}.parquet"
+    return get_bucket(), key
