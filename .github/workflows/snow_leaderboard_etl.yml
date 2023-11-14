@@ -5,7 +5,7 @@ on:
   schedule:
     # the data we want runs through 12:00 UTC; tbd when it is published, let's give it an hour.
     # daily at 13:00 UTC
-    - cron:  '0 13 * * *'
+    - cron: "0 13 * * *"
 
 # will cancel previous workflows if they are still running.
 concurrency:
@@ -50,6 +50,8 @@ jobs:
       - name: Install python dependencies
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
         run: poetry install --sync --no-interaction --without dev --directory snow_leaderboard
+      - name: Check hashboard cli version
+        run: poetry run --directory snow_leaderboard hb --version
       - name: Run ETL pipeline
         run: poetry run --directory snow_leaderboard python -m etl
         env:
@@ -62,4 +64,3 @@ jobs:
           HASHBOARD_PROJECT_ID: ${{ secrets.HASHBOARD_PROJECT_ID }}
           HASHBOARD_ACCESS_KEY_ID: ${{ secrets.HASHBOARD_ACCESS_KEY_ID }}
           HASHBOARD_SECRET_ACCESS_KEY_TOKEN: ${{ secrets.HASHBOARD_SECRET_ACCESS_KEY_TOKEN }}
-
