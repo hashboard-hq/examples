@@ -1,4 +1,4 @@
-name: "Update Snowfall Data"
+name: "Backfill Snowfall Data"
 
 on:
   workflow_dispatch:
@@ -47,7 +47,7 @@ jobs:
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
         run: poetry install --sync --no-interaction --without dev --directory snow_leaderboard
       - name: Upload data to Hashboard
-        run: poetry run --directory snow_leaderboard python snow_leaderboard/src/etl/load_hashboard.py
+        run: poetry run --directory snow_leaderboard python snow_leaderboard/src/etl/__init__.py
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

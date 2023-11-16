@@ -63,3 +63,6 @@ def update_current_season(delta: timedelta = timedelta(days=5)) -> None:
     load_season_to_hashboard(season=season)
     update_dashboard_filter(season=season)
     check_for_powder_day(season=season)
+
+if __name__ == "__main__":
+    backfill_all_daily_datasets_in_season(2023)
