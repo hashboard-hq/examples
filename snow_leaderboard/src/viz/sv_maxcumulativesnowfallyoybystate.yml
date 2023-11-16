@@ -1,7 +1,7 @@
-hbVersion: '1.0'
+hbVersion: "1.0"
 type: saved_view
-grn: sv:AirOnZ4rv_YvT4gx
-model: m:W5n7kyuuKaETEy49
+alias: sv_maxcumulativesnowfallyoybystate
+model: m::snowfall
 name: Max Cumulative Snowfall YoY by State
 data:
   x:
@@ -15,26 +15,26 @@ data:
     limit: 6
     showOther: false
   trellis:
-    columnId: m:_YdPKNeTPUBs6AYs.state
+    columnId: m::skiareas.state
     groups:
-    - key: CALIFORNIA
-    - key: COLORADO
-    - key: UTAH
-    - key: NEVADA
-    - key: OREGON
-    - key: WYOMING
+      - key: CALIFORNIA
+      - key: COLORADO
+      - key: UTAH
+      - key: NEVADA
+      - key: OREGON
+      - key: WYOMING
     showOther: false
   filters:
-  - columnId: day_in_season
-    lt: 231
-  - columnId: m:_YdPKNeTPUBs6AYs.state
-    values:
-    - CALIFORNIA
-    - COLORADO
-    - UTAH
-    - NEVADA
-    - OREGON
-    - WYOMING
+    - columnId: day_in_season
+      lt: 231
+    - columnId: m::skiareas.state
+      values:
+        - CALIFORNIA
+        - COLORADO
+        - UTAH
+        - NEVADA
+        - OREGON
+        - WYOMING
 visualization:
   chartType: line
   stack: unstack

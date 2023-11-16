@@ -5,7 +5,7 @@ on:
   schedule:
     # the data we want runs through 12:00 UTC; tbd when it is published, let's give it an hour.
     # daily at 13:00 UTC
-    - cron:  '0 13 * * *'
+    - cron: "0 13 * * *"
 
 # will cancel previous workflows if they are still running.
 concurrency:
@@ -62,4 +62,4 @@ jobs:
           HASHBOARD_PROJECT_ID: ${{ secrets.HASHBOARD_PROJECT_ID }}
           HASHBOARD_ACCESS_KEY_ID: ${{ secrets.HASHBOARD_ACCESS_KEY_ID }}
           HASHBOARD_SECRET_ACCESS_KEY_TOKEN: ${{ secrets.HASHBOARD_SECRET_ACCESS_KEY_TOKEN }}
-
+          HASHBOARD_CLI_BASE_URI: ${{ secrets.HASHBOARD_CLI_BASE_URI }}

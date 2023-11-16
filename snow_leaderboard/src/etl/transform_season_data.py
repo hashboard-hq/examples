@@ -18,6 +18,7 @@ def concatenate_season_data(season: int) -> None:
     source_uri = s3_uri(source_bucket, source_key)
 
     conn = duckdb.connect()
+    conn.execute("set enable_progress_bar=false;")
     conn.execute("install httpfs; load httpfs; install aws; load aws;")
     conn.execute("call load_aws_credentials();")
     cur = conn.sql(
