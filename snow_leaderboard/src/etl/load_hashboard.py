@@ -39,6 +39,6 @@ def load_locations_to_hashboard() -> None:
 
 
 if __name__ == "__main__":
-    # load_season_to_hashboard(2022)
+    load_season_to_hashboard(2022)
     load_season_to_hashboard(2023)
     load_locations_to_hashboard()

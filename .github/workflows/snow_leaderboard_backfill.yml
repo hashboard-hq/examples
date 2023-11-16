@@ -2,10 +2,6 @@ name: "Update Snowfall Data"
 
 on:
   workflow_dispatch:
-  schedule:
-    # the data we want runs through 12:00 UTC; tbd when it is published, let's give it an hour.
-    # daily at 13:00 UTC
-    - cron: "0 13 * * *"
 
 # will cancel previous workflows if they are still running.
 concurrency:
@@ -50,8 +46,8 @@ jobs:
       - name: Install python dependencies
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
         run: poetry install --sync --no-interaction --without dev --directory snow_leaderboard
-      - name: Run ETL pipeline
-        run: poetry run --directory snow_leaderboard python -m etl
+      - name: Upload data to Hashboard
+        run: poetry run --directory snow_leaderboard python snow_leaderboard/src/etl/load_hashboard.py
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
