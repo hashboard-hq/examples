@@ -1,0 +1,5 @@
+hbVersion: "1.0"
+type: homepage_launchpad
+description: ""
+pinnedResourceIds:
+  - dsb::dsb_snowleaderboard

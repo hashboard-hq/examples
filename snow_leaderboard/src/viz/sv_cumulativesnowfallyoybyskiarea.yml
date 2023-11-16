@@ -1,0 +1,29 @@
+hbVersion: "1.0"
+type: saved_view
+alias: sv_cumulativesnowfallyoybyskiarea
+model: m::snowfall
+name: Cumulative Snowfall YoY by Ski Area
+data:
+  x:
+    columnId: day_in_season
+  y:
+    columnId: sum_snowfall_ytd
+  breakout:
+    columnId: season
+    groups:
+      - key: 2022
+      - key: 2023
+    showOther: true
+  trellis:
+    columnId: m::skiareas.name
+    metricId: sum_snowfall_ytd
+    sort: desc
+    limit: 12
+    showOther: false
+  filters:
+    - columnId: day_in_season
+      lt: 231
+visualization:
+  chartType: line
+  stack: unstack
+  showAxisLabels: true
