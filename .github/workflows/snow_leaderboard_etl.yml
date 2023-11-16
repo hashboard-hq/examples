@@ -50,6 +50,15 @@ jobs:
       - name: Install python dependencies
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
         run: poetry install --sync --no-interaction --without dev --directory snow_leaderboard
+      - name: Check hashboard cli version
+        run: poetry run --directory snow_leaderboard hb --version
+      - name: Check pull
+        run: poetry run --directory snow_leaderboard hb pull --all
+        env:
+          HASHBOARD_PROJECT_ID: ${{ secrets.HASHBOARD_PROJECT_ID }}
+          HASHBOARD_ACCESS_KEY_ID: ${{ secrets.HASHBOARD_ACCESS_KEY_ID }}
+          HASHBOARD_SECRET_ACCESS_KEY_TOKEN: ${{ secrets.HASHBOARD_SECRET_ACCESS_KEY_TOKEN }}
+          HASHBOARD_CLI_BASE_URI: ${{ secrets.HASHBOARD_CLI_BASE_URI }}
       - name: Run ETL pipeline
         run: poetry run --directory snow_leaderboard python -m etl
         env:
