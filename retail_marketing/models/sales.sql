@@ -5,6 +5,6 @@ select
   cast(hash("pizza_type" || "pizza_shape" || "pizza_size" ) as string) as "product_id",
   "quantity",
   "customer_id",
-  "item_price",
+  cast("item_price" as decimal) as "item_price",
   "timestamp"
 from {{ source("generated_sources", "sales_data") }}
