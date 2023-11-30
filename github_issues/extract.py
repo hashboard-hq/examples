@@ -1,3 +1,4 @@
+import os
 import requests
 import pandas as pd
 import numpy as np
@@ -9,6 +10,7 @@ def get_github_issues(owner, repo, token, per_page=30):
     headers = {"Authorization": f"token {token}"}
     while True:
         url = f"https://api.github.com/repos/{owner}/{repo}/issues?state=all&page={page}&per_page={per_page}"
+
         response = requests.get(url, headers=headers)
 
         if response.status_code != 200:
