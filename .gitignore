@@ -1,4 +1,5 @@
 .DS_Store
-/.env
+**/.env
 logs/
 .vscode
+**/hb_access_key**.json

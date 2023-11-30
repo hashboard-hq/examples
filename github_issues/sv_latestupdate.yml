@@ -1,0 +1,40 @@
+hbVersion: "1.0"
+type: saved_view
+alias: latest_update
+model: m::issues
+name: Latest Update
+hidden:
+  - issue_number
+  - type
+  - state
+  - state_reason
+  - title
+  - url
+  - created_at
+  - closed_at
+  - author
+  - author_association
+  - assignee
+  - body
+  - is_bug
+  - is_enhancement
+  - is_tech_debt
+  - comments
+  - active_lock_reason
+  - draft
+  - performed_via_github_app
+  - reactions_count
+  - locked
+  - labels
+  - milestone
+data:
+  y:
+    columnId: custom_measure_2
+  filters: []
+  sort:
+    - columnId: updated_at
+      order: desc
+  limit: 1
+  includeJoinedColumns: true
+visualization:
+  chartType: source_data_table

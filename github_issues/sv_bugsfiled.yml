@@ -1,0 +1,38 @@
+hbVersion: "1.0"
+type: saved_view
+alias: bugs_filed
+model: m::issues
+name: Bugs Filed
+data:
+  x:
+    columnId: created_at
+    granularity: month
+  y:
+    columnId: custom_measure_3
+  breakout:
+    columnId: state
+    metricId: custom_measure_3
+    sort: desc
+    limit: 6
+    showOther: false
+  filters:
+    - columnId: type
+      values:
+        - issue
+    - columnId: is_bug
+      values:
+        - true
+    - columnId: created_at
+      range:
+        - - 0
+          - year
+          - startOfPeriod: true
+        - - 1
+          - year
+          - startOfPeriod: true
+visualization:
+  chartType: bar
+  stack: stack
+  showAxisLabels: true
+  legend: top
+  showLegendTitle: false

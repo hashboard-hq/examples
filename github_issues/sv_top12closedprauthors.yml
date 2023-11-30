@@ -1,0 +1,39 @@
+hbVersion: "1.0"
+type: saved_view
+model: m::issues
+alias: top_pr_auth
+name: Top 12 Closed PR Authors
+data:
+  x:
+    columnId: author
+  y:
+    columnId: custom_measure
+  filters:
+    - columnId: type
+      values:
+        - pull request
+    - columnId: state
+      values:
+        - closed
+    - columnId: closed_at
+      range:
+        - - 0
+          - year
+          - startOfPeriod: true
+        - - 1
+          - year
+          - startOfPeriod: true
+  sort:
+    - columnId: custom_measure
+      order: desc
+  limit: 12
+visualization:
+  chartType: table
+  showAxisLabels: true
+  tableVisualization:
+    - calculation: columnPercentTotal
+      heightPixels: 15
+      type: bar
+      maxWidthPixels: 100
+      labelPlacement: right
+  tableColumnWidths: []

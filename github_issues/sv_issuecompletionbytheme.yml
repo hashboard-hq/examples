@@ -1,0 +1,51 @@
+hbVersion: "1.0"
+type: saved_view
+alias: issues_by_theme
+model: m::issues
+name: Issue Completion by Theme
+data:
+  x:
+    columnId: closed_at
+    granularity: month
+  y:
+    - columnId: custom_measure_3
+    - columnId: custom_measure_4
+    - columnId: custom_measure_5
+  trellis:
+    by: metric
+  filters:
+    - columnId: author
+      excludeValues:
+        - github-actions[bot]
+        - dependabot[bot]
+        - FishtownBuildBot
+        - datadog-dev-and-staging-dbt-labs[bot]
+        - snyk-bot
+    - columnId: state
+      values:
+        - closed
+    - columnId: closed_at
+      range:
+        - - 0
+          - year
+          - startOfPeriod: true
+        - - 1
+          - year
+          - startOfPeriod: true
+    - columnId: type
+      values:
+        - issue
+    - columnId: state_reason
+      values:
+        - completed
+visualization:
+  chartType: bar
+  showAxisLabels: true
+  missingValuesBehavior: show
+  scales:
+    y:
+      range:
+        max: 75
+  legend: none
+  showLegendTitle: false
+  colorPalette: palette::alt

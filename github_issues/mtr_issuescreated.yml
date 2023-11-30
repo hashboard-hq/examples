@@ -1,0 +1,14 @@
+hbVersion: "1.0"
+type: metric
+alias: issues_created
+name: Issues Created
+config:
+  metricType: timeseries
+  dataModel: m::issues
+  measureId: custom_measure_2
+  dimensionId: created_at
+  granularity: year
+  displayOptions:
+    sparkline: true
+    numPeriodsToDisplay: 12
+    displayLastPartialPeriod: true
