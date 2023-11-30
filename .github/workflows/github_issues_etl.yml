@@ -43,13 +43,13 @@ jobs:
           GITHUB_REPO_NAME: ${{ secrets.GH_REPO_NAME }}
           GITHUB_REPO_OWNER: ${{ secrets.GH_REPO_OWNER }}
       - name: Upload issues
-        run: poetry run --directory dbt-core_issues hb upload dbt_issues.parquet
+        run: poetry run --directory github_issues hb upload github_issues.parquet
         env:
           HASHBOARD_PROJECT_ID: ${{ secrets.GH_HASHBOARD_PROJECT_ID }}
           HASHBOARD_ACCESS_KEY_ID: ${{ secrets.GH_HASHBOARD_ACCESS_KEY_ID }}
           HASHBOARD_SECRET_ACCESS_KEY_TOKEN: ${{ secrets.GH_HASHBOARD_SECRET_ACCESS_KEY_TOKEN }}
       - name: Rebuild project
-        run: poetry run --directory dbt-core_issues hb deploy ./github_issues
+        run: poetry run --directory github_issues hb deploy ./github_issues
         env:
           HASHBOARD_PROJECT_ID: ${{ secrets.GH_HASHBOARD_PROJECT_ID }}
           HASHBOARD_ACCESS_KEY_ID: ${{ secrets.GH_HASHBOARD_ACCESS_KEY_ID }}
