@@ -50,7 +50,7 @@ jobs:
           HASHBOARD_SECRET_ACCESS_KEY_TOKEN: ${{ secrets.GH_HASHBOARD_SECRET_ACCESS_KEY_TOKEN }}
           HASHBOARD_CLI_BASE_URI: ${{ secrets.HASHBOARD_CLI_BASE_URI }}
       - name: Rebuild project
-        run: poetry run --directory github_issues hb deploy ./github_issues
+        run: poetry run --directory github_issues hb deploy ./github_issues --no-preview
         env:
           HASHBOARD_PROJECT_ID: ${{ secrets.GH_HASHBOARD_PROJECT_ID }}
           HASHBOARD_ACCESS_KEY_ID: ${{ secrets.GH_HASHBOARD_ACCESS_KEY_ID }}
