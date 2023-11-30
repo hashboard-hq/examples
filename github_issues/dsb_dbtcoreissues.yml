@@ -1,0 +1,155 @@
+hbVersion: "1.0"
+name: dbt-core issues
+description: This year's Github issue activity for dbt-core
+type: dashboard
+globalFilters:
+  - dataModel: m::issues
+    columnId: author
+    excludeValues:
+      - github-actions[bot]
+      - dependabot[bot]
+      - FishtownBuildBot
+      - datadog-dev-and-staging-dbt-labs[bot]
+      - snyk-bot
+sections:
+  - filters: []
+    rows:
+      - blocks:
+          - type: empty
+            width: 10
+          - type: savedView
+            savedView: sv::latest_update
+            legendPosition: top
+            width: 2
+        height: 2
+      - blocks:
+          - type: markdown
+            text: "## This Year Totals\n ---"
+            width: 12
+      - blocks:
+          - type: linkedMetric
+            ignoreDashboardFilters: false
+            width: 3
+            metric: mtr::issues_created
+          - type: linkedMetric
+            ignoreDashboardFilters: false
+            width: 3
+            metric: mtr::closed_issues
+          - type: linkedMetric
+            ignoreDashboardFilters: false
+            width: 3
+            metric: mtr::closed_pr
+          - type: linkedMetric
+            label: Bugs Reported
+            ignoreDashboardFilters: false
+            width: 3
+            metric: mtr::bugs
+        height: 4
+      - blocks:
+          - type: markdown
+            text:
+              "- **Issues Created**: The number of Github issues created this year,\
+              \ excluding pull requests\n- **Closed Issues**: The number of Github issues\
+              \ closed this year. Only includes completed issues, rather than labels like\
+              \ `wont-fix`\n- **Closed Pull Requests**: The number of closed PR's this year\n\
+              - **Bugs Reported**: The number of Github issues created this year with a\
+              \ bug label"
+            width: 12
+  - filters: []
+    rows:
+      - blocks:
+          - type: markdown
+            text: "## Pull Requests \n ---"
+            width: 12
+      - blocks:
+          - type: savedView
+            savedView: sv::top_pr_auth
+            legendPosition: top
+            width: 4
+          - type: savedView
+            savedView: sv::recently_closed_pr
+            legendPosition: top
+            width: 8
+        height: 6
+  - filters: []
+    rows:
+      - blocks:
+          - type: markdown
+            text: "## Issues \n ---"
+            width: 12
+      - blocks:
+          - type: savedView
+            savedView: sv::issue_crt_thm
+            legendPosition: none
+            width: 12
+        height: 5
+      - blocks:
+          - type: savedView
+            savedView: sv::issues_by_theme
+            legendPosition: none
+            width: 12
+        height: 5
+      - blocks:
+          - type: savedView
+            savedView: sv::recently_closed
+            legendPosition: top
+            width: 12
+        height: 6
+  - filters: []
+    rows:
+      - blocks:
+          - type: markdown
+            text: "## Bugs \n ---"
+            width: 12
+      - blocks:
+          - type: customDashboardMetric
+            label: Avg Days to Close
+            ignoreDashboardFilters: false
+            width: 2
+            config:
+              dataModel: m::issues
+              measureId: avg_days_to_close
+              filters:
+                - columnId: is_bug
+                  values:
+                    - true
+                - columnId: created_at
+                  range:
+                    - - 0
+                      - year
+                      - startOfPeriod: true
+                    - - 1
+                      - year
+                      - startOfPeriod: true
+              metricType: simple
+          - type: customDashboardMetric
+            label: ""
+            ignoreDashboardFilters: false
+            width: 2
+            config:
+              dataModel: m::issues
+              measureId: perc_closed
+              filters:
+                - columnId: is_bug
+                  values:
+                    - true
+                - columnId: created_at
+                  range:
+                    - - 0
+                      - year
+                      - startOfPeriod: true
+                    - - 1
+                      - year
+                      - startOfPeriod: true
+              metricType: simple
+          - type: savedView
+            savedView: sv::bugs_filed
+            legendPosition: top
+            width: 8
+        height: 5
+      - blocks:
+          - type: savedView
+            savedView: sv::open_bugs
+            legendPosition: top
+            width: 12
+        height: 6

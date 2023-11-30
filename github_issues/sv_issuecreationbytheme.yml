@@ -1,0 +1,35 @@
+hbVersion: "1.0"
+type: saved_view
+model: m::issues
+name: Issue Creation by Theme
+alias: issue_crt_thm
+data:
+  x:
+    columnId: created_at
+    granularity: month
+  y:
+    - columnId: custom_measure_3
+    - columnId: custom_measure_4
+    - columnId: custom_measure_5
+  trellis:
+    by: metric
+  filters:
+    - columnId: type
+      values:
+        - issue
+    - columnId: created_at
+      range:
+        - - 0
+          - year
+          - startOfPeriod: true
+        - - 1
+          - year
+          - startOfPeriod: true
+visualization:
+  chartType: bar
+  showAxisLabels: true
+  missingValuesBehavior: show
+  scales:
+    y:
+      range:
+        max: 75

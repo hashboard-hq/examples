@@ -1,0 +1,14 @@
+hbVersion: "1.0"
+type: metric
+alias: bugs
+name: Bugs reported
+config:
+  metricType: timeseries
+  dataModel: m::issues
+  measureId: custom_measure_3
+  dimensionId: created_at
+  granularity: year
+  displayOptions:
+    sparkline: true
+    numPeriodsToDisplay: 12
+    displayLastPartialPeriod: true
