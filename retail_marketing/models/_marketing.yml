@@ -51,6 +51,13 @@ models:
               fixedDecimals: 0
               formatAsDollars: true
             sql: sum(orders.total_order_value * marketing_attribution.attribution_share)
+          - id: costs
+            type: metric
+            name: Marketing Spend
+            formattingOptions:
+              fixedDecimals: 0
+              formatAsDollars: true
+            sql: sum(marketing_touchpoints.cost_per_touchpoint)
 
   - name: marketing_touchpoints
     description: This model describes each marketing touchpoint that leads to an order.
