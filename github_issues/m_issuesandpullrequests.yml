@@ -131,6 +131,22 @@ cols:
     aggregationOptions:
       defaultBinWidth: 1
       binsEnabled: false
+  - id: normalized_closed_at
+    type: datetime
+    sql: closed_at + interval (year(now()) -  year(closed_at)) year
+    name: Normalized Closed At
+    description: closed at, but all the years are set to this year
+    aggregationOptions:
+      minGranularity: second
+      maxGranularity: year
+  - id: closed_year
+    type: attribute
+    sql: year(closed_at)
+    name: Closed Year
+    description: year an issue was closed
+    aggregationOptions:
+      defaultBinWidth: 1
+      binsEnabled: false
   - id: custom_measure_2
     type: metric
     name: issue count
