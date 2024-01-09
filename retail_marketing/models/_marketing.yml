@@ -7,37 +7,37 @@ models:
       - name: attribution_id
         description: Unique ID for the attribution.
         meta:
-          glean:
+          hashboard:
             primaryKey: true
       - name: order_id
         description: Order ID, matches the order_id in the sales model.
         meta:
-          glean:
+          hashboard:
             foreignModels:
               - m::orders
       - name: touchpoint_id
         description: ID of the marketing touchpoint which led to the order.
         meta:
-          glean:
+          hashboard:
             foreignModels:
               - m::marketing_touchpoints
       - name: attribution_share
         description: Proportional credit given to this touchpoint for the order.
       - name: order_timestamp
         meta:
-          glean:
+          hashboard:
             primaryDate: true
       - name: attribution_timestamp
         description: The time when the attribution was recorded.
       - name: campaign_id
         meta:
-          glean:
+          hashboard:
             foreignModels:
               - m::campaigns
       - name: attribution_model
         description: The model used for attributing the order to the touchpoint.
     meta:
-      glean:
+      hashboard:
         alias: marketing_attribution
         cols:
           - id: row_count
@@ -65,7 +65,7 @@ models:
       - name: touchpoint_id
         description: Unique ID for the touchpoint.
         meta:
-          glean:
+          hashboard:
             primaryKey: true
       - name: customer_id
         description: The customer ID this touchpoint was exposed to.
@@ -81,7 +81,7 @@ models:
         description: The value assigned to the touchpoint.
       - name: cost_per_touchpoint
     meta:
-      glean:
+      hashboard:
         alias: marketing_touchpoints
         cols:
           - id: row_count
@@ -95,7 +95,7 @@ models:
       - name: campaign_id
         description: Unique ID for the campaign.
         meta:
-          glean:
+          hashboard:
             primaryKey: true
       - name: campaign_name
         description: The name of the marketing campaign.
@@ -108,7 +108,7 @@ models:
       - name: total_budget
         description: The total budget for the campaign.
     meta:
-      glean:
+      hashboard:
         alias: campaigns
         cols:
           - id: row_count

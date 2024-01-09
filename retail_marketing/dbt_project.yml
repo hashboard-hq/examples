@@ -15,7 +15,7 @@ models:
   +materialized: external
   +meta:
     hashboard-defaults:
-      glean: "1.0"
+      hbVersion: "1.0"
       preventUpdatesFromUI: false
       duckdbDefaultFileExtension: parquet
       source:
