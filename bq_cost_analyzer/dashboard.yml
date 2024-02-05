@@ -1,0 +1,78 @@
+hbVersion: "1.0"
+name: BigQuery Cost Analyzer for ${BQ_PROJECT_ID}
+description: ""
+type: dashboard
+globalFilters: []
+sections:
+  - filters: []
+    rows:
+      - blocks:
+          - type: markdown
+            text: |
+              ## Welcome to Hashboard!
+              ---
+              Feel free to click around and explore -- everything below is interactive.
+            width: 12
+  - filters:
+      - dataModel: m::bq_job_metadata_${ALIAS_BQ_PROJECT_ID}
+        columnId: creation_time
+        range:
+          - - -3
+            - month
+            - startOfPeriod: false
+          - - 0
+            - minute
+    rows:
+      - blocks:
+          - type: customDashboardMetric
+            label: Total spend
+            ignoreDashboardFilters: false
+            width: 4
+            config:
+              dataModel: m::bq_job_metadata_${ALIAS_BQ_PROJECT_ID}
+              measureId: total_compute_cost
+              filters: []
+              metricType: timeseries
+              dimensionId: creation_time
+              granularity: week
+              displayOptions:
+                sparkline: true
+                displayNumber: total
+          - type: customDashboardMetric
+            label: Unique users
+            ignoreDashboardFilters: false
+            width: 4
+            config:
+              dataModel: m::bq_job_metadata_${ALIAS_BQ_PROJECT_ID}
+              measureId: count_distinct_user_email
+              filters: []
+              metricType: timeseries
+              dimensionId: creation_time
+              granularity: week
+              displayOptions:
+                sparkline: true
+                displayNumber: total
+          - type: customDashboardMetric
+            label: Total bytes billed
+            ignoreDashboardFilters: false
+            width: 4
+            config:
+              dataModel: m::bq_job_metadata_${ALIAS_BQ_PROJECT_ID}
+              measureId: total_bytes_billed
+              filters: []
+              metricType: simple
+        height: 4
+      - blocks:
+          - type: savedView
+            savedView: sv::compute_costs_by_user_${ALIAS_BQ_PROJECT_ID}
+            axisLabels: hide
+            legendPosition: top
+            width: 12
+        height: 6
+      - blocks:
+          - type: savedView
+            savedView: sv::most_expensive_tables_${ALIAS_BQ_PROJECT_ID}
+            axisLabels: hide
+            legendPosition: top
+            width: 12
+        height: 9

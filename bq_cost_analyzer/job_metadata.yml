@@ -1,0 +1,145 @@
+hbVersion: "1.0"
+type: model
+alias: bq_job_metadata_${ALIAS_BQ_PROJECT_ID}
+name: BigQuery Job Metadata for ${BQ_PROJECT_ID}
+source:
+  connectionName: BigQuery OAuth ${BQ_PROJECT_ID}
+  sql: |
+    SELECT
+        creation_time,
+        project_id,
+        user_email,
+        job_id,
+        transaction_id,
+        job_type,
+        statement_type,
+        start_time,
+        end_time,
+        state,
+        total_slot_ms,
+        total_bytes_processed,
+        total_bytes_billed,
+        cache_hit,
+        ARRAY(
+            SELECT
+                project_id || '.' || dataset_id || '.' || table_id
+            FROM
+                UNNEST(referenced_tables)
+        ) AS referenced_tables,
+        (error_result is not NULL) as is_error,
+        ((total_bytes_billed / POW(1024, 4)) * 6.25) as compute_cost
+    FROM
+        `region-us`.INFORMATION_SCHEMA.JOBS
+cols:
+  - id: creation_time
+    type: datetime
+    physicalName: creation_time
+    name: Timestamp
+    primaryDate: true
+    description: Time the job was created.
+    aggregationOptions:
+      minGranularity: second
+      maxGranularity: year
+  - id: project_id
+    type: attribute
+    physicalName: project_id
+    name: project_id
+    description: The ID of the project.
+  - id: user_email
+    type: attribute
+    physicalName: user_email
+    name: user_email
+    description: Email address or service account of the user who ran the job.
+  - id: job_id
+    type: attribute
+    physicalName: job_id
+    name: job_id
+    description: The ID of the job. For example, bquxjob_1234.
+    primaryKey: true
+  - id: transaction_id
+    type: attribute
+    physicalName: transaction_id
+    name: transaction_id
+    description: ID of the transaction in which this job ran, if any.
+  - id: job_type
+    type: attribute
+    physicalName: job_type
+    name: job_type
+    description: The type of the job. Can be QUERY, LOAD, EXTRACT, COPY, or NULL. A NULL value indicates an internal job, such as a script job statement evaluation or a materialized view refresh.
+  - id: statement_type
+    type: attribute
+    physicalName: statement_type
+    name: statement_type
+    description: The type of query statement. For example, DELETE, INSERT, SCRIPT, SELECT, or UPDATE. See [QueryStatementType](https://cloud.google.com/bigquery/docs/reference/auditlogs/rest/Shared.Types/BigQueryAuditMetadata.QueryStatementType) for list of valid values.
+  - id: start_time
+    type: datetime
+    physicalName: start_time
+    name: start_time
+    primaryDate: false
+    description: Start time of this job.
+    aggregationOptions:
+      minGranularity: second
+      maxGranularity: year
+  - id: end_time
+    type: datetime
+    physicalName: end_time
+    name: end_time
+    primaryDate: false
+    description: End time of this job.
+    aggregationOptions:
+      minGranularity: second
+      maxGranularity: year
+  - id: state
+    type: attribute
+    physicalName: state
+    name: state
+    description: Running state of the job. Valid states include PENDING, RUNNING, and DONE.
+  - id: cache_hit
+    type: attribute
+    physicalName: cache_hit
+    name: cache_hit
+    description: Whether the query results of this job were from a cache. If you have a multi-query statement job, cache_hit for your parent query is NULL.
+  - id: referenced_tables
+    type: attribute
+    physicalName: referenced_tables
+    name: referenced_tables
+    description: Array of tables referenced by the job. Only populated for query jobs.
+  - id: is_error
+    type: attribute
+    physicalName: is_error
+    name: is_error
+    description: Whether the query resulted in an error.
+  - id: total_slot_ms
+    type: metric
+    name: total_slot_ms
+    description: Sum of the slot milliseconds for the jobs over their entire durations.
+    aggregate: sum
+    physicalName: total_slot_ms
+  - id: total_bytes_billed
+    type: metric
+    name: total_bytes_billed
+    description: |-
+      If the project is configured to use on-demand pricing, then this field contains the total bytes billed for the job. If the project is configured to use flat-rate pricing, then you are not billed for bytes and this field is informational only.
+      Note: This column's values are empty for queries that read from tables with row-level access policies.
+    aggregate: sum
+    physicalName: total_bytes_billed
+  - id: total_bytes_processed
+    type: metric
+    name: total_bytes_processed
+    description: Total bytes processed by jobs.
+    aggregate: sum
+    physicalName: total_bytes_processed
+  - id: total_compute_cost
+    type: metric
+    name: total_compute_cost
+    description: The total cost (in dollars) of compute based on the total bytes billed.
+    formattingOptions:
+      fixedDecimals: 2
+      formatAsDollars: true
+    aggregate: sum
+    physicalName: compute_cost
+  - id: count_distinct_user_email
+    type: metric
+    name: distinct user emails
+    aggregate: count_distinct
+    physicalName: user_email

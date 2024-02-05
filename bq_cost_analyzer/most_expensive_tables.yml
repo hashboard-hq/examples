@@ -1,0 +1,23 @@
+hbVersion: "1.0"
+type: saved_view
+model: m::bq_job_metadata_${ALIAS_BQ_PROJECT_ID}
+alias: most_expensive_tables_${ALIAS_BQ_PROJECT_ID}
+name: Most expensive tables in ${BQ_PROJECT_ID}
+data:
+  x:
+    columnId: referenced_tables
+  y:
+    - columnId: total_slot_ms
+    - columnId: total_bytes_billed
+    - columnId: total_compute_cost
+  filters: []
+  sort:
+    - columnId: total_slot_ms
+      order: desc
+  limit: 10000
+visualization:
+  chartType: table
+  showAxisLabels: true
+  tableColumnWidths:
+    - columnId: referenced_tables
+      width: 445

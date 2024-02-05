@@ -1,0 +1,14 @@
+hbVersion: "1.0"
+type: homepage_launchpad
+description: |
+  ## Welcome to the BigQuery cost analyzer!
+
+  This tool helps you understand and analyze your BigQuery costs.
+  You can view your total spend, unique users, and total bytes billed over time.
+  You can also see the compute cost by user and the most expensive tables in your project.
+
+  Jump into a dashboard, or try exploring the data models and saved explorations to gain insights into your usage.
+
+  Check out the [Hashboard documentation](https://docs.hashboard.com) for more info.
+
+pinnedResourceIds: ${PINNED_GRNS}
