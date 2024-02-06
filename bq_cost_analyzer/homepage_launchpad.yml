@@ -11,4 +11,5 @@ description: |
 
   Check out the [Hashboard documentation](https://docs.hashboard.com) for more info.
 
-pinnedResourceIds: ${PINNED_GRNS}
+pinnedResourceIds: 
+ - ${PINNED_GRNS}
