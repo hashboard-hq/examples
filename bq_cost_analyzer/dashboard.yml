@@ -3,6 +3,7 @@ name: BigQuery Cost Analyzer for ${BQ_PROJECT_ID}
 description: ""
 type: dashboard
 globalFilters: []
+alias: dashboard_${ALIAS_BQ_PROJECT_ID}
 sections:
   - filters: []
     rows:
