@@ -1,79 +1,103 @@
-hbVersion: "1.0"
-name: BigQuery Cost Analyzer for ${BQ_PROJECT_ID}
-description: ""
+hbVersion: '1.0'
+name: BigQuery Cost Analysis for ${BQ_PROJECT_ID}
+description: ''
+alias: dashboard_${ALIAS_BQ_PROJECT_ID}
 type: dashboard
 globalFilters: []
-alias: dashboard_${ALIAS_BQ_PROJECT_ID}
 sections:
-  - filters: []
-    rows:
-      - blocks:
-          - type: markdown
-            text: |
-              ## Welcome to Hashboard!
-              ---
-              Feel free to click around and explore -- everything below is interactive.
-            width: 12
-  - filters:
-      - dataModel: m::bq_job_metadata_${ALIAS_BQ_PROJECT_ID}
-        columnId: creation_time
-        range:
-          - - -3
-            - month
-            - startOfPeriod: false
+- filters: []
+  rows:
+  - blocks:
+    - type: markdown
+      text: "## Welcome to Hashboard!\n---\nFeel free to click around and explore\
+        \ -- everything below is interactive.\n\nThis dashboard is shareable -- click\
+        \ the **Share** button in the top right of the page to make this dashboard\
+        \ public, send it as an email or Slack message, or set up a recurring report.\n\
+        \nYou can also add users to this project via the **[People](https://hashboard.com/app/p/people)**\
+        \ page."
+      width: 12
+- filters:
+  - dataModel: m::bq_job_metadata_${ALIAS_BQ_PROJECT_ID}
+    columnId: creation_time
+    range:
+    - - -3
+      - month
+      - startOfPeriod: false
+    - - 0
+      - minute
+  rows:
+  - blocks:
+    - type: customDashboardMetric
+      label: Total spend
+      ignoreDashboardFilters: false
+      width: 4
+      config:
+        dataModel: m::bq_job_metadata_${ALIAS_BQ_PROJECT_ID}
+        measureId: total_compute_cost
+        filters: []
+        metricType: timeseries
+        dimensionId: creation_time
+        granularity: week
+        displayOptions:
+          sparkline: true
+          displayNumber: total
+    - type: customDashboardMetric
+      label: Unique users
+      ignoreDashboardFilters: false
+      width: 4
+      config:
+        dataModel: m::bq_job_metadata_${ALIAS_BQ_PROJECT_ID}
+        measureId: count_distinct_user_email
+        filters: []
+        metricType: timeseries
+        dimensionId: creation_time
+        granularity: week
+        displayOptions:
+          sparkline: true
+          displayNumber: total
+    - type: customDashboardMetric
+      label: Total gigabytes billed
+      ignoreDashboardFilters: false
+      width: 4
+      config:
+        dataModel: m::bq_job_metadata_${ALIAS_BQ_PROJECT_ID}
+        measureId: total_gigabytes_billed
+        filters:
+        - columnId: creation_time
+          range:
+          - - -11
+            - week
+            - startOfPeriod: true
           - - 0
             - minute
-    rows:
-      - blocks:
-          - type: customDashboardMetric
-            label: Total spend
-            ignoreDashboardFilters: false
-            width: 4
-            config:
-              dataModel: m::bq_job_metadata_${ALIAS_BQ_PROJECT_ID}
-              measureId: total_compute_cost
-              filters: []
-              metricType: timeseries
-              dimensionId: creation_time
-              granularity: week
-              displayOptions:
-                sparkline: true
-                displayNumber: total
-          - type: customDashboardMetric
-            label: Unique users
-            ignoreDashboardFilters: false
-            width: 4
-            config:
-              dataModel: m::bq_job_metadata_${ALIAS_BQ_PROJECT_ID}
-              measureId: count_distinct_user_email
-              filters: []
-              metricType: timeseries
-              dimensionId: creation_time
-              granularity: week
-              displayOptions:
-                sparkline: true
-                displayNumber: total
-          - type: customDashboardMetric
-            label: Total bytes billed
-            ignoreDashboardFilters: false
-            width: 4
-            config:
-              dataModel: m::bq_job_metadata_${ALIAS_BQ_PROJECT_ID}
-              measureId: total_bytes_billed
-              filters: []
-              metricType: simple
-        height: 4
-      - blocks:
-          - type: savedView
-            savedView: sv::compute_costs_by_user_${ALIAS_BQ_PROJECT_ID}
-            axisLabels: hide
-            legendPosition: top
-            width: 12
-        height: 6
-      - blocks:
-          - type: savedView
-            savedView: sv::most_expensive_tables_${ALIAS_BQ_PROJECT_ID}
-            axisLabels: hide
-            legendPosition: top
-            width: 12
-        height: 9
+        metricType: timeseries
+        dimensionId: creation_time
+        granularity: week
+        displayOptions:
+          sparkline: true
+          displayNumber: total
+    height: 4
+  - blocks:
+    - type: savedExploration
+      savedExploration: sv::compute_costs_by_user_${ALIAS_BQ_PROJECT_ID}
+      axisLabels: hide
+      legendPosition: top
+      width: 12
+    height: 9
+- filters: []
+  rows:
+  - blocks:
+    - type: savedExploration
+      savedExploration: sv::compute_cost_by_statement_type_${ALIAS_BQ_PROJECT_ID}
+      legendPosition: top
+      width: 12
+    height: 10
+- filters: []
+  rows:
+  - blocks:
+    - type: savedExploration
+      savedExploration: sv::most_expensive_tables_${ALIAS_BQ_PROJECT_ID}
+      axisLabels: hide
+      legendPosition: top
+      width: 12
+    height: 9

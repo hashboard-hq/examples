@@ -1,5 +1,5 @@
-hbVersion: "1.0"
-type: saved_view
+hbVersion: '1.0'
+type: saved_exploration
 alias: compute_costs_by_user_${ALIAS_BQ_PROJECT_ID}
 model: m::bq_job_metadata_${ALIAS_BQ_PROJECT_ID}
 name: Compute cost by user for ${BQ_PROJECT_ID}
@@ -16,16 +16,17 @@ data:
     limit: 6
     showOther: true
   filters:
-    - columnId: creation_time
-      range:
-        - - -3
-          - month
-          - startOfPeriod: false
-        - - 0
-          - minute
+  - columnId: creation_time
+    range:
+    - - -3
+      - month
+      - startOfPeriod: false
+    - - 0
+      - minute
 visualization:
-  chartType: line
-  stack: unstack
+  chartType: bar
+  stack: stack
   showAxisLabels: true
+  missingValuesBehavior: show
   legend: right
   showLegendTitle: false
