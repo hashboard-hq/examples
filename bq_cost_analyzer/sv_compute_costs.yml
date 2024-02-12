@@ -30,3 +30,4 @@ visualization:
   missingValuesBehavior: show
   legend: right
   showLegendTitle: false
+  colorPalette: palette::hb

@@ -20,3 +20,4 @@ visualization:
   chartType: line
   stack: unstack
   showAxisLabels: true
+  colorPalette: palette::hb
