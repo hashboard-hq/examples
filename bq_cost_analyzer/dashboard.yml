@@ -9,12 +9,14 @@ sections:
   rows:
   - blocks:
     - type: markdown
-      text: "## Welcome to Hashboard!\n---\nFeel free to click around and explore\
-        \ -- everything below is interactive.\n\nThis dashboard is shareable -- click\
-        \ the **Share** button in the top right of the page to make this dashboard\
-        \ public, send it as an email or Slack message, or set up a recurring report.\n\
-        \nYou can also add users to this project via the **[People](https://hashboard.com/app/p/people)**\
-        \ page."
+      text: "## Welcome to Hashboard!\n\n### Feel free to click around – everything\
+        \ is interactive. See our [documentation](https://docs.hashboard.com) for\
+        \ more info.\n---\nHover over a chart or metric to add/remove filters or change\
+        \ the chart's configuration. Or, click into the chart to start exploring your\
+        \ data.\n\nClick the **Share** button in the top right of the page to make\
+        \ this dashboard public, send it as an email or Slack message, or set up a\
+        \ recurring report.\n\nYou can also add users to this project via the **[People](https://hashboard.com/app/p/people)**\
+        \ page.\n"
       width: 12
 - filters:
   - dataModel: m::bq_job_metadata_${ALIAS_BQ_PROJECT_ID}
@@ -26,6 +28,10 @@ sections:
     - - 0
       - minute
   rows:
+  - blocks:
+    - type: markdown
+      text: "## Last 3 months\n ---"
+      width: 12
   - blocks:
     - type: customDashboardMetric
       label: Total spend
@@ -89,11 +95,16 @@ sections:
   - blocks:
     - type: savedExploration
       savedExploration: sv::compute_cost_by_statement_type_${ALIAS_BQ_PROJECT_ID}
+      axisLabels: hide
       legendPosition: top
       width: 12
     height: 10
 - filters: []
   rows:
+  - blocks:
+    - type: markdown
+      text: "## Overall\n---"
+      width: 12
   - blocks:
     - type: savedExploration
       savedExploration: sv::most_expensive_tables_${ALIAS_BQ_PROJECT_ID}
