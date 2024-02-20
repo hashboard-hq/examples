@@ -2,6 +2,9 @@ hbVersion: "1.0"
 type: model
 alias: bq_job_metadata_${ALIAS_BQ_PROJECT_ID}
 name: BigQuery Job Metadata for ${BQ_PROJECT_ID}
+resourceMetadata:
+  labels:
+  - ${BQ_PROJECT_ID}
 description: Metadata about the jobs run in the provided BigQuery project, including compute cost, job duration, tables, and user emails.
 source:
   connectionName: BigQuery OAuth ${BQ_PROJECT_ID}
@@ -17,7 +20,7 @@ source:
         start_time,
         end_time,
         state,
-        total_slot_ms,
+        (total_slot_ms / (1000 * 60 * 60)) as total_slot_hours,
         total_bytes_processed,
         total_bytes_billed,
         cache_hit,
@@ -28,7 +31,7 @@ source:
                 UNNEST(referenced_tables)
         ) AS referenced_tables,
         (error_result is not NULL) as is_error,
-        ((total_bytes_billed / POW(1024, 4)) * 6.25) as compute_cost
+        ((total_bytes_billed / POW(1024, 4)) * 6.25) as on_demand_compute_cost
     FROM
         `region-us`.INFORMATION_SCHEMA.JOBS
 cols:
@@ -110,12 +113,12 @@ cols:
     physicalName: is_error
     name: Is error
     description: Whether the query resulted in an error.
-  - id: total_slot_ms
+  - id: total_slot_hours
     type: measure
-    name: Total slot MS
-    description: Sum of the slot milliseconds for the jobs over their entire durations.
+    name: Total slot hours
+    description: Sum of the slot hours for the jobs over their entire durations.
     aggregate: sum
-    physicalName: total_slot_ms
+    physicalName: total_slot_hours
   - id: total_bytes_billed
     type: measure
     name: Total bytes billed
@@ -138,7 +141,7 @@ cols:
       fixedDecimals: 2
       formatAsDollars: true
     aggregate: sum
-    physicalName: compute_cost
+    physicalName: on_demand_compute_cost
   - id: count_distinct_user_email
     type: measure
     name: Distinct user emails

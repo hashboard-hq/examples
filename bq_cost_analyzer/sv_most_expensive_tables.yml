@@ -3,6 +3,10 @@ type: saved_exploration
 alias: most_expensive_tables_${ALIAS_BQ_PROJECT_ID}
 model: m::bq_job_metadata_${ALIAS_BQ_PROJECT_ID}
 name: Most expensive tables in ${BQ_PROJECT_ID}
+resourceMetadata:
+  labels:
+  - ${BQ_PROJECT_ID}
+  status: exploratory
 data:
   x:
     columnId: referenced_tables

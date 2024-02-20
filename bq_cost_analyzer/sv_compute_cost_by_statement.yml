@@ -3,6 +3,10 @@ type: saved_exploration
 model: m::bq_job_metadata_${ALIAS_BQ_PROJECT_ID}
 alias: compute_cost_by_statement_type_${ALIAS_BQ_PROJECT_ID}
 name: Compute cost by statement type for ${BQ_PROJECT_ID}
+resourceMetadata:
+  labels:
+  - ${BQ_PROJECT_ID}
+  status: exploratory
 data:
   x:
     columnId: creation_time
