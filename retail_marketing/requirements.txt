@@ -1,6 +1,7 @@
 Faker==19.1.0
-dbt-core==1.5.1
-dbt-duckdb==1.5.2
+dbt-core==1.7.0
+dbt-duckdb==1.7.2
+duckdb==0.10.0
 hashboard-cli
 fastparquet==2023.7.0
 pandas==2.0.3
