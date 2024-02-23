@@ -1,0 +1,37 @@
+hbVersion: '1.0'
+type: saved_exploration
+alias: compute_costs_by_user_${ALIAS_BQ_PROJECT_ID}
+model: m::bq_job_metadata_${ALIAS_BQ_PROJECT_ID}
+name: Compute cost by user for ${BQ_PROJECT_ID}
+resourceMetadata:
+  labels:
+  - ${BQ_PROJECT_ID}
+  status: exploratory
+data:
+  x:
+    columnId: creation_time
+    granularity: week
+  y:
+    columnId: total_compute_cost
+  breakout:
+    columnId: user_email
+    metricId: total_compute_cost
+    sort: desc
+    limit: 6
+    showOther: true
+  filters:
+  - columnId: creation_time
+    range:
+    - - -3
+      - month
+      - startOfPeriod: false
+    - - 0
+      - minute
+visualization:
+  chartType: bar
+  stack: stack
+  showAxisLabels: true
+  missingValuesBehavior: show
+  legend: right
+  showLegendTitle: false
+  colorPalette: palette::hb

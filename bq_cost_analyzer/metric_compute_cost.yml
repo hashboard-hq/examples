@@ -1,0 +1,17 @@
+hbVersion: '1.0'
+type: metric
+name: Compute cost for ${BQ_PROJECT_ID}
+resourceMetadata:
+  labels:
+  - ${BQ_PROJECT_ID}
+  status: exploratory
+config:
+  metricType: timeseries
+  dataModel: m::bq_job_metadata_${ALIAS_BQ_PROJECT_ID}
+  measureId: total_compute_cost
+  dimensionId: creation_time
+  granularity: week
+  displayOptions:
+    sparkline: true
+    numPeriodsToDisplay: 12
+    displayLastPartialPeriod: false
