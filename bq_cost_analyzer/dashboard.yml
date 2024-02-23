@@ -33,7 +33,7 @@ sections:
   rows:
   - blocks:
     - type: markdown
-      text: "## Last 3 months\n ---"
+      text: "## Last 3 months\n --- \n Total spend assumes [default pricing](https://cloud.google.com/bigquery/pricing) of $$6.25 per TiB. Feel free to change this if you have a different plan!"
       width: 12
   - blocks:
     - type: customDashboardMetric
@@ -106,7 +106,7 @@ sections:
   rows:
   - blocks:
     - type: markdown
-      text: "## Overall\n---"
+      text: "## Overall\n---\n Note that each operation can reference multiple tables, so the sum of the compute cost of every table together might add up to more than the total compute cost of the project."
       width: 12
   - blocks:
     - type: savedExploration
