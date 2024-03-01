@@ -33,7 +33,11 @@ sections:
   rows:
   - blocks:
     - type: markdown
-      text: "## Last 3 months\n --- \n Total spend assumes [default pricing](https://cloud.google.com/bigquery/pricing) of $$6.25 per TiB. Feel free to change this if you have a different plan!"
+      text: "## Last 3 months\n --- \n Total spend assumes [default pricing](https://cloud.google.com/bigquery/pricing)\
+        \ of $$6.25 per TiB. We also assume your BigQuery region is `region-us`. \
+        \ \n\nFeel free to change these if you have a different plan or region – the\
+        \ [blog post](https://hashboard.com/blog/introducing-the-bigquery-cost-analyzer)\
+        \ goes into depth about how."
       width: 12
   - blocks:
     - type: customDashboardMetric
