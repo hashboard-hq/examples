@@ -3,6 +3,6 @@ This directory contains the Hashboard configuration files for the Hashquery demo
 To deploy locally:
 
 ```
-$ hb upload data/sales.parquet data/products.parquet data/orders.parquet data/customers.parquet data/campaigns.parquet data/ecommerce_events.csv 
+$ hb upload data/*
 $ hb deploy
 ```
