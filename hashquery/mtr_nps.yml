@@ -1,0 +1,13 @@
+hbVersion: '1.0'
+type: metric
+name: NPS
+config:
+  metricType: timeseries
+  dataModel: m::orders
+  measureId: net_promoter_score
+  dimensionId: timestamp
+  granularity: quarter
+  displayOptions:
+    sparkline: true
+    numPeriodsToDisplay: 12
+    displayLastPartialPeriod: false

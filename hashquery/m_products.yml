@@ -1,0 +1,42 @@
+hbVersion: "1.0"
+type: model
+alias: products
+name: products
+description: order information
+source:
+  connectionName: Uploads
+  physicalName: products.parquet
+  schema: main
+cols:
+  - id: id
+    type: attribute
+    physicalName: id
+    isHiddenByDefault: true
+    name: id
+    description: the unique identifier of the product
+    primaryKey: true
+  - id: pizza_size
+    type: attribute
+    physicalName: pizza_size
+    isHiddenByDefault: false
+    name: pizza_size
+    description: pizza size; small, medium or large
+  - id: pizza_type
+    type: attribute
+    physicalName: pizza_type
+    isHiddenByDefault: false
+    name: pizza_type
+    description: the type of pizza
+  - id: price
+    type: attribute
+    physicalName: price
+    isHiddenByDefault: false
+    name: price
+    description: price in USD per pizza
+    aggregationOptions:
+      defaultBinWidth: 1
+      binsEnabled: true
+  - id: row_count
+    type: measure
+    name: Product Count
+    aggregate: row_count

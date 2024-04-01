@@ -1,0 +1,8 @@
+This directory contains the Hashboard configuration files for the Hashquery demo project.
+
+To deploy locally:
+
+```
+$ hb upload data/sales.parquet data/products.parquet data/orders.parquet data/customers.parquet data/campaigns.parquet data/ecommerce_events.csv 
+$ hb deploy
+```
