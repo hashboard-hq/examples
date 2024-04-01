@@ -1,0 +1,8 @@
+This directory contains the Hashboard configuration files for the Hashquery demo project.
+
+To deploy locally:
+
+```
+$ hb upload data/*
+$ hb deploy
+```

@@ -1,0 +1,60 @@
+hbVersion: "1.0"
+type: model
+alias: campaigns
+name: campaigns
+description: This model provides details about each marketing campaign.
+source:
+  connectionName: Uploads
+  physicalName: campaigns.parquet
+  schema: main
+cols:
+  - id: campaign_id
+    type: attribute
+    physicalName: campaign_id
+    name: campaign_id
+    description: Unique ID for the campaign.
+    primaryKey: true
+  - id: campaign_name
+    type: attribute
+    physicalName: campaign_name
+    name: campaign_name
+    description: The name of the marketing campaign.
+  - id: campaign_type
+    type: attribute
+    physicalName: campaign_type
+    name: campaign_type
+    description: Type of the campaign, e.g., Email, Social Media, Search Engine Marketing.
+  - id: start_date
+    type: datetime
+    physicalName: start_date
+    name: start_date
+    primaryDate: false
+    description: Start date of the campaign.
+    aggregationOptions:
+      minGranularity: second
+      maxGranularity: year
+  - id: end_date
+    type: datetime
+    physicalName: end_date
+    name: end_date
+    primaryDate: false
+    description: End date of the campaign.
+    aggregationOptions:
+      minGranularity: second
+      maxGranularity: year
+  - id: total_budget
+    type: attribute
+    physicalName: total_budget
+    name: total_budget
+    description: The total budget for the campaign.
+    aggregationOptions:
+      defaultBinWidth: 200
+      binsEnabled: false
+  - id: row_count
+    type: measure
+    name: Order Attribution Records
+    aggregate: row_count
+  - id: custom_measure
+    type: measure
+    name: custom measure
+    sql: count(*)

@@ -1,0 +1,135 @@
+hbVersion: "1.0"
+type: model
+alias: orders
+name: orders
+description: order information
+source:
+  connectionName: Uploads
+  physicalName: orders.parquet
+  schema: main
+cols:
+  - id: id
+    type: attribute
+    physicalName: id
+    isHiddenByDefault: true
+    name: id
+    description: order id
+    aggregationOptions:
+      defaultBinWidth: 1000
+      binsEnabled: false
+    primaryKey: true
+  - id: timestamp
+    type: datetime
+    physicalName: timestamp
+    name: timestamp
+    primaryDate: true
+    aggregationOptions:
+      minGranularity: second
+      maxGranularity: year
+  - id: payment_method
+    type: attribute
+    physicalName: payment_method
+    isHiddenByDefault: false
+    name: payment_method
+    description: credit or cash
+  - id: delivery
+    type: attribute
+    physicalName: delivery
+    isHiddenByDefault: false
+    name: delivery
+    description: boolean, is it delivery
+  - id: type
+    type: attribute
+    physicalName: type
+    isHiddenByDefault: false
+    name: type
+    description: whether the order is a subscription order
+  - id: customer_id
+    type: attribute
+    physicalName: customer_id
+    isHiddenByDefault: true
+    name: customer_id
+    description: Imported from dbt (model.retail_example.orders.columns.customer_id).
+  - id: loyalty_status
+    type: attribute
+    physicalName: loyalty_status
+    isHiddenByDefault: true
+    name: loyalty_status
+    description: Imported from dbt (model.retail_example.orders.columns.loyalty_status).
+  - id: discount_code
+    type: attribute
+    physicalName: discount_code
+    isHiddenByDefault: true
+    name: discount_code
+    description: Imported from dbt (model.retail_example.orders.columns.discount_code).
+  - id: feedback_rating
+    type: attribute
+    physicalName: feedback_rating
+    isHiddenByDefault: true
+    name: feedback_rating
+    description: Imported from dbt (model.retail_example.orders.columns.feedback_rating).
+    aggregationOptions:
+      defaultBinWidth: 0.2
+      binsEnabled: false
+  - id: delivery_time
+    type: attribute
+    physicalName: delivery_time
+    isHiddenByDefault: true
+    name: delivery_time
+    description: Imported from dbt (model.retail_example.orders.columns.delivery_time).
+    aggregationOptions:
+      defaultBinWidth: 2
+      binsEnabled: false
+  - id: preparation_time
+    type: attribute
+    physicalName: preparation_time
+    isHiddenByDefault: true
+    name: preparation_time
+    description: Imported from dbt (model.retail_example.orders.columns.preparation_time).
+    aggregationOptions:
+      defaultBinWidth: 1
+      binsEnabled: false
+  - id: special_request
+    type: attribute
+    physicalName: special_request
+    isHiddenByDefault: true
+    name: special_request
+    description: Imported from dbt (model.retail_example.orders.columns.special_request).
+  - id: referral_source
+    type: attribute
+    physicalName: referral_source
+    isHiddenByDefault: true
+    name: referral_source
+    description: Imported from dbt (model.retail_example.orders.columns.referral_source).
+  - id: cook_id
+    type: attribute
+    physicalName: cook_id
+    isHiddenByDefault: true
+    name: cook_id
+    description: Imported from dbt (model.retail_example.orders.columns.cook_id).
+  - id: location_id
+    type: attribute
+    physicalName: location_id
+    isHiddenByDefault: true
+    name: location_id
+    description: Imported from dbt (model.retail_example.orders.columns.location_id).
+  - id: total_order_value
+    type: attribute
+    physicalName: total_order_value
+    name: total_order_value
+    aggregationOptions:
+      defaultBinWidth: 1
+      binsEnabled: true
+  - id: order_count
+    type: measure
+    name: Pizza Orders
+    aggregate: row_count
+  - id: avg_order_value
+    type: measure
+    name: avg total_order_value
+    aggregate: avg
+    physicalName: total_order_value
+  - id: net_promoter_score
+    type: measure
+    name: net_promoter_score
+    sql: (COUNT(CASE WHEN feedback_rating BETWEEN 4 AND 5 THEN 1 END) - COUNT(CASE WHEN feedback_rating BETWEEN 1 AND 2 THEN 1 END)) * 100.0 / COUNT(feedback_rating)
