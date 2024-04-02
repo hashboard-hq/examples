@@ -6,7 +6,6 @@ description: sales has a record for each customer, order, product combination
 source:
   connectionName: Uploads
   physicalName: sales.parquet
-  schema: main
 cols:
   - id: item_id
     type: attribute

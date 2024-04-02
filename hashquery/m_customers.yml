@@ -6,7 +6,6 @@ description: This table contains customer information.
 source:
   connectionName: Uploads
   physicalName: customers.parquet
-  schema: main
 cols:
   - id: id
     type: attribute

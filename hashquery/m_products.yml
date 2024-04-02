@@ -6,7 +6,6 @@ description: order information
 source:
   connectionName: Uploads
   physicalName: products.parquet
-  schema: main
 cols:
   - id: id
     type: attribute
