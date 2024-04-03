@@ -6,7 +6,6 @@ description: This model provides details about each marketing campaign.
 source:
   connectionName: Uploads
   physicalName: campaigns.parquet
-  schema: main
 cols:
   - id: campaign_id
     type: attribute
