@@ -11,14 +11,9 @@ permissions:
   issues: write
   pull-requests: write
 
-env:
-  BQ_DATASET_NAME: "ci_pr_${{ github.event.pull_request.number }}"
-  BQ_DATASET_DESCRIPTION: "${{ github.event.pull_request.title}} (${{github.event.pull_request.html_url}})"
-  PYTHONIOENCODING: ascii
-
 jobs:
   create-preview:
-    name: "Run dbt pipeline and create Hashboard preview"
+    name: "Hashboard validate & preview"
     concurrency:
       group: preview-${{ github.event.pull_request.number || github.ref }}
       cancel-in-progress: true
@@ -33,6 +28,10 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: "3.9.16"
+
+      - name: "Install dependencies"
+        run: |
+          pip install hashboard-cli
 
       - name: Generate Hashboard preview
         id: generate-preview
