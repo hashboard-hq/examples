@@ -1,0 +1,35 @@
+hbVersion: '1.0'
+type: model
+grn: m:KlM-jd48vzQsPLmS
+alias: customers
+name: customers
+description: This table contains customer information.
+source:
+  connectionName: Uploads
+  physicalName: customers.parquet
+cols:
+- id: id
+  type: attribute
+  physicalName: id
+  name: id
+  description: The unique identifier for the customer.
+  primaryKey: true
+- id: name
+  type: attribute
+  physicalName: name
+  name: name
+  description: The name of the customer.
+- id: address
+  type: attribute
+  physicalName: address
+  name: address
+  description: The address of the customer.
+- id: phone_number
+  type: attribute
+  physicalName: phone_number
+  name: phone_number
+  description: The phone number of the customer.
+- id: row_count
+  type: measure
+  name: Customer Count
+  aggregate: row_count

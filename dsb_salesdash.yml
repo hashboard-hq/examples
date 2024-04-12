@@ -1,0 +1,32 @@
+hbVersion: '1.0'
+grn: dsb:Gh-ZO7m1dHXHA0nb
+name: Sales Dash
+description: ''
+type: dashboard
+globalFilters:
+- dataModel: m::sales
+  columnId: timestamp
+sections:
+- filters: []
+  rows:
+  - blocks:
+    - type: linkedMetric
+      ignoreDashboardFilters: false
+      width: 4
+      metric: mtr:JWjJ_z4bz7n4A_pg
+    - type: linkedMetric
+      ignoreDashboardFilters: false
+      width: 4
+      metric: mtr:8H-vMOWiEJGjqny4
+    - type: linkedMetric
+      ignoreDashboardFilters: false
+      width: 4
+      metric: mtr:60xfMK3J8HO_ebUw
+    height: 4
+  - blocks:
+    - type: savedExploration
+      savedExploration: sv:258_Q2kKNZmtptSP
+      axisLabels: hide
+      legendPosition: top
+      width: 12
+    height: 9
