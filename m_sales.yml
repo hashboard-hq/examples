@@ -19,7 +19,7 @@ cols:
   - id: customer_id
     type: attribute
     physicalName: customer_id
-    name: customer_id
+    name: changed customer_id
     description: unique ID for a customer
     foreignModels:
       - m:KlM-jd48vzQsPLmS
