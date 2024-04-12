@@ -1,0 +1,66 @@
+# Runs the dbt pipeline against a new dataset, then creates a preview build in Hashboard.
+name: hashboard-preview
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+    branches: [main]
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+env:
+  BQ_DATASET_NAME: "ci_pr_${{ github.event.pull_request.number }}"
+  BQ_DATASET_DESCRIPTION: "${{ github.event.pull_request.title}} (${{github.event.pull_request.html_url}})"
+  PYTHONIOENCODING: ascii
+
+jobs:
+  create-preview:
+    name: "Run dbt pipeline and create Hashboard preview"
+    concurrency:
+      group: preview-${{ github.event.pull_request.number || github.ref }}
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    if: ${{ !github.event.pull_request.merged }}
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: "Install Python 3.9"
+        id: install-python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9.16"
+
+      - name: Generate Hashboard preview
+        id: generate-preview
+        env:
+          HASHBOARD_PROJECT_ID: ${{ secrets.PIZZABYTES_HB_PROJECT_ID }}
+          HASHBOARD_ACCESS_KEY_ID: ${{ secrets.PIZZABYTES_HB_ACCESS_KEY_ID }}
+          HASHBOARD_SECRET_ACCESS_KEY_TOKEN: ${{ secrets.PIZZABYTES_HB_SECRET_ACCESS_KEY_TOKEN }}
+        run: |
+          hb preview | tee output.txt
+          grep -q Details output.txt
+          if [ $? -eq 0 ]; then
+            RESULT=`grep Details output.txt | sed 's/Details/Hashboard preview build succeeded/'`
+          else
+            RESULT=`echo "Preview Build failed. See the GitHub action logs for more details."`
+          fi
+          echo "result=$RESULT" >> $GITHUB_OUTPUT
+
+      - uses: actions/github-script@v6
+        name: "Comment on the pull request"
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `${{ steps.generate-preview.outputs.result }}`
+            })
+
+      - id: set-appropriate-exit-code
+        name: "Set exit code"
+        run: echo ${{ steps.generate-preview.outputs.result }} | grep succeeded
