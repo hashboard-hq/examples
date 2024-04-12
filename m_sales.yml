@@ -1,4 +1,4 @@
-hbVersion: '1.0'
+hbVersion: "1.0"
 type: model
 grn: m:7oXKMCOoGfP-2DfA
 alias: sales
@@ -8,116 +8,116 @@ source:
   connectionName: Uploads
   physicalName: sales.parquet
 cols:
-- id: item_id
-  type: attribute
-  physicalName: item_id
-  name: item_id
-  description: unique value for each line
-  aggregationOptions:
-    defaultBinWidth: 900000000000000000
-    binsEnabled: false
-- id: customer_id
-  type: attribute
-  physicalName: customer_id
-  name: customer_id
-  description: unique ID for a customer
-  foreignModels:
-  - m:KlM-jd48vzQsPLmS
-- id: order_id
-  type: attribute
-  physicalName: order_id
-  name: order_id
-  description: order id
-  aggregationOptions:
-    defaultBinWidth: 1000
-    binsEnabled: false
-  foreignModels:
-  - m:6gtPn8qG-6eN206_
-- id: item_number
-  type: attribute
-  physicalName: item_number
-  name: item_number
-  description: an item sequence number within this order; values from 1 to 5
-  aggregationOptions:
-    defaultBinWidth: 1
-    binsEnabled: false
-- id: product_id
-  type: attribute
-  physicalName: product_id
-  name: product_id
-  description: allows us to join to the products table, synonyms sku
-  foreignModels:
-  - m:UnmAIP248Pew4q5q
-- id: item_price
-  type: attribute
-  physicalName: item_price
-  name: item_price
-  description: order value - this is just for this product
-  aggregationOptions:
-    defaultBinWidth: 0.5
-    binsEnabled: false
-- id: quantity
-  type: attribute
-  physicalName: quantity
-  name: quantity
-  description: number of pizzas
-  aggregationOptions:
-    defaultBinWidth: 1
-    binsEnabled: false
-- id: timestamp
-  type: datetime
-  physicalName: timestamp
-  name: timestamp
-  primaryDate: true
-  description: the time the order was created
-  aggregationOptions:
-    minGranularity: week
-    maxGranularity: year
-- id: revenue
-  type: measure
-  name: Revenue
-  description: 'revenue is the total sales of pizza. synonyms: sales, top line revenue'
-  formattingOptions:
-    fixedDecimals: 0
-    formatAsCurrency: true
-  aggregate: sum
-  physicalName: item_price
-- id: revenue_per_customer
-  type: measure
-  name: Revenue per customer
-  formattingOptions:
-    fixedDecimals: 2
-    formatAsCurrency: true
-  sql: sum(sales.item_price) / count(distinct sales.customer_id)
-- id: revenue_per_order
-  type: measure
-  name: Revenue per order
-  description: 'revenue is the total sales of pizza, synonyms: sales, top line'
-  formattingOptions:
-    fixedDecimals: 2
-    formatAsCurrency: true
-  sql: sum(sales.item_price) / count(distinct sales.order_id)
-- id: average_unit_price
-  type: measure
-  name: Avg unit price
-  description: 'revenue is the total sales of pizza, synonyms: sales, top line'
-  formattingOptions:
-    fixedDecimals: 0
-    formatAsCurrency: true
-  sql: sum(item_price) / sum(quantity)
-- id: num_customers
-  type: measure
-  name: Number of customers
-  aggregate: count_distinct
-  physicalName: customer_id
-- id: num_orders
-  type: measure
-  name: Number of orders
-  aggregate: count_distinct
-  physicalName: order_id
-- id: orders_per_customer
-  type: measure
-  name: Orders per customer
-  formattingOptions:
-    fixedDecimals: 2
-  sql: count(sales.order_id) / count(distinct sales.customer_id)
+  - id: item_id
+    type: attribute
+    physicalName: item_id
+    name: item_id
+    description: unique value for each line
+    aggregationOptions:
+      defaultBinWidth: 900000000000000000
+      binsEnabled: false
+  - id: customer_id
+    type: attribute
+    physicalName: customer_id
+    name: customer_id
+    description: unique ID for a customer
+    foreignModels:
+      - m:KlM-jd48vzQsPLmS
+  - id: order_id
+    type: attribute
+    physicalName: order_id
+    name: order_id
+    description: order id
+    aggregationOptions:
+      defaultBinWidth: 1000
+      binsEnabled: false
+    foreignModels:
+      - m:6gtPn8qG-6eN206_
+  - id: item_number
+    type: attribute
+    physicalName: item_number
+    name: item_number
+    description: an item sequence number within this order; values from 1 to 5
+    aggregationOptions:
+      defaultBinWidth: 1
+      binsEnabled: false
+  - id: product_id
+    type: attribute
+    physicalName: product_id
+    name: product_id
+    description: allows us to join to the products table, synonyms sku
+    foreignModels:
+      - m:UnmAIP248Pew4q5q
+  - id: item_price
+    type: attribute
+    physicalName: item_price
+    name: item_price
+    description: order value - this is just for this product
+    aggregationOptions:
+      defaultBinWidth: 0.5
+      binsEnabled: false
+  - id: quantity
+    type: attribute
+    physicalName: quantity
+    name: quantity
+    description: number of pizzas
+    aggregationOptions:
+      defaultBinWidth: 1
+      binsEnabled: false
+  - id: timestamp
+    type: datetime
+    physicalName: timestamp
+    name: timestamp
+    primaryDate: true
+    description: the time the order was created
+    aggregationOptions:
+      minGranularity: week
+      maxGranularity: year
+  - id: revenue
+    type: measure
+    name: Revenue
+    description: "revenue is the total sales of pizza. synonyms: sales, top line revenue"
+    formattingOptions:
+      fixedDecimals: 0
+      formatAsCurrency: true
+    aggregate: sum
+    physicalName: item_price
+  - id: revenue_per_customer
+    type: measure
+    name: Revenue per customer
+    formattingOptions:
+      fixedDecimals: 2
+      formatAsCurrency: true
+    sql: sum(sales.item_price) / count(distinct sales.customer_id)
+  - id: revenue_per_order
+    type: measure
+    name: Revenue per order
+    description: "revenue is the total sales of pizza, synonyms: sales, top line"
+    formattingOptions:
+      fixedDecimals: 2
+      formatAsCurrency: true
+    sql: sum(sales.item_price) / count(distinct sales.order_id)
+  - id: average_unit_price
+    type: measure
+    name: Avg unit price
+    description: "revenue is the total sales of pizza, synonyms: sales, top line"
+    formattingOptions:
+      fixedDecimals: 0
+      formatAsCurrency: true
+    sql: sum(item_price) / sum(quantity)
+  - id: num_customers
+    type: measure
+    name: Number of customers
+    aggregate: count_distinct
+    physicalName: customer_id
+  - id: num_orders
+    type: measure
+    name: Number of orders
+    aggregate: count_distinct
+    physicalName: order_id
+  - id: orders_per_customer
+    type: measure
+    name: Orders per customer
+    formattingOptions:
+      fixedDecimals: 2
+    sql: count(sales.order_id) / count(distinct sales.customer_id)
