@@ -40,7 +40,7 @@ jobs:
           HASHBOARD_ACCESS_KEY_ID: ${{ secrets.PIZZABYTES_HB_ACCESS_KEY_ID }}
           HASHBOARD_SECRET_ACCESS_KEY_TOKEN: ${{ secrets.PIZZABYTES_HB_SECRET_ACCESS_KEY_TOKEN }}
         run: |
-          hb preview | tee output.txt
+          SCHEMA=pr_24_ hb preview | tee output.txt
           grep -q Details output.txt
           if [ $? -eq 0 ]; then
             RESULT=`grep Details output.txt | sed 's/Details/Hashboard preview build succeeded/'`
