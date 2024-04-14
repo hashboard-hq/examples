@@ -1,0 +1,29 @@
+hbVersion: '1.0'
+type: saved_exploration
+grn: sv:X0yA1VJYzI4eR_Iu
+model: m::sales
+name: Type and size breakdown
+data:
+  x:
+  - columnId: m::products.pizza_type
+  - columnId: m::products.pizza_size
+  y:
+    columnId: revenue
+  filters: []
+  sort:
+  - columnId: m::products.pizza_type
+    order: asc
+  - columnId: m::products.pizza_size
+    order: asc
+  limit: 10000
+  subtotals: true
+visualization:
+  chartType: table
+  showAxisLabels: true
+  tableVisualization: []
+  tableColumnWidths:
+  - columnId: revenue
+    width: 218
+attributeTray:
+  isVisible: false
+  attributeTiles: []

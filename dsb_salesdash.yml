@@ -3,11 +3,6 @@ grn: dsb:ZMOad3w5cgw2ewbJ
 name: 💯 Top-level metrics
 description: ''
 type: dashboard
-resourceMetadata:
-  status: verified
-  owner: stokoe@hashboard.com
-  labels:
-  - sales
 globalFilters:
 - dataModel: m::sales
   columnId: timestamp
@@ -53,10 +48,12 @@ sections:
   - blocks:
     - type: savedExploration
       savedExploration: sv:X0yA1VJYzI4eR_Iu
+      axisLabels: hide
       legendPosition: top
       width: 6
     - type: savedExploration
       savedExploration: sv:Mdz3CifPPOPAoM66
+      axisLabels: hide
       legendPosition: top
       width: 6
     height: 12
@@ -73,6 +70,7 @@ sections:
   - blocks:
     - type: savedExploration
       savedExploration: sv:Ds4a8XBzvBFNSN3-
+      axisLabels: hide
       legendPosition: top
       width: 6
     - type: empty
