@@ -3,7 +3,7 @@ type: metric
 grn: mtr:8H-vMOWiEJGjqny4
 name: Revenue per customer
 resourceMetadata:
-  owner: cgaguilar@gmail.com
+  owner: dan.s.eisenberg@gmail.com
 config:
   metricType: timeseries
   dataModel: m::sales

@@ -7,5 +7,5 @@ resourceMetadata:
   owner: anna@hashboard.com
 config:
   metricType: simple
-  dataModel: m::customers
-  measureId: row_count
+  dataModel: m::sales
+  measureId: num_customers
