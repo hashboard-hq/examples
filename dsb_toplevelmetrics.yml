@@ -67,7 +67,7 @@ sections:
   rows:
   - blocks:
     - type: markdown
-      text: '## Bizdev and ops'
+      text: '## Bizdev & ops'
       width: 12
   - blocks:
     - type: savedExploration
