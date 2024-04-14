@@ -73,6 +73,14 @@ sections:
       axisLabels: hide
       legendPosition: top
       width: 6
-    - type: empty
+    - type: savedExploration
+      savedExploration: sv:f7nAoYRR4Yl_ai-d
+      legendPosition: top
       width: 6
     height: 8
+  - blocks:
+    - type: savedExploration
+      savedExploration: sv:7VbKfCvNIDheB7Xq
+      legendPosition: top
+      width: 12
+    height: 6
