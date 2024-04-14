@@ -3,6 +3,11 @@ grn: dsb:ZMOad3w5cgw2ewbJ
 name: 💯 Top-level metrics
 description: ''
 type: dashboard
+resourceMetadata:
+  status: verified
+  owner: stokoe@hashboard.com
+  labels:
+  - sales
 globalFilters:
 - dataModel: m::sales
   columnId: timestamp
