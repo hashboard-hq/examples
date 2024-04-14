@@ -4,6 +4,9 @@ grn: m:6gtPn8qG-6eN206_
 alias: orders
 name: orders
 description: order information
+resourceMetadata:
+  status: verified
+  owner: dan.s.eisenberg@gmail.com
 source:
   connectionName: Uploads
   physicalName: orders.parquet

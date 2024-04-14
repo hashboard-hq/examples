@@ -4,6 +4,9 @@ grn: m:KlM-jd48vzQsPLmS
 alias: customers
 name: customers
 description: This table contains customer information.
+resourceMetadata:
+  status: verified
+  owner: dan.s.eisenberg@gmail.com
 source:
   connectionName: Uploads
   physicalName: customers.parquet

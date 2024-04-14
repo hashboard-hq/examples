@@ -4,6 +4,9 @@ grn: m:UnmAIP248Pew4q5q
 alias: products
 name: products
 description: order information
+resourceMetadata:
+  status: verified
+  owner: dan.s.eisenberg@gmail.com
 source:
   connectionName: Uploads
   physicalName: products.parquet
