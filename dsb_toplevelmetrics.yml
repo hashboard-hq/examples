@@ -1,0 +1,88 @@
+hbVersion: '1.0'
+grn: dsb:ZMOad3w5cgw2ewbJ
+name: 💯 Top-level metrics
+description: ''
+type: dashboard
+globalFilters:
+- dataModel: m::sales
+  columnId: timestamp
+sections:
+- filters:
+  - dataModel: m::orders
+    columnId: type
+  rows:
+  - blocks:
+    - type: markdown
+      text: '## Business health'
+      width: 12
+  - blocks:
+    - type: linkedMetric
+      ignoreDashboardFilters: false
+      width: 4
+      metric: mtr:JWjJ_z4bz7n4A_pg
+    - type: linkedMetric
+      ignoreDashboardFilters: false
+      width: 4
+      metric: mtr:8H-vMOWiEJGjqny4
+    - type: linkedMetric
+      ignoreDashboardFilters: false
+      width: 4
+      metric: mtr:60xfMK3J8HO_ebUw
+    height: 4
+  - blocks:
+    - type: savedExploration
+      savedExploration: sv:258_Q2kKNZmtptSP
+      axisLabels: hide
+      legendPosition: top
+      width: 12
+    height: 9
+- filters:
+  - dataModel: m::orders
+    columnId: referral_source
+    filterOnlyUnderlyingModel: true
+  rows:
+  - blocks:
+    - type: markdown
+      text: '## Product'
+      width: 12
+  - blocks:
+    - type: savedExploration
+      savedExploration: sv:X0yA1VJYzI4eR_Iu
+      axisLabels: hide
+      legendPosition: top
+      width: 6
+    - type: savedExploration
+      savedExploration: sv:Mdz3CifPPOPAoM66
+      axisLabels: hide
+      legendPosition: top
+      width: 6
+    height: 12
+- filters:
+  - dataModel: m::orders
+    columnId: loyalty_status
+  - dataModel: m::orders
+    columnId: feedback_rating
+  rows:
+  - blocks:
+    - type: markdown
+      text: '## Bizdev and ops'
+      width: 12
+  - blocks:
+    - type: savedExploration
+      savedExploration: sv:Ds4a8XBzvBFNSN3-
+      axisLabels: hide
+      legendPosition: top
+      width: 6
+    - type: savedExploration
+      savedExploration: sv:f7nAoYRR4Yl_ai-d
+      axisLabels: hide
+      legendPosition: top
+      width: 6
+    height: 8
+  - blocks:
+    - type: savedExploration
+      savedExploration: sv:7VbKfCvNIDheB7Xq
+      axisLabels: hide
+      legendPosition: top
+      width: 12
+    height: 6

@@ -1,0 +1,24 @@
+hbVersion: '1.0'
+type: saved_exploration
+grn: sv:f7nAoYRR4Yl_ai-d
+model: m::sales
+name: Delivery saturation
+data:
+  x:
+    columnId: timestamp
+    granularity: month
+  y:
+    columnId: revenue
+  breakout:
+    columnId: m::orders.delivery
+    metricId: revenue
+    sort: desc
+    limit: 6
+    showOther: true
+  filters: []
+visualization:
+  chartType: bar
+  stack: stack100pct
+  showAxisLabels: false
+  legend: top
+  showLegendTitle: false

@@ -1,0 +1,23 @@
+hbVersion: '1.0'
+type: metric
+grn: mtr:JWjJ_z4bz7n4A_pg
+name: Revenue
+resourceMetadata:
+  status: verified
+  owner: anna@hashboard.com
+  labels:
+  - okrs 2024
+config:
+  metricType: timeseries
+  dataModel: m::sales
+  measureId: revenue
+  goals:
+  - type: constant
+    value: 4000
+    comparison: gte
+  dimensionId: timestamp
+  granularity: month
+  displayOptions:
+    sparkline: true
+    numPeriodsToDisplay: 12
+    displayLastPartialPeriod: false
