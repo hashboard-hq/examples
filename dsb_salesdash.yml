@@ -1,14 +1,25 @@
 hbVersion: '1.0'
 grn: dsb:Gh-ZO7m1dHXHA0nb
-name: Sales Dash
+name: 💯 Top-level metrics
 description: ''
 type: dashboard
+resourceMetadata:
+  status: verified
+  owner: stokoe@hashboard.com
+  labels:
+  - sales
 globalFilters:
 - dataModel: m::sales
   columnId: timestamp
 sections:
-- filters: []
+- filters:
+  - dataModel: m::orders
+    columnId: type
   rows:
+  - blocks:
+    - type: markdown
+      text: '## Business health'
+      width: 12
   - blocks:
     - type: linkedMetric
       ignoreDashboardFilters: false
@@ -30,3 +41,40 @@ sections:
       legendPosition: top
       width: 12
     height: 9
+- filters:
+  - dataModel: m::orders
+    columnId: referral_source
+    filterOnlyUnderlyingModel: true
+  rows:
+  - blocks:
+    - type: markdown
+      text: '## Products'
+      width: 12
+  - blocks:
+    - type: savedExploration
+      savedExploration: sv:X0yA1VJYzI4eR_Iu
+      legendPosition: top
+      width: 6
+    - type: savedExploration
+      savedExploration: sv:Mdz3CifPPOPAoM66
+      legendPosition: top
+      width: 6
+    height: 12
+- filters:
+  - dataModel: m::orders
+    columnId: loyalty_status
+  - dataModel: m::orders
+    columnId: feedback_rating
+  rows:
+  - blocks:
+    - type: markdown
+      text: '## Bizdev and ops'
+      width: 12
+  - blocks:
+    - type: savedExploration
+      savedExploration: sv:Ds4a8XBzvBFNSN3-
+      legendPosition: top
+      width: 6
+    - type: empty
+      width: 6
+    height: 8
