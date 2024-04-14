@@ -9,7 +9,7 @@ resourceMetadata:
   owner: dan.s.eisenberg@gmail.com
 source:
   connectionName: Uploads
-  physicalName: sales.parquet
+  physicalName: ${SCHEMA}sales.parquet
 cols:
 - id: item_id
   type: attribute
