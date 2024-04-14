@@ -1,0 +1,40 @@
+hbVersion: '1.0'
+type: saved_exploration
+grn: sv:X0yA1VJYzI4eR_Iu
+model:
+  modelId: m::sales
+  adhoc:
+    cols:
+    - name: Pizza Types
+      id: adhoc_attribute
+      sql: products.pizza_type
+      type: attribute
+    - name: Pizza Size
+      id: adhoc_attribute_2
+      sql: products.pizza_size
+      type: attribute
+name: Type and size breakdown
+data:
+  x:
+  - columnId: adhoc_attribute
+  - columnId: adhoc_attribute_2
+  y:
+    columnId: revenue
+  filters: []
+  sort:
+  - columnId: adhoc_attribute
+    order: asc
+  - columnId: adhoc_attribute_2
+    order: asc
+  limit: 10000
+  subtotals: true
+visualization:
+  chartType: table
+  showAxisLabels: true
+  tableVisualization: []
+  tableColumnWidths:
+  - columnId: revenue
+    width: 218
+attributeTray:
+  isVisible: false
+  attributeTiles: []

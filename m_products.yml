@@ -1,0 +1,41 @@
+hbVersion: '1.0'
+type: model
+grn: m:UnmAIP248Pew4q5q
+alias: products
+name: products
+description: order information
+resourceMetadata:
+  status: verified
+  owner: dan.s.eisenberg@gmail.com
+source:
+  connectionName: Uploads
+  physicalName: products.parquet
+cols:
+- id: id
+  type: attribute
+  physicalName: id
+  name: id
+  description: the unique identifier of the product
+  primaryKey: true
+- id: pizza_size
+  type: attribute
+  physicalName: pizza_size
+  name: pizza_size
+  description: pizza size; small, medium or large
+- id: pizza_type
+  type: attribute
+  physicalName: pizza_type
+  name: pizza_type
+  description: the type of pizza
+- id: price
+  type: attribute
+  physicalName: price
+  name: price
+  description: price in USD per pizza
+  aggregationOptions:
+    defaultBinWidth: 1
+    binsEnabled: true
+- id: row_count
+  type: measure
+  name: Product Count
+  aggregate: row_count

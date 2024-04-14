@@ -1,0 +1,100 @@
+hbVersion: '1.0'
+type: model
+grn: m:6gtPn8qG-6eN206_
+alias: orders
+name: orders
+description: order information
+resourceMetadata:
+  status: verified
+  owner: dan.s.eisenberg@gmail.com
+source:
+  connectionName: Uploads
+  physicalName: orders.parquet
+cols:
+- id: id
+  type: attribute
+  physicalName: id
+  name: id
+  description: order id
+  aggregationOptions:
+    defaultBinWidth: 1000
+    binsEnabled: false
+  primaryKey: true
+- id: payment_method
+  type: attribute
+  physicalName: payment_method
+  name: payment_method
+  description: credit or cash
+- id: delivery
+  type: attribute
+  physicalName: delivery
+  name: delivery
+  description: boolean, is it delivery
+- id: type
+  type: attribute
+  physicalName: type
+  name: type
+  description: whether the order is a subscription order
+- id: customer_id
+  type: attribute
+  physicalName: customer_id
+  name: customer_id
+  description: Imported from dbt (model.retail_example.orders.columns.customer_id).
+- id: loyalty_status
+  type: attribute
+  physicalName: loyalty_status
+  name: loyalty_status
+  description: Imported from dbt (model.retail_example.orders.columns.loyalty_status).
+- id: discount_code
+  type: attribute
+  physicalName: discount_code
+  name: discount_code
+  description: Imported from dbt (model.retail_example.orders.columns.discount_code).
+- id: feedback_rating
+  type: attribute
+  physicalName: feedback_rating
+  name: feedback_rating
+  description: Imported from dbt (model.retail_example.orders.columns.feedback_rating).
+  aggregationOptions:
+    defaultBinWidth: 0.2
+    binsEnabled: false
+- id: delivery_time
+  type: attribute
+  physicalName: delivery_time
+  name: delivery_time
+  description: Imported from dbt (model.retail_example.orders.columns.delivery_time).
+  aggregationOptions:
+    defaultBinWidth: 2
+    binsEnabled: false
+- id: preparation_time
+  type: attribute
+  physicalName: preparation_time
+  name: preparation_time
+  description: Imported from dbt (model.retail_example.orders.columns.preparation_time).
+  aggregationOptions:
+    defaultBinWidth: 1
+    binsEnabled: false
+- id: special_request
+  type: attribute
+  physicalName: special_request
+  name: special_request
+  description: Imported from dbt (model.retail_example.orders.columns.special_request).
+- id: referral_source
+  type: attribute
+  physicalName: referral_source
+  name: referral_source
+  description: Imported from dbt (model.retail_example.orders.columns.referral_source).
+- id: cook_id
+  type: attribute
+  physicalName: cook_id
+  name: cook_id
+  description: Imported from dbt (model.retail_example.orders.columns.cook_id).
+- id: location_id
+  type: attribute
+  physicalName: location_id
+  name: location_id
+  description: Imported from dbt (model.retail_example.orders.columns.location_id).
+- id: row_count
+  type: measure
+  name: Pizza Orders
+  aggregate: row_count
