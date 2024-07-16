@@ -1,0 +1,32 @@
+hbVersion: "1.0"
+name: Sales Dashboard
+description: ""
+alias: sales_dashboard
+type: dashboard
+globalFilters:
+  - dataModel: m::sales
+    columnId: store_state
+sections:
+  - filters: []
+    rows:
+      - blocks:
+          - type: savedExploration
+            savedExploration: sv::revenue_chart
+            axisLabels: hide
+            legendPosition: top
+            width: 12
+        height: 4
+  - filters: []
+    rows:
+      - blocks:
+          - type: savedExploration
+            savedExploration: sv::top_selling_products_table
+            axisLabels: hide
+            legendPosition: top
+            width: 4
+          - type: savedExploration
+            savedExploration: sv::sales_chart
+            axisLabels: hide
+            legendPosition: top
+            width: 8
+        height: 7
