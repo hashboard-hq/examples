@@ -1,0 +1,19 @@
+hbVersion: '1.0'
+type: saved_view
+alias: top_selling_products_table
+model: m::sales
+name: Top-selling products
+data:
+  x:
+    columnId: product_description
+  y:
+  - columnId: total_revenue
+  - columnId: quantity_sold
+  filters: []
+  sort:
+  - columnId: product_description
+    order: asc
+  limit: 10000
+visualization:
+  chartType: table
+  showAxisLabels: false
