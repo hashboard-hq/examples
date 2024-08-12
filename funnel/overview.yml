@@ -8,9 +8,9 @@ data:
   y:
     - columnId: user_count
     - name: Fall Off
-      formula: difference(user_count, 2)
+      formula: difference(user_count, 1)
     - name: Fall Off %
-      formula: percentChange(user_count, 2)
+      formula: percentChange(user_count, 1)
   filters: []
   sort:
     - columnId: stage_name
