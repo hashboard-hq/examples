@@ -1,4 +1,4 @@
-glean: '1.0'
+glean: "1.0"
 type: saved_view
 model: ../models/mrr.yml
 name: Monthly growth rate
@@ -7,18 +7,17 @@ data:
     columnId: date_month
     granularity: month
   y:
-  - name: Percent Change over Revenue
-    formula: percentChange(revenue, 2)
-  - name: Goal
-    formula: constant(0.3)
+    - name: Percent Change over Revenue
+      formula: percentChange(revenue, 1)
+    - name: Goal
+      formula: constant(0.3)
   filters:
-  - columnId: date_month
-    range:
-    - '2018-02-01'
-    - '2019-12-01'
+    - columnId: date_month
+      range:
+        - "2018-02-01"
+        - "2019-12-01"
 visualization:
   chartType: line
   showOther: true
   stack: unstack
   showAxisLabels: true
-
