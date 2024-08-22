@@ -1,0 +1,29 @@
+hbVersion: '1.0'
+type: saved_exploration
+
+alias: ordering_trends
+model: m::sales
+name: Ordering trends
+data:
+  x:
+    columnId: timestamp
+    granularity: year
+  y:
+    columnId: revenue
+  breakout:
+    columnId: m::products.pizza_size
+    metricId: revenue
+    sort: desc
+    limit: 6
+    showOther: true
+  trellis:
+    columnId: m::products.pizza_type
+    metricId: revenue
+    sort: desc
+    limit: 5
+    showOther: true
+  filters: []
+visualization:
+  chartType: line
+  stack: unstack
+  showAxisLabels: true

@@ -1,9 +1,12 @@
-duckdb_profile:
+bigquery: 
+  target: dev
   outputs:
     dev:
-      type: duckdb
-      external_root: ./data_catalog/dbt/
-      extensions:
-        - parquet
-      threads: 4
-  target: dev
+      type: bigquery
+      method: oauth
+      project: glean-web
+      dataset: "{{ env_var('DBT_SCHEMA') }}"
+      threads: 1
+      timeout_seconds: 300
+      location: US
+      priority: interactive

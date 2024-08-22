@@ -2,8 +2,7 @@ version: 2
 
 sources:
   - name: generated_sources
-    meta:
-      external_location: "./data_catalog/{name}.parquet"
+    schema: pizza_bytes
     tables:
       - name: campaigns
       - name: customers

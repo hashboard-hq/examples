@@ -2,7 +2,7 @@ name: 'retail_example'
 version: '1.0.0'
 config-version: 2
 
-profile: 'duckdb_profile'
+profile: 'bigquery'
 
 model-paths: ["models"]
 
@@ -11,12 +11,12 @@ clean-targets:
 - "dbt_packages"
 
 models:
-  # configure everything to be materialized as parquet
-  +materialized: external
   +meta:
     hashboard-defaults:
       hbVersion: "1.0"
       preventUpdatesFromUI: false
-      duckdbDefaultFileExtension: parquet
       source:
-        connectionName: Uploads
+        connectionName: BigQuery
+
+dbt-cloud:
+    project-id: 377814

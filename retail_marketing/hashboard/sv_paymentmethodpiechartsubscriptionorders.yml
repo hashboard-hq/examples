@@ -1,0 +1,35 @@
+hbVersion: '1.0'
+type: saved_exploration
+
+alias: pie_chart
+model: m::sales
+name: payment method pie chart - subscription orders
+data:
+  measures:
+  - columnId: revenue
+  breakout:
+    columnId: m::orders.payment_method
+    metricId: revenue
+    sort: desc
+    limit: 6
+    showOther: true
+  filters:
+  - columnId: timestamp
+    range:
+    - '2022-05-01'
+    - '2023-02-01'
+  - columnId: m::orders.delivery
+    excludeValues:
+    - Yes
+  - columnId: m::orders.type
+    excludeValues:
+    - Subscription
+visualization:
+  chartType: pie
+  legend: top
+  showLegendTitle: false
+  valueLabels:
+    contents:
+      value: true
+      percentage: true
+    quantity: fit

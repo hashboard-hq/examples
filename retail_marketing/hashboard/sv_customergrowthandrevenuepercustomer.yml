@@ -1,0 +1,26 @@
+hbVersion: '1.0'
+type: saved_exploration
+
+alias: customer_growth_rev
+model: m::sales
+name: Customer growth and revenue per customer
+data:
+  x:
+    columnId: timestamp
+    granularity: month
+  y:
+  - columnId: revenue_per_customer
+    axis:
+      orient: secondary
+    markType: line
+  - columnId: num_customers
+    axis:
+      orient: primary
+  breakout:
+    by: metric
+  filters: []
+visualization:
+  chartType: bar
+  showAxisLabels: false
+  legend: top
+  showLegendTitle: false

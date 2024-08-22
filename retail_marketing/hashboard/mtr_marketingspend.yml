@@ -1,0 +1,19 @@
+hbVersion: '1.0'
+type: metric
+
+alias: marketing_spend
+name: Marketing Spend
+config:
+  metricType: timeseries
+  dataModel: m::marketing_attribution
+  measureId: costs
+  goals:
+  - type: constant
+    value: 100000
+    comparison: gte
+  dimensionId: order_timestamp
+  granularity: month
+  displayOptions:
+    sparkline: true
+    numPeriodsToDisplay: 12
+    displayLastPartialPeriod: false

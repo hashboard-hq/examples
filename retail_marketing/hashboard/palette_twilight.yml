@@ -1,0 +1,16 @@
+hbVersion: '1.0'
+
+type: color_palette
+name: Twilight
+alias: _twilight
+defaultColor:
+  color: '#234990FF'
+colors:
+- color: '#003F5CFF'
+- color: '#444E86FF'
+- color: '#955196FF'
+- color: '#DD5182FF'
+- color: '#FF6E54FF'
+- color: '#FFA600FF'
+options:
+  additionalColorGeneration: interpolate

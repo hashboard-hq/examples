@@ -1,0 +1,18 @@
+hbVersion: '1.0'
+type: metric
+
+alias: rev_per_customer
+name: Revenue per customer
+resourceMetadata:
+  status: exploratory
+  owner: dan.s.eisenberg@gmail.com
+config:
+  metricType: timeseries
+  dataModel: m::sales
+  measureId: revenue_per_customer
+  dimensionId: timestamp
+  granularity: month
+  displayOptions:
+    sparkline: true
+    numPeriodsToDisplay: 12
+    displayLastPartialPeriod: false
