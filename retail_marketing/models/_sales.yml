@@ -11,123 +11,30 @@ models:
           - not_null
       - name: customer_id
         description: unique ID for a customer
-        meta:
-          hashboard:
-            foreignModels:
-              - m::customers
       - name: order_id
         description: order id
-        meta:
-          hashboard:
-            foreignModels:
-              - m::orders
-            aggregationOptions:
-              binsEnabled: false
       - name: item_number
         description: an item sequence number within this order; values from 1 to 5
-        meta:
-          hashboard:
-            aggregationOptions:
-              defaultBinWidth: 1
-              binsEnabled: false
       - name: product_id
         description: allows us to join to the products table, synonyms sku
-        meta:
-          hashboard:
-            foreignModels:
-              - m::products
       - name: item_price
         description: order value - this is just for this product
-        meta:
-          hashboard:
-            aggregationOptions:
-              defaultBinWidth: 0.5
-              binsEnabled: false
       - name: quantity
         description: number of pizzas
-        meta:
-          hashboard:
-            aggregationOptions:
-              defaultBinWidth: 1
-              binsEnabled: false
       - name: timestamp
         description: the time the order was created
-        meta:
-          hashboard:
-            primaryDate: true
-            aggregationOptions:
-              minGranularity: week
-              maxGranularity: year
-    meta:
-      hashboard:
-        alias: sales
-        cols:
-          - id: revenue
-            type: metric
-            name: Revenue
-            description: "revenue is the total sales of pizza. synonyms: sales, top line revenue"
-            physicalName: item_price
-            aggregate: sum
-            formattingOptions:
-              fixedDecimals: 0
-              formatAsDollars: true
-          - id: revenue_per_customer
-            type: metric
-            name: Revenue per customer
-            sql: sum(sales.item_price) / count(distinct sales.customer_id)
-            formattingOptions:
-              fixedDecimals: 2
-              formatAsDollars: true
-          - id: revenue_per_order
-            type: metric
-            name: Revenue per order
-            description: "revenue is the total sales of pizza, synonyms: sales, top line"
-            sql: sum(sales.item_price) / count(distinct sales.order_id)
-            formattingOptions:
-              fixedDecimals: 2
-              formatAsDollars: true
-          - id: average_unit_price
-            type: metric
-            name: Avg unit price
-            description: "revenue is the total sales of pizza, synonyms: sales, top line"
-            sql: sum(item_price) / sum(quantity)
-            formattingOptions:
-              fixedDecimals: 0
-              formatAsDollars: true
-          - id: num_customers
-            type: metric
-            name: Number of customers
-            physicalName: customer_id
-            aggregate: count_distinct
-          - id: num_orders
-            type: metric
-            name: Number of orders
-            physicalName: order_id
-            aggregate: count_distinct
-          - id: orders_per_customer
-            type: metric
-            name: Orders per customer
-            sql: count(sales.order_id) / count(distinct sales.customer_id)
-            formattingOptions:
-              fixedDecimals: 2
-
 
   - name: orders
     description: order information
     columns:
       - name: id
         description: order id
-        meta:
-          hashboard:
-            aggregationOptions:
-              binsEnabled: false
-            primaryKey: true
       - name: payment_method
         description: credit or cash
       - name: delivery
         description: boolean, is it delivery
       - name: type
-        description: whether the order is a subscription order 
+        description: whether the order is a subscription order
       - name: customer_id
       - name: loyalty_status
       - name: discount_code
@@ -139,43 +46,18 @@ models:
       - name: referral_source
       - name: cook_id
       - name: location_id
-    meta:
-      hashboard:
-        alias: orders
-        cols:
-          - id: row_count
-            type: metric
-            name: Pizza Orders
-            aggregate: row_count
 
   - name: products
     description: order information
     columns:
       - name: id
         description: the unique identifier of the product
-        meta:
-          hashboard:
-            primaryKey: true
       - name: pizza_size
         description: pizza size; small, medium or large
       - name: pizza_type
         description: the type of pizza
       - name: price
         description: price in USD per pizza
-        meta:
-          hashboard:
-            aggregationOptions:
-              defaultBinWidth: 1
-              binsEnabled: true
-    meta:
-      hashboard:
-        alias: products
-        cols:
-          - id: row_count
-            type: metric
-            name: Product Count
-            aggregate: row_count
-
 
   - name: customers
     description: This table contains customer information.
@@ -185,9 +67,6 @@ models:
         tests:
           - unique
           - not_null
-        meta:
-          hashboard:
-            primaryKey: true
       - name: name
         description: The name of the customer.
         tests:
@@ -200,11 +79,3 @@ models:
         description: The phone number of the customer.
         tests:
           - not_null
-    meta:
-      hashboard:
-        alias: customers
-        cols:
-          - id: row_count
-            type: metric
-            name: Customer Count
-            aggregate: row_count

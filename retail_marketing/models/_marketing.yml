@@ -6,67 +6,24 @@ models:
     columns:
       - name: attribution_id
         description: Unique ID for the attribution.
-        meta:
-          hashboard:
-            primaryKey: true
       - name: order_id
         description: Order ID, matches the order_id in the sales model.
-        meta:
-          hashboard:
-            foreignModels:
-              - m::orders
       - name: touchpoint_id
         description: ID of the marketing touchpoint which led to the order.
-        meta:
-          hashboard:
-            foreignModels:
-              - m::marketing_touchpoints
       - name: attribution_share
         description: Proportional credit given to this touchpoint for the order.
       - name: order_timestamp
-        meta:
-          hashboard:
-            primaryDate: true
       - name: attribution_timestamp
         description: The time when the attribution was recorded.
       - name: campaign_id
-        meta:
-          hashboard:
-            foreignModels:
-              - m::campaigns
       - name: attribution_model
         description: The model used for attributing the order to the touchpoint.
-    meta:
-      hashboard:
-        alias: marketing_attribution
-        cols:
-          - id: row_count
-            type: metric
-            name: Order Attribution Records
-            aggregate: row_count
-          - id: attributable_revenue
-            type: metric
-            name: Attributable Revenue
-            formattingOptions:
-              fixedDecimals: 0
-              formatAsDollars: true
-            sql: sum(orders.total_order_value * marketing_attribution.attribution_share)
-          - id: costs
-            type: metric
-            name: Marketing Spend
-            formattingOptions:
-              fixedDecimals: 0
-              formatAsDollars: true
-            sql: sum(marketing_touchpoints.cost_per_touchpoint)
 
   - name: marketing_touchpoints
     description: This model describes each marketing touchpoint that leads to an order.
     columns:
       - name: touchpoint_id
         description: Unique ID for the touchpoint.
-        meta:
-          hashboard:
-            primaryKey: true
       - name: customer_id
         description: The customer ID this touchpoint was exposed to.
       - name: source
@@ -80,23 +37,12 @@ models:
       - name: touchpoint_value
         description: The value assigned to the touchpoint.
       - name: cost_per_touchpoint
-    meta:
-      hashboard:
-        alias: marketing_touchpoints
-        cols:
-          - id: row_count
-            type: metric
-            name: Order Attribution Records
-            aggregate: row_count
 
   - name: campaigns
     description: This model provides details about each marketing campaign.
     columns:
       - name: campaign_id
         description: Unique ID for the campaign.
-        meta:
-          hashboard:
-            primaryKey: true
       - name: campaign_name
         description: The name of the marketing campaign.
       - name: campaign_type
@@ -107,11 +53,3 @@ models:
         description: End date of the campaign.
       - name: total_budget
         description: The total budget for the campaign.
-    meta:
-      hashboard:
-        alias: campaigns
-        cols:
-          - id: row_count
-            type: metric
-            name: Order Attribution Records
-            aggregate: row_count
