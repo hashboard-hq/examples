@@ -1,5 +1,5 @@
 select 
-  timestamp,
+  timestamp_seconds(cast(timestamp/1000000000 as int)) as timestamp,
   order_id as id,
   payment_method,
   delivery,
