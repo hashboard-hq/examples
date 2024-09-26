@@ -26,7 +26,7 @@ jobs:
           HASHBOARD_ACCESS_KEY_ID: ${{ secrets.PIZZABYTES_HB_ACCESS_KEY_ID }}
           HASHBOARD_SECRET_ACCESS_KEY_TOKEN: ${{ secrets.PIZZABYTES_HB_SECRET_ACCESS_KEY_TOKEN }}
         run: |
-          hb build 2>&1 | tee out.txt
+          TERM=dumb hb build 2>&1 | tee out.txt
           EXIT_CODE=${PIPESTATUS[0]}
 
           RESULT=$(cat out.txt | sed 's/`//g')
