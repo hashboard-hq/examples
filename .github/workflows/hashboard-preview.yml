@@ -11,21 +11,14 @@ permissions:
   pull-requests: write
 
 jobs:
-  create-preview:
-    name: "Hashboard validate & preview"
-    concurrency:
-      group: preview-${{ github.event.pull_request.number || github.ref }}
-      cancel-in-progress: true
+  create-hashboard-build:
+    name: "Create Hashboard build"
     runs-on: ubuntu-latest
     if: ${{ !github.event.pull_request.merged }}
-
     steps:
       - uses: actions/checkout@v3
-
       - name: "Install dependencies"
-        run: |
-          pip install --pre hashboard-cli
-
+        run: pip install --pre hashboard-cli
       - name: Create Hashboard build
         id: create-hb-build
         env:
@@ -44,7 +37,6 @@ jobs:
           echo "$RESULT" >> $GITHUB_OUTPUT
           echo "$EOF" >> $GITHUB_OUTPUT
           echo "exitCode=$EXIT_CODE" >> $GITHUB_OUTPUT
-
       - uses: actions/github-script@v6
         name: "Comment on the pull request"
         with:
@@ -55,7 +47,6 @@ jobs:
               repo: context.repo.repo,
               body: `[Hashboard build](${{ steps.create-hb-build.outputs.url }})\n\`\`\`${{ steps.create-hb-build.outputs.log }}`
             })
-
       - id: set-appropriate-exit-code
         name: "Set exit code"
         run: echo ${{ steps.create-hb-build.outputs.exitCode }} | grep succeeded
