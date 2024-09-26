@@ -36,7 +36,7 @@ jobs:
           hb build 2>&1 | tee out.txt
           EXIT_CODE=${PIPESTATUS[0]}
 
-          RESULT=$(cat out.txt | sed 's/[`�]//g')
+          RESULT=$(cat out.txt | sed 's/`//g')
           URL=$(grep -o 'https://[^ ]*' out.txt)
           EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
           echo "url=$URL" >> $GITHUB_OUTPUT
@@ -53,7 +53,7 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `[Hashboard build](${{ steps.create-hb-build.outputs.url }})\n\`\`\`${{ steps.create-hb-build.outputs.log }}\`\`\``
+              body: `[Hashboard build](${{ steps.create-hb-build.outputs.url }})\n\`\`\`${{ steps.create-hb-build.outputs.log }}`
             })
 
       - id: set-appropriate-exit-code
