@@ -36,7 +36,7 @@ jobs:
           hb build 2>&1 | tee out.txt
           EXIT_CODE=${PIPESTATUS[0]}
 
-          RESULT=$(cat out.txt | sed 's/`//g' | sed 's/\x1b\[[0-9;]*m//g')
+          RESULT=$(cat out.txt | sed 's/`//g' | tr -cd '\11\12\15\40-\176')
           EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
           echo "log<<$EOF" >> $GITHUB_OUTPUT
           echo "$RESULT" >> $GITHUB_OUTPUT
