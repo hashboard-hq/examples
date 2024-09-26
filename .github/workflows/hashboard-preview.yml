@@ -39,7 +39,9 @@ jobs:
           RESULT=$(cat out.txt | sed 's/`//g')
           EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
           echo "log<<$EOF" >> $GITHUB_OUTPUT
+          echo "\`\`\`" >> $GITHUB_OUTPUT
           echo "$RESULT" >> $GITHUB_OUTPUT
+          echo "\`\`\`" >> $GITHUB_OUTPUT
           echo "$EOF" >> $GITHUB_OUTPUT
           echo "exitCode=$EXIT_CODE" >> $GITHUB_OUTPUT
 
