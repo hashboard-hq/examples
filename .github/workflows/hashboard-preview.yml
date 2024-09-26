@@ -44,4 +44,4 @@ jobs:
             })
       - id: set-appropriate-exit-code
         name: "Set exit code"
-        run: echo ${{ steps.create-hb-build.outputs.exitCode }} | grep succeeded
+        run: exit "${{ steps.create-hb-build.outputs.exitCode }}"
