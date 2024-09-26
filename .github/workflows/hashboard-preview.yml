@@ -1,54 +1,37 @@
 # Runs the dbt pipeline against a new dataset, then creates a preview build in Hashboard.
 name: hashboard-preview
 
-on:
-  pull_request:
-    types: [opened, reopened, synchronize]
-    branches: [demo/pizzaBytesNoDbt]
-
+on: [pull_request]
 permissions:
-  contents: read
-  issues: write
   pull-requests: write
 
 jobs:
-  create-preview:
-    name: "Hashboard validate & preview"
-    concurrency:
-      group: preview-${{ github.event.pull_request.number || github.ref }}
-      cancel-in-progress: true
+  create-hashboard-build:
+    name: "Create Hashboard build"
     runs-on: ubuntu-latest
     if: ${{ !github.event.pull_request.merged }}
-
     steps:
       - uses: actions/checkout@v3
-
-      - name: "Install Python 3.9"
-        id: install-python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.9.16"
-
       - name: "Install dependencies"
-        run: |
-          pip install hashboard-cli
-
-      - name: Generate Hashboard preview
-        id: generate-preview
+        run: pip install --pre hashboard-cli
+      - name: Create Hashboard build
+        id: create-hb-build
         env:
           HASHBOARD_PROJECT_ID: ${{ secrets.PIZZABYTES_HB_PROJECT_ID }}
           HASHBOARD_ACCESS_KEY_ID: ${{ secrets.PIZZABYTES_HB_ACCESS_KEY_ID }}
           HASHBOARD_SECRET_ACCESS_KEY_TOKEN: ${{ secrets.PIZZABYTES_HB_SECRET_ACCESS_KEY_TOKEN }}
         run: |
-          hb preview | tee output.txt
-          grep -q Details output.txt
-          if [ $? -eq 0 ]; then
-            RESULT=`grep Details output.txt | sed 's/Details/Hashboard preview build succeeded/'`
-          else
-            RESULT=`echo "Preview Build failed. See the GitHub action logs for more details."`
-          fi
-          echo "result=$RESULT" >> $GITHUB_OUTPUT
+          TERM=dumb hb build 2>&1 | tee out.txt
+          EXIT_CODE=${PIPESTATUS[0]}
 
+          RESULT=$(cat out.txt | sed 's/`//g')
+          URL=$(grep -o 'https://[^ ]*' out.txt)
+          EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
+          echo "url=$URL" >> $GITHUB_OUTPUT
+          echo "log<<$EOF" >> $GITHUB_OUTPUT
+          echo "$RESULT" >> $GITHUB_OUTPUT
+          echo "$EOF" >> $GITHUB_OUTPUT
+          echo "exitCode=$EXIT_CODE" >> $GITHUB_OUTPUT
       - uses: actions/github-script@v6
         name: "Comment on the pull request"
         with:
@@ -57,9 +40,8 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `${{ steps.generate-preview.outputs.result }}`
+              body: `[Hashboard build](${{ steps.create-hb-build.outputs.url }})\n\`\`\`${{ steps.create-hb-build.outputs.log }}`
             })
-
       - id: set-appropriate-exit-code
         name: "Set exit code"
-        run: echo ${{ steps.generate-preview.outputs.result }} | grep succeeded
+        run: exit "${{ steps.create-hb-build.outputs.exitCode }}"
