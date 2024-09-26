@@ -51,9 +51,9 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `${{ steps.generate-preview.outputs.result }}`
+              body: `${{ steps.create-hb-build.outputs.result }}`
             })
 
       - id: set-appropriate-exit-code
         name: "Set exit code"
-        run: echo ${{ steps.generate-preview.outputs.result }} | grep succeeded
+        run: echo ${{ steps.create-hb-build.outputs.result }} | grep succeeded
