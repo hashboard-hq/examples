@@ -31,23 +31,24 @@ jobs:
 
       - name: "Install dependencies"
         run: |
-          pip install hashboard-cli
+          pip install --pre hashboard-cli
 
-      - name: Generate Hashboard preview
-        id: generate-preview
+      - name: Create Hashboard build
+        id: create-hb-build
         env:
-          HASHBOARD_PROJECT_ID: ${{ secrets.PIZZABYTES_HB_PROJECT_ID }}
-          HASHBOARD_ACCESS_KEY_ID: ${{ secrets.PIZZABYTES_HB_ACCESS_KEY_ID }}
-          HASHBOARD_SECRET_ACCESS_KEY_TOKEN: ${{ secrets.PIZZABYTES_HB_SECRET_ACCESS_KEY_TOKEN }}
+          HASHBOARD_PROJECT_ID: ${{ secrets.HASHBOARD_PROJECT_ID }}
+          HASHBOARD_ACCESS_KEY_ID: ${{ secrets.HASHBOARD_ACCESS_KEY_ID }}
+          HASHBOARD_SECRET_ACCESS_KEY_TOKEN: ${{ secrets.HASHBOARD_ACCESS_KEY_TOKEN }}
         run: |
-          hb preview | tee output.txt
-          grep -q Details output.txt
-          if [ $? -eq 0 ]; then
-            RESULT=`grep Details output.txt | sed 's/Details/Hashboard preview build succeeded/'`
-          else
-            RESULT=`echo "Preview Build failed. See the GitHub action logs for more details."`
-          fi
-          echo "result=$RESULT" >> $GITHUB_OUTPUT
+          hb build  --dbt-artifacts=./ci_artifacts | tee out.txt
+          EXIT_CODE=${PIPESTATUS[0]}
+
+          RESULT=$(cat out.txt | sed 's/`//g')
+          EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
+          echo "log<<$EOF" >> $GITHUB_OUTPUT
+          echo "$RESULT" >> $GITHUB_OUTPUT
+          echo "$EOF" >> $GITHUB_OUTPUT
+          echo "exitCode=$EXIT_CODE" >> $GITHUB_OUTPUT
 
       - uses: actions/github-script@v6
         name: "Comment on the pull request"
