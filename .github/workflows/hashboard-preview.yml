@@ -4,7 +4,6 @@ name: hashboard-preview
 on:
   pull_request:
     types: [opened, reopened, synchronize]
-    branches: [demo/pizzaBytesNoDbt]
 
 permissions:
   contents: read
