@@ -53,7 +53,7 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `${{ steps.create-hb-build.outputs.url }} \`\`\`${{ steps.create-hb-build.outputs.log }}\`\`\``
+              body: `[${{ steps.create-hb-build.outputs.url }}]\n\`\`\`${{ steps.create-hb-build.outputs.log }}\`\`\``
             })
 
       - id: set-appropriate-exit-code
