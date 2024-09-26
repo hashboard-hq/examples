@@ -39,7 +39,7 @@ jobs:
           HASHBOARD_ACCESS_KEY_ID: ${{ secrets.HASHBOARD_ACCESS_KEY_ID }}
           HASHBOARD_SECRET_ACCESS_KEY_TOKEN: ${{ secrets.HASHBOARD_ACCESS_KEY_TOKEN }}
         run: |
-          hb build  --dbt-artifacts=./ci_artifacts | tee out.txt
+          hb build | tee out.txt
           EXIT_CODE=${PIPESTATUS[0]}
 
           RESULT=$(cat out.txt | sed 's/`//g')
