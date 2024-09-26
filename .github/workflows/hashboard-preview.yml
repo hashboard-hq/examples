@@ -1,14 +1,7 @@
 # Runs the dbt pipeline against a new dataset, then creates a preview build in Hashboard.
 name: hashboard-preview
 
-on:
-  pull_request:
-    types: [opened, reopened, synchronize]
-
-permissions:
-  contents: read
-  issues: write
-  pull-requests: write
+on: [pull_request]
 
 jobs:
   create-hashboard-build:
