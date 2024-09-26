@@ -22,12 +22,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: "Install Python 3.9"
-        id: install-python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.9.16"
-
       - name: "Install dependencies"
         run: |
           pip install --pre hashboard-cli
@@ -37,7 +31,7 @@ jobs:
         env:
           HASHBOARD_PROJECT_ID: ${{ secrets.HASHBOARD_PROJECT_ID }}
           HASHBOARD_ACCESS_KEY_ID: ${{ secrets.HASHBOARD_ACCESS_KEY_ID }}
-          HASHBOARD_SECRET_ACCESS_KEY_TOKEN: ${{ secrets.HASHBOARD_ACCESS_KEY_TOKEN }}
+          HASHBOARD_SECRET_ACCESS_KEY_TOKEN: ${{ secrets.HASHBOARD_SECRET_ACCESS_KEY_TOKEN }}
         run: |
           hb build | tee out.txt
           EXIT_CODE=${PIPESTATUS[0]}
