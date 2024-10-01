@@ -1,3 +1,5 @@
 # This file marks the root of a project directory. It determines the identity of the resources in your local filesystem
 # and encodes additional project configuration metadata. For additional information please visit docs.hashboard.com.
 dbtRoot: .
+dbtOptions:
+    useDefer: true
