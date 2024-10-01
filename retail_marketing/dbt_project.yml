@@ -1,14 +1,14 @@
-name: 'retail_example'
-version: '1.0.0'
+name: "retail_example"
+version: "1.0.0"
 config-version: 2
 
-profile: 'bigquery'
+profile: "bigquery"
 
 model-paths: ["models"]
 
 clean-targets:
-- "target"
-- "dbt_packages"
+  - "target"
+  - "dbt_packages"
 
 models:
   +meta:
@@ -19,4 +19,4 @@ models:
         connectionName: BigQuery
 
 dbt-cloud:
-    project-id: 377814
+  project-id: 381814
