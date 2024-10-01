@@ -1,0 +1,34 @@
+version: 2
+
+models:
+  - name: customers
+    description: This table contains customer information.
+    columns:
+      - name: id
+        description: The unique identifier for the customer.
+        tests:
+          - unique
+          - not_null
+        meta:
+          hashboard:
+            primaryKey: true
+      - name: name
+        description: The name of the customer.
+        tests:
+          - not_null
+      - name: address
+        description: The address of the customer.
+        tests:
+          - not_null
+      - name: phone_number
+        description: The phone number of the customer.
+        tests:
+          - not_null
+    meta:
+      hashboard:
+        alias: customers
+        cols:
+          - id: row_count
+            type: metric
+            name: Customer Count
+            aggregate: row_count
