@@ -6,5 +6,5 @@ select
   quantity,
   customer_id,
   cast(item_price as decimal) as item_price,
-  timestamp_seconds(cast(timestamp/1000000000 as int)) as timestamp
+  timestamp
 from {{ source("generated_sources", "sales_data") }}
