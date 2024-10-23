@@ -8,9 +8,10 @@ source:
     SELECT
       sales.*, p.product_description, p.brand, p.category, p.unit_price_dollars,
       stores.store_state
-    FROM ${BQ_DATASET}.sales
-    JOIN ${BQ_DATASET}.products p ON p.product_id = sales.product_id
-    JOIN ${BQ_DATASET}.stores ON stores.store_id = sales.store_id
+    FROM dbt_prod.sales
+    JOIN dbt_prod.products p ON p.product_id = sales.product_id
+    JOIN dbt_prod.stores ON stores.store_id = sales.store_id
+    WHERE stores.store_state LIKE '${STORE_STATE}'
 cols:
   - id: date
     type: datetime
