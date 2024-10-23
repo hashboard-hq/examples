@@ -1,0 +1,92 @@
+hbVersion: '1.0'
+type: model
+alias: sales
+name: sales
+source:
+  connectionName: hb-grocery-demo
+  sql: "SELECT\n  sales.*, p.product_description, p.brand, p.category, p.unit_price_dollars,\n\
+    \  stores.store_state\nFROM dbt_prod.sales\nJOIN dbt_prod.products p ON p.product_id
+    = sales.product_id\nJOIN dbt_prod.stores ON stores.store_id = sales.store_id\n
+    WHERE stores.store_state LIKE '${STORE_STATE}'\n"
+cols:
+- id: date
+  type: datetime
+  physicalName: date
+  name: date
+  primaryDate: true
+  aggregationOptions:
+    minGranularity: second
+    maxGranularity: year
+- id: transaction_id
+  type: attribute
+  physicalName: transaction_id
+  name: transaction_id
+  aggregationOptions:
+    defaultBinWidth: 5000
+    binsEnabled: false
+- id: product_id
+  type: attribute
+  physicalName: product_id
+  name: product_id
+  aggregationOptions:
+    defaultBinWidth: 5
+    binsEnabled: false
+- id: store_id
+  type: attribute
+  physicalName: store_id
+  name: store_id
+  aggregationOptions:
+    defaultBinWidth: 0.1
+    binsEnabled: false
+- id: sales_quantity
+  type: attribute
+  physicalName: sales_quantity
+  name: sales_quantity
+  aggregationOptions:
+    defaultBinWidth: 0.5
+    binsEnabled: false
+- id: discount_amount
+  type: attribute
+  physicalName: discount_amount
+  name: discount_amount
+  aggregationOptions:
+    defaultBinWidth: 2
+    binsEnabled: false
+- id: product_description
+  type: attribute
+  physicalName: product_description
+  name: product_description
+- id: brand
+  type: attribute
+  physicalName: brand
+  name: brand
+- id: category
+  type: attribute
+  physicalName: category
+  name: category
+- id: store_state
+  type: attribute
+  physicalName: store_state
+  name: store_state
+- id: unit_price_dollars
+  type: attribute
+  physicalName: unit_price_dollars
+  name: unit_price_dollars
+  aggregationOptions:
+    defaultBinWidth: 0.3
+    binsEnabled: true
+- id: row_count
+  type: measure
+  name: row count
+  aggregate: row_count
+- id: quantity_sold
+  type: measure
+  name: quantity sold
+  sql: sum(sales_quantity)
+- id: total_revenue
+  type: measure
+  name: total revenue
+  formattingOptions:
+    fixedDecimals: 2
+    formatAsCurrency: true
+  sql: SUM(sales_quantity * unit_price_dollars)

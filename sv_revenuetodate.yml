@@ -1,0 +1,33 @@
+hbVersion: '1.0'
+type: saved_exploration
+alias: revenue_chart
+model:
+  modelId: m::sales
+  calculations:
+  - id: rolling_sum_over_total_revenue
+    name: Rolling Sum over total revenue
+    formula: rollingSum(total_revenue, infinite, trailing, 0)
+    formattingOptions:
+      fixedDecimals: 2
+      formatAsCurrency: true
+name: Revenue to date
+data:
+  x:
+    columnId: date
+    granularity: quarter
+  y:
+    columnId: rolling_sum_over_total_revenue
+  breakout:
+    columnId: store_state
+    metricId: total_revenue
+    sort: desc
+    limit: 6
+    showOther: true
+  filters: []
+visualization:
+  chartType: bar
+  stack: stack
+  showAxisLabels: true
+  showGridLines:
+    x: true
+    y: true
