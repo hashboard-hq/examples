@@ -1,0 +1,38 @@
+hbVersion: '1.0'
+type: saved_exploration
+name: By Patient Age
+#grn: sv:NppIHwqEG2CXzCzR
+alias: by_patient_age
+model:
+  modelId: m::claim_details
+  calculations:
+  - id: percent_of_total_claims
+    name: Percent of Total Claims
+    formula: percentOfTotal(claims)
+    formattingOptions:
+      fixedDecimals: 1
+      commaThousandsSeparators: false
+      formatAsPercent: true
+data:
+  x:
+    columnId: m::patients.age
+    bins:
+      binWidth: 5
+      binsEnabled: true
+  y:
+    columnId: percent_of_total_claims
+  filters:
+  - columnId: m::claims.date_of_service
+    range:
+    - - -1
+      - month
+      - startOfPeriod: true
+    - - 0
+      - month
+      - startOfPeriod: true
+visualization:
+  chartType: bar
+  showAxisLabels: true
+  missingValuesBehavior: show
+  legend: none
+  showLegendTitle: false

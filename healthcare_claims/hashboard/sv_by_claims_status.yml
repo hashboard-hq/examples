@@ -1,0 +1,29 @@
+hbVersion: '1.0'
+type: saved_exploration
+#grn: sv:EZvej27ahUddqu2H
+name: By Claims Status
+alias: by_claims_status
+model:
+  modelId: m::claim_details
+  calculations:
+  - id: percent_of_total_claims
+    name: Percent of Total Claims
+    formula: percentOfTotal(claims)
+    formattingOptions:
+      fixedDecimals: 1
+      commaThousandsSeparators: false
+      formatAsPercent: true
+data:
+  metric:
+    columnId: percent_of_total_claims
+  rows:
+    columnId: m::claims.status
+  filters: []
+  sort:
+  - columnId: percent_of_total_claims
+    order: desc
+  limit: 10000
+visualization:
+  chartType: horizontal_bar
+  showBarLabels: true
+  showAxisLabels: true

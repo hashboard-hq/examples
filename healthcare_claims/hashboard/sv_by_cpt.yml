@@ -1,0 +1,29 @@
+hbVersion: '1.0'
+type: saved_exploration
+#grn: sv:uLzfPnmRQo_kbiSP
+name: By CPT
+alias: by_cpt
+model:
+  modelId: m::claim_details
+  calculations:
+  - id: percent_of_total_claim_lines
+    name: Percent of Total Claim Lines
+    formula: percentOfTotal(claim_lines)
+    formattingOptions:
+      fixedDecimals: 1
+      commaThousandsSeparators: false
+      formatAsPercent: true
+data:
+  metric:
+    columnId: percent_of_total_claim_lines
+  rows:
+    columnId: cpt_code
+  filters: []
+  sort:
+  - columnId: percent_of_total_claim_lines
+    order: desc
+  limit: 10000
+visualization:
+  chartType: horizontal_bar
+  showBarLabels: true
+  showAxisLabels: true
