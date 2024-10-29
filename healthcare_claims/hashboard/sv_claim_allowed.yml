@@ -1,0 +1,46 @@
+hbVersion: "1.0"
+type: saved_exploration
+model: m::claim_details
+name: Claim allowed amount by status
+alias: claim_allowed_by_status
+data:
+  x:
+    columnId: service_date
+    granularity: month
+  y:
+    columnId: claim_lines
+  breakout:
+    columnId: m::claims.status
+    groups:
+      - key: Rejected
+        color: "#FF6746"
+      - key: Unpaid
+        color: "#D2DCFF"
+      - key: Paid
+        color: "#235564"
+    showOther: false
+  filters: []
+visualization:
+  chartType: bar
+  stack: stack
+  showAxisLabels: true
+  legend: top
+  showLegendTitle: false
+  colorPalette: palette::hb_inverted
+attributeTray:
+  orderAttributesAccordingToSpec: true
+  attributeTiles:
+    - columnId: claim_detail_id
+      hidden: true
+    - columnId: quantity
+      hidden: true
+    - columnId: unit_cost
+      hidden: true
+    - columnId: total_cost
+      hidden: true
+    - columnId: allowed_amount
+      hidden: true
+    - columnId: cpt_code
+    - columnId: icd_code
+    - columnId: service_description
+    - columnId: actual_paid_amount
