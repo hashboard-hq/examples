@@ -1,0 +1,3 @@
+# This file marks the root of your Hashboard project directory. It determines the identity of the resources in your local filesystem
+# and encodes additional project configuration metadata. For additional information please visit docs.hashboard.com.
+dbtRoot: .
