@@ -1,0 +1,49 @@
+hbVersion: '1.0'
+type: saved_exploration
+
+alias: discount_codes_by_loyalty
+model: m::sales
+name: Discount codes by loyalty status pivot
+data:
+  x:
+    columnId: m::orders.discount_code
+  y:
+  - columnId: revenue
+  - columnId: revenue_per_customer
+  pivotColumns:
+  - columnId: m::orders.loyalty_status
+  - by: metric
+  filters: []
+  sort:
+  - columnId: revenue
+    order: desc
+  limit: 10000
+visualization:
+  chartType: table
+  showAxisLabels: false
+  legend: top
+  showLegendTitle: false
+  tableCellFormatting:
+  - columnId: revenue_per_customer
+    color: green
+    calculation: columnPercentTotal
+  tableVisualization:
+  - columnId: revenue
+    calculation: columnPercentTotal
+    type: bar
+    heightPixels: 15
+    labelPlacement: right
+    maxWidthPixels: 100
+  tableColumnWidths:
+  - columnId: revenue_per_customer
+    width: 179
+  - columnId: revenue
+    width: 208
+  - columnId: '#pivot:No:edbebaf2-44e3-36a2-9d38-cf3a4f5696ae'
+    width: 209
+  - columnId: '#pivot:Yes:edbebaf2-44e3-36a2-9d38-cf3a4f5696ae'
+    width: 195
+  - columnId: '#pivot:Gold Member:edbebaf2-44e3-36a2-9d38-cf3a4f5696ae'
+    width: 214
+  - columnId: '#pivot:Silver Member:edbebaf2-44e3-36a2-9d38-cf3a4f5696ae'
+    width: 210

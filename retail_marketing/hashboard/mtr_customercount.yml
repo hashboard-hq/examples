@@ -1,0 +1,12 @@
+hbVersion: '1.0'
+type: metric
+
+alias: customer_count
+name: Customer Count
+resourceMetadata:
+  status: verified
+  owner: ela@hashboard.com
+config:
+  metricType: simple
+  dataModel: m::sales
+  measureId: num_customers

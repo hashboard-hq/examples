@@ -1,0 +1,104 @@
+hbVersion: '1.0'
+
+alias: top_level_metrics
+name: 💯 Top-level metrics
+description: ''
+type: dashboard
+resourceMetadata:
+  status: verified
+  owner: demo.user@hashboard.com
+globalFilters:
+- dataModel: m::sales
+  columnId: timestamp
+  lt: '2024-06-01'
+sections:
+- filters:
+  - dataModel: m::orders
+    columnId: type
+  rows:
+  - blocks:
+    - type: markdown
+      text: '## Business company + health'
+      width: 12
+  - blocks:
+    - type: linkedMetric
+      ignoreDashboardFilters: false
+      width: 3
+      metric: mtr::rev_per_customer
+    - type: linkedMetric
+      ignoreDashboardFilters: false
+      width: 3
+      metric: mtr::marketing_spend
+    - type: linkedMetric
+      ignoreDashboardFilters: false
+      width: 3
+      metric: mtr::revenue
+    - type: linkedMetric
+      ignoreDashboardFilters: false
+      width: 3
+      metric: mtr::customer_count
+    height: 4
+  - blocks:
+    - type: savedExploration
+      savedExploration: sv::rev_by_sub
+      axisLabels: hide
+      legendPosition: top
+      width: 12
+    height: 10
+- filters:
+  - dataModel: m::orders
+    columnId: referral_source
+    filterOnlyUnderlyingModel: true
+  rows:
+  - blocks:
+    - type: markdown
+      text: '## Products'
+      width: 12
+  - blocks:
+    - type: savedExploration
+      savedExploration: sv::type_size_breakdown
+      axisLabels: hide
+      legendPosition: top
+      width: 6
+    - type: savedExploration
+      savedExploration: sv::ordering_trends
+      axisLabels: hide
+      legendPosition: top
+      width: 6
+    height: 12
+- filters:
+  - dataModel: m::orders
+    columnId: loyalty_status
+  - dataModel: m::orders
+    columnId: feedback_rating
+  rows:
+  - blocks:
+    - type: markdown
+      text: '## Bizdev and ops'
+      width: 12
+  - blocks:
+    - type: savedExploration
+      savedExploration: sv::discount_code_distro
+      axisLabels: hide
+      legendPosition: top
+      width: 6
+    - type: savedExploration
+      savedExploration: sv::customer_growth_rev
+      axisLabels: hide
+      legendPosition: top
+      width: 6
+    height: 8
+  - blocks:
+    - type: savedExploration
+      savedExploration: sv::discount_codes_by_loyalty
+      axisLabels: hide
+      legendPosition: top
+      width: 12
+    height: 6
+  - blocks:
+    - type: savedExploration
+      savedExploration: sv::pie_chart
+      axisLabels: hide
+      legendPosition: top
+      width: 12
+    height: 5

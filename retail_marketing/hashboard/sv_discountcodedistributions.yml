@@ -1,0 +1,24 @@
+hbVersion: '1.0'
+type: saved_exploration
+
+alias: discount_code_distro
+model: m::sales
+name: Discount code distributions
+data:
+  x:
+    columnId: timestamp
+    granularity: month
+  y:
+    columnId: revenue
+  breakout:
+    columnId: m::orders.discount_code
+    groups:
+    - key: SUMMER21
+    - key: FIRSTORDER
+    - key: FREESHIP
+    showOther: true
+  filters: []
+visualization:
+  chartType: bar
+  stack: stack100pct
+  showAxisLabels: true

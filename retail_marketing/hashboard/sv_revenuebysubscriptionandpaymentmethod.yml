@@ -1,0 +1,29 @@
+hbVersion: '1.0'
+type: saved_exploration
+
+alias: rev_by_sub
+model: m::sales
+name: Revenue by subscription and payment method
+data:
+  x:
+    columnId: timestamp
+    granularity: month
+  y:
+    columnId: revenue
+  breakout:
+    columnId: m::orders.payment_method
+    metricId: revenue
+    sort: desc
+    limit: 6
+    showOther: true
+  trellis:
+    columnId: m::orders.type
+    metricId: revenue
+    sort: desc
+    limit: 2
+    showOther: true
+  filters: []
+visualization:
+  chartType: bar
+  stack: stack
+  showAxisLabels: true
