@@ -7,10 +7,13 @@
 ``` bash
 git clone https://github.com/hashboard-hq/examples.git
 
-cd 04_retail_marketing
+cd retail_marketing
 
-# with python 2.9+
-pip install -r requirements.txt
+# install uv (Python package manager)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# create virtual environment with correct python version and dependencies
+uv sync
 
 # you need to get your authorization key setup locally
 # see docs here: https://docs.hashboard.com/docs/data-ops/cli#1-create-an-access-key
@@ -19,17 +22,17 @@ pip install -r requirements.txt
 make -B
 
 # generate synthetic data:
-python generate_data.py
-python generate_customers.py
-python generate_marketing.py
+uv run generate_data.py
+uv run generate_customers.py
+uv run generate_marketing.py
 
 # run dbt
-dbt build
+uv run dbt build
 
-# you can upload the files in data manually, or progromatically
-for file in ./data_catalog/dbt/*; do hb upload Uploads "$$file"; done
+# upload the files
+uv run hb datasource upload ./data_catalog/dbt/*.parquet
 
 # run hashboard:
-hb preview --dbt
+uv run hb build
 ```
 
